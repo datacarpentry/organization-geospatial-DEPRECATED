@@ -77,7 +77,7 @@ environment, use a shared data directory.
 
 ## One Dataset - Many Files
 
-While text files often are self contained (one CSV) is composed of one unique file,
+While text files often are self contained (one CSV is composed of one unique file),
 many spatial formats contain several files. For instance, a shapefile (discussed 
 below) contains 3 or more files, all of which must retain the same NAME and be
 stored in the same file directory, in order for you to be able to work with them.
@@ -95,7 +95,7 @@ raster and vector data.
 ## Vector Data - Points, Lines, Polygons
 
 Vector data, are often used to store things like road and plot locations, 
-boundaries of states, countries and lakes. 
+boundaries of states, countries, and lakes. 
 
 Vector data are composed of discrete geometric locations (x,y values) known as
 **vertices** that define the "shape" of the spatial object. The organization 
@@ -182,10 +182,10 @@ more `attributes` associated with it.
 Shapefile attributes are similar to fields or columns in a spreadsheet. Each row
 in the spreadsheet has a set of columns associated with it that describe the row
 element. In the case of a shapefile, each row represents a spatial object - for
-example, a road, represented as a line in a line shapefile, will have one "row" 
+example, a road - represented as a line in a line shapefile, will have one "row" 
 of attributes associated with it. These attributes can include different types 
 of information that describe shapefile `features`. Thus, a road,
-may have a name, length, number of lanes, speed limit, type of road and other
+may have a name, length, number of lanes, speed limit, type of road, and other
 attributes stored with it. 
 
 <figure>

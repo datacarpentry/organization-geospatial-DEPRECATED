@@ -93,11 +93,11 @@ The figure above was created from a dataset that you are given called:
 `HARV_dsmCrop.tif`. 
 
 * What other information would you like to know about the data 
-used to create the above map before you would feel comfortable using this data
+used to create the above map before you would feel comfortable using these data
 to address a research question? 
-* Thing about the data used to create this plot.  If you had to share this data
+* Think about the data used to create this plot.  If you had to share these data
 with a colleague, what information do they need to know, to efficiently work 
-with it? 
+with the data? 
 
 How does thinking about this plot and what you'd like to know about it influence
 how you think about sharing data with a colleague? 
@@ -122,15 +122,15 @@ with the data effectively, including:
 
 * **Spatial Extent:** What area does this dataset cover? 
 * **Coordinate reference system:** What spatial projection / coordinate reference
-system are used to store the data? Will it line up with other data? 
-* **Resolution:** The data appears to be in **raster** format. This means it is
+system are used to store the data? Will they line up with other data? 
+* **Resolution:** The dataset appears to be in **raster** format. This means it is
 composed of pixels. What area on the ground does each pixel cover - i.e. What is 
-its spatial resolution?
+the spatial resolution?
 
 **Data Collection / Processing Methods**
 
-* **When was the data collected?** Is it recent or historical?
-* **How was this data generated?** Is this an output from a model, is it an image
+* **When were the data collected?** Are they recent or historical?
+* **How was the data generated?** Is this an output from a model, is it an image
 from a remote sensing instrument such as a satellite (e.g. Landsat) or collected
 from an airplane? How were the data collected?
 * **Units:** We can see a scale bar of values to the right of the data, however, 
@@ -139,8 +139,8 @@ what metric and in what units does this represent? Temperature? Elevation? Preci
 
 **Contact Information**
 
-* **Who created this data?** 
-* **Who do we contact:** We might need permission to use it, have questions
+* **Who created these data?** 
+* **Who do we contact:** We might need permission to use the data, have questions
 about the data, or need more information to give correct attribution.
 
 When we are given a dataset, or when we download it online, we do not know
@@ -174,7 +174,7 @@ tutorial:
 
 * **Structured Embedded Metadata:** Some file formats supported embedded 
 metadata which you can access from a tool like `R` or `Python` directly from the 
-imported data (e.g. **GeoTIFF** and **HDF5**). This data is contained in the same 
+imported data (e.g. **GeoTIFF** and **HDF5**). These data are contained in the same 
 file (or file set as for shapefiles) as the data. 
 * **Structured Metadata Files:** Structured metadata files, such as the 
 Ecological Metadata Language (**EML**), are stored in a machine readable format 
@@ -190,7 +190,7 @@ Structured metadata formats are ideal if you can find them because they are most
 often:
 
 * In a standard, documented format that others use.
-* Are machine readable which means you can use them in scripts and algorithms.
+* Machine readable, which means you can use them in scripts and algorithms.
 
 <i class="fa fa-star"></i> **Data Note:** When you find metadata for a dataset 
 that you are working with, **DOWNLOAD AND SAVE IT** immediately to the directory 
@@ -392,7 +392,7 @@ etc)
 ## Work With EML in R 
 
 The `EML` package for `R` is designed to open, read and create EML formatted 
-metadata. In this tutorial, we will overview demonstrate how we can use EML
+metadata. In this tutorial, we will demonstrate how we can use EML
 structured metadata in an automated workflow. 
 
 NOTE: To save time, we will not explicitly teach the `EML` package given it is
@@ -558,7 +558,7 @@ on this website? Is there information that you might prefer to find on that page
 
 ```
 
-NOTE: This data and metadata are used in the 
+NOTE: These data and metadata are used in the 
 [*Introduction to Working With Time Series Data in Text Formats in R* series](http://www.neondataskills.org/tutorial-series/tabular-time-series/).
 
 
@@ -567,9 +567,9 @@ NOTE: This data and metadata are used in the
 Metadata are particularly important when we are working with data that we did 
 not collect ourselves. When you download, or gain access to data from a 
 colleague, or other data provider, be sure to first find and review the 
-metadata. Then, if the data is in a seperate file (e.g., structured or
+metadata. Then, if the data are in a seperate file (e.g., structured or
 unstructured metadata) make sure you save the metadata in a directory that is 
-closely associated with wherever you save the data itself! 
+closely associated with wherever you save the data themselves! 
 
 
 ## Create Metadata For Your Data
