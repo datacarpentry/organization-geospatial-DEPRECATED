@@ -109,10 +109,14 @@ in 2 dimensional space.  Tools like `R`, using supporting packages such as
 define the extent of a new raster.
 
 
-    # View the extent of the raster
-    DEM@extent
+```r
+# View the extent of the raster
+DEM@extent
+```
 
-    ## Error in eval(expr, envir, enclos): object 'DEM' not found
+```
+## Error in eval(expr, envir, enclos): object 'DEM' not found
+```
 
 <figure>
     <a href="{{ site.baseurl }}/images/hyperspectral/pixelDetail.png">
@@ -141,40 +145,54 @@ of the raster.
 Let's explore that next.
 
 
-    # create a raster from the matrix
-    myRaster1 <- raster(nrow=4, ncol=4)
-    
-    # assign some random data to the raster
-    myRaster1[]<- 1:ncell(myRaster1)
-    
-    # view attributes of the raster
-    myRaster1
+```r
+# create a raster from the matrix
+myRaster1 <- raster(nrow=4, ncol=4)
 
-    ## class       : RasterLayer 
-    ## dimensions  : 4, 4, 16  (nrow, ncol, ncell)
-    ## resolution  : 90, 45  (x, y)
-    ## extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
-    ## coord. ref. : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
-    ## data source : in memory
-    ## names       : layer 
-    ## values      : 1, 16  (min, max)
+# assign some random data to the raster
+myRaster1[]<- 1:ncell(myRaster1)
 
-    # is the CRS defined?
-    myRaster1@crs
+# view attributes of the raster
+myRaster1
+```
 
-    ## CRS arguments:
-    ##  +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0
+```
+## class       : RasterLayer 
+## dimensions  : 4, 4, 16  (nrow, ncol, ncell)
+## resolution  : 90, 45  (x, y)
+## extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
+## data source : in memory
+## names       : layer 
+## values      : 1, 16  (min, max)
+```
 
-    # what are the data extents?
-    myRaster1@extent
+```r
+# is the CRS defined?
+myRaster1@crs
+```
 
-    ## class       : Extent 
-    ## xmin        : -180 
-    ## xmax        : 180 
-    ## ymin        : -90 
-    ## ymax        : 90
+```
+## CRS arguments:
+##  +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0
+```
 
-    plot(myRaster1, main="Raster with 16 pixels")
+```r
+# what are the data extents?
+myRaster1@extent
+```
+
+```
+## class       : Extent 
+## xmin        : -180 
+## xmax        : 180 
+## ymin        : -90 
+## ymax        : 90
+```
+
+```r
+plot(myRaster1, main="Raster with 16 pixels")
+```
 
 ![ ]({{ site.baseurl }}/images/rfigs/dc-spatio-temporal-intro/07-spatial-resolution-extent/calculate-raster-extent-1.png)
 
@@ -205,19 +223,27 @@ the image represents a 1 m x 1 m area.
 Let's open up a raster in `R` to see how the attributes are stored.
 
 
-    #load raster library
-    library(raster)
-    library(rgdal)
-    
-    # Load raster in an R object called 'DEM'
-    DEM <- raster("DigitalTerrainModel/SJER2013_DTM.tif")
+```r
+#load raster library
+library(raster)
+library(rgdal)
 
-    ## Error in .rasterObjectFromFile(x, band = band, objecttype = "RasterLayer", : Cannot create a RasterLayer object from this file. (file does not exist)
+# Load raster in an R object called 'DEM'
+DEM <- raster("DigitalTerrainModel/SJER2013_DTM.tif")
+```
 
-    # View raster attributes
-    DEM
+```
+## Error in .rasterObjectFromFile(x, band = band, objecttype = "RasterLayer", : Cannot create a RasterLayer object from this file. (file does not exist)
+```
 
-    ## Error in eval(expr, envir, enclos): object 'DEM' not found
+```r
+# View raster attributes
+DEM
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'DEM' not found
+```
 
 Notice that this raster (in GeoTIFF format) already has defined:
 

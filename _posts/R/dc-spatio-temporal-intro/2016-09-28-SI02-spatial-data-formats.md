@@ -133,22 +133,35 @@ type of vector data**: points, lines or polygons.
 {: .notice}
 
 
-    # load libraries required to work with spatial data
-    library(raster) # commands to view metadata from vector objects
-    library(rgdal) # library of common GIS functions
-    
-    # Open shapefile
-    roads_HARV <- readOGR("NEON-DS-Site-Layout-Files/HARV","HARV_roads")
+```r
+# load libraries required to work with spatial data
+library(raster) # commands to view metadata from vector objects
+library(rgdal) # library of common GIS functions
 
-    ## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
+# Open shapefile
+roads_HARV <- readOGR("NEON-DS-Site-Layout-Files/HARV","HARV_roads")
+```
 
-    # view slots available for the object
-    slotNames(roads_HARV)
+```
+## OGR data source with driver: ESRI Shapefile 
+## Source: "NEON-DS-Site-Layout-Files/HARV", layer: "HARV_roads"
+## with 13 features
+## It has 15 fields
+```
 
-    ## Error in is(x, "classRepresentation"): object 'roads_HARV' not found
+```r
+# view slots available for the object
+slotNames(roads_HARV)
+```
 
-    # view all methods available for that object
-    # methods(class = class(roads_HARV))
+```
+## [1] "data"        "lines"       "bbox"        "proj4string"
+```
+
+```r
+# view all methods available for that object
+# methods(class = class(roads_HARV))
+```
 
 
 ## Stucture of a Lines Feature
@@ -158,15 +171,82 @@ consists of 2 or more vertices that are connected. We can view each set of coord
 for that object using `R`.
 
 
-    # view the coordinates for each vertex, for the last feature in the spatial object
-    roads_HARV@lines[13]
+```r
+# view the coordinates for each vertex, for the last feature in the spatial object
+roads_HARV@lines[13]
+```
 
-    ## Error in eval(expr, envir, enclos): object 'roads_HARV' not found
+```
+## [[1]]
+## An object of class "Lines"
+## Slot "Lines":
+## [[1]]
+## An object of class "Line"
+## Slot "coords":
+##           [,1]    [,2]
+##  [1,] 732479.6 4713107
+##  [2,] 732485.9 4713115
+##  [3,] 732498.2 4713148
+##  [4,] 732496.7 4713211
+##  [5,] 732487.1 4713259
+##  [6,] 732486.9 4713279
+##  [7,] 732488.9 4713322
+##  [8,] 732491.1 4713349
+##  [9,] 732504.8 4713377
+## [10,] 732528.3 4713443
+## [11,] 732533.0 4713476
+## [12,] 732528.8 4713506
+## [13,] 732522.0 4713534
+## [14,] 732509.9 4713569
+## [15,] 732496.6 4713604
+## [16,] 732479.4 4713639
+## [17,] 732463.5 4713670
+## [18,] 732454.0 4713697
+## [19,] 732439.3 4713734
+## [20,] 732428.8 4713763
+## [21,] 732416.5 4713816
+## [22,] 732414.5 4713829
+## [23,] 732413.4 4713845
+## [24,] 732415.0 4713879
+## [25,] 732416.5 4713905
+## [26,] 732421.4 4713932
+## [27,] 732427.6 4713961
+## [28,] 732437.7 4713996
+## [29,] 732449.0 4714027
+## [30,] 732465.3 4714068
+## [31,] 732474.8 4714085
+## [32,] 732485.4 4714097
+## [33,] 732500.5 4714110
+## [34,] 732517.8 4714122
+## [35,] 732544.8 4714135
+## [36,] 732565.0 4714153
+## [37,] 732624.9 4714162
+## [38,] 732682.9 4714177
+## [39,] 732764.1 4714184
+## [40,] 732843.3 4714200
+## [41,] 732915.8 4714219
+## [42,] 732991.7 4714236
+## [43,] 733067.5 4714255
+## [44,] 733106.4 4714260
+## [45,] 733170.0 4714259
+## [46,] 733239.0 4714246
+## [47,] 733295.5 4714217
+## 
+## 
+## 
+## Slot "ID":
+## [1] "12"
+```
 
-    # view the coordinates for the last feature in the spatial object
-    roads_HARV@lines[14]
+```r
+# view the coordinates for the last feature in the spatial object
+roads_HARV@lines[14]
+```
 
-    ## Error in eval(expr, envir, enclos): object 'roads_HARV' not found
+```
+## [[1]]
+## NULL
+```
 
 
 <div id="challenge" markdown="1">
@@ -201,11 +281,30 @@ attributes stored with it.
 
 
 
-    # view all attributes for a spatial object
-    # note, the code below just looks at the first 3 features
-    head(roads_HARV@data, 3)
+```r
+# view all attributes for a spatial object
+# note, the code below just looks at the first 3 features
+head(roads_HARV@data, 3)
+```
 
-    ## Error in head(roads_HARV@data, 3): object 'roads_HARV' not found
+```
+##   OBJECTID_1 OBJECTID       TYPE             NOTES MISCNOTES RULEID
+## 0         14       48 woods road Locust Opening Rd      <NA>      5
+## 1         40       91   footpath              <NA>      <NA>      6
+## 2         41      106   footpath              <NA>      <NA>      6
+##            MAPLABEL SHAPE_LENG             LABEL BIKEHORSE RESVEHICLE
+## 0 Locust Opening Rd  1297.3571 Locust Opening Rd         Y         R1
+## 1              <NA>   146.2998              <NA>         Y         R1
+## 2              <NA>   676.7180              <NA>         Y         R2
+##   RECMAP Shape_Le_1                            ResVehic_1
+## 0      Y  1297.1062    R1 - All Research Vehicles Allowed
+## 1      Y   146.2998    R1 - All Research Vehicles Allowed
+## 2      Y   676.7181 R2 - 4WD/High Clearance Vehicles Only
+##                    BicyclesHo
+## 0 Bicycles and Horses Allowed
+## 1 Bicycles and Horses Allowed
+## 2 Bicycles and Horses Allowed
+```
 
 In the map below of the Harvard Forest field site, there are many different features
 with different spatial object types. We will learn to create maps like this in
@@ -299,20 +398,52 @@ will focus on the `GeoTIFF`. The `GeoTIFF` format is similar to the `.tif`
 format, however the `GeoTIFF` format stores additional spatial `metadata`.
 
 
-    # view attributes for a geotif file
-    GDALinfo("NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif")
+```r
+# view attributes for a geotif file
+GDALinfo("NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif")
+```
 
-    ## Error in .local(.Object, ...): `NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif' does not exist in the file system,
-    ## and is not recognised as a supported dataset name.
+```
+## rows        1367 
+## columns     1697 
+## bands       1 
+## lower left origin.x        731453 
+## lower left origin.y        4712471 
+## res.x       1 
+## res.y       1 
+## ysign       -1 
+## oblique.x   0 
+## oblique.y   0 
+## driver      GTiff 
+## projection  +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs 
+## file        NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif 
+## apparent band summary:
+##    GDType hasNoDataValue NoDataValue blockSize1 blockSize2
+## 1 Float64           TRUE       -9999          1       1697
+## apparent band statistics:
+##   Bmin  Bmax   Bmean      Bsd
+## 1    0 38.17 18.0978 5.321834
+## Metadata:
+## AREA_OR_POINT=Area
+```
 
-    # import geotiff
-    chm_HARV <- raster("NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif")
+```r
+# import geotiff
+chm_HARV <- raster("NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif")
 
-    ## Error in .rasterObjectFromFile(x, band = band, objecttype = "RasterLayer", : Cannot create a RasterLayer object from this file. (file does not exist)
+chm_HARV
+```
 
-    chm_HARV
-
-    ## Error in eval(expr, envir, enclos): object 'chm_HARV' not found
+```
+## class       : RasterLayer 
+## dimensions  : 1367, 1697, 2319799  (nrow, ncol, ncell)
+## resolution  : 1, 1  (x, y)
+## extent      : 731453, 733150, 4712471, 4713838  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## data source : /Users/lewa8222/Documents/data/NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif 
+## names       : HARV_chmCrop 
+## values      : 0, 38.17  (min, max)
+```
 
 
 ### Metadata in .tif Files
@@ -342,12 +473,14 @@ when you export a GeoTIFF, it will default to a different value which could be
 read incorrectly in other programs!
 
 
-    # if you want a NA value of -9999, then you have to specify this when you
-    # export a raster file in R
-    exampleRaster <- writeRaster(rasterObject,  # object to export/write
-                                 FileName.tif,  # name of new .tif file
-                                 datatype = "INT1U",  # the data type
-                                 NAflag = -9999)  # your desired NA or noData value
+```r
+# if you want a NA value of -9999, then you have to specify this when you
+# export a raster file in R
+exampleRaster <- writeRaster(rasterObject,  # object to export/write
+                             FileName.tif,  # name of new .tif file
+                             datatype = "INT1U",  # the data type
+                             NAflag = -9999)  # your desired NA or noData value
+```
 
 We cover writing `NA` values using the `writeRaster` function in R in
 [*Raster Calculations in R - Subtract One Raster from Another and Extract Pixel Values For Defined Locations* tutorial](http://neondataskills.org/R/Raster-Calculations-In-R).

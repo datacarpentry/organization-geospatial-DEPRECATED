@@ -72,10 +72,7 @@ the data.
 
 </div>
 
-
-    ## Error in .rasterObjectFromFile(x, band = band, objecttype = "RasterLayer", : Cannot create a RasterLayer object from this file. (file does not exist)
-
-    ## Error in plot(DSM_HARV, main = "A Dataset You Are Given\n What metric does it represent?\nHow Was It Processed??"): object 'DSM_HARV' not found
+![ ]({{ site.baseurl }}/images/rfigs/dc-spatio-temporal-intro/03-metadata-formats-and-files/elevation-map-1.png)
 
 
 <div id="challenge" markdown="1">
@@ -230,22 +227,26 @@ in `R`. We cover this in more detail, in the
 [*Intro to Raster Data in R* tutorial](http://www.neondataskills.org/R/Introduction-to-Raster-Data-In-R).
 
 
-    # load libraries
-    library(raster)
-    library(rgdal)
-    
-    # set working directory to ensure R can find the file we wish to import
-    # setwd("working-dir-path-here")
-    
-    # read in a GeoTIFF raster file (.tif) using the raster() function
-    DSM_HARV <- raster("NEON-DS-Airborne-Remote-Sensing/HARV/DSM/HARV_dsmCrop.tif")
+```r
+# load libraries
+library(raster)
+library(rgdal)
 
-    ## Error in .rasterObjectFromFile(x, band = band, objecttype = "RasterLayer", : Cannot create a RasterLayer object from this file. (file does not exist)
+# set working directory to ensure R can find the file we wish to import
+# setwd("working-dir-path-here")
 
-    # view Coordinate Reference System (note, this often contains horizontal units!)
-    crs(DSM_HARV)
+# read in a GeoTIFF raster file (.tif) using the raster() function
+DSM_HARV <- raster("NEON-DS-Airborne-Remote-Sensing/HARV/DSM/HARV_dsmCrop.tif")
 
-    ## Error in crs(DSM_HARV): object 'DSM_HARV' not found
+# view Coordinate Reference System (note, this often contains horizontal units!)
+crs(DSM_HARV)
+```
+
+```
+## CRS arguments:
+##  +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84
+## +towgs84=0,0,0
+```
 
 ### Spatial Classes in R
 
@@ -254,51 +255,94 @@ associated with spatial data in R. Let's have a look.
 
 
 
-    # assign crs to an object (class) to use for reprojection and other tasks
-    myCRS <- crs(DSM_HARV)
+```r
+# assign crs to an object (class) to use for reprojection and other tasks
+myCRS <- crs(DSM_HARV)
+myCRS
+```
 
-    ## Error in crs(DSM_HARV): object 'DSM_HARV' not found
+```
+## CRS arguments:
+##  +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84
+## +towgs84=0,0,0
+```
 
-    myCRS
+```r
+# what class is the new CRS object?
+class(myCRS)
+```
 
-    ## Error in eval(expr, envir, enclos): object 'myCRS' not found
+```
+## [1] "CRS"
+## attr(,"package")
+## [1] "sp"
+```
 
-    # what class is the new CRS object?
-    class(myCRS)
+```r
+# view spatial extent
+extent(DSM_HARV)
+```
 
-    ## Error in eval(expr, envir, enclos): object 'myCRS' not found
+```
+## class       : Extent 
+## xmin        : 731453 
+## xmax        : 733150 
+## ymin        : 4712471 
+## ymax        : 4713838
+```
 
-    # view spatial extent
-    extent(DSM_HARV)
+```r
+# view spatial resolution
+res(DSM_HARV)
+```
 
-    ## Error in extent(DSM_HARV): object 'DSM_HARV' not found
-
-    # view spatial resolution
-    res(DSM_HARV)
-
-    ## Error in res(DSM_HARV): object 'DSM_HARV' not found
+```
+## [1] 1 1
+```
 
 The spatial `extent()` is a class as well. Let's have a look.
 
 
-    # view object extent
-    myExtent <- extent(DSM_HARV)
+```r
+# view object extent
+myExtent <- extent(DSM_HARV)
+myExtent
+```
 
-    ## Error in extent(DSM_HARV): object 'DSM_HARV' not found
+```
+## class       : Extent 
+## xmin        : 731453 
+## xmax        : 733150 
+## ymin        : 4712471 
+## ymax        : 4713838
+```
 
-    myExtent
+```r
+class(myExtent)
+```
 
-    ## Error in eval(expr, envir, enclos): object 'myExtent' not found
+```
+## [1] "Extent"
+## attr(,"package")
+## [1] "raster"
+```
 
-    class(myExtent)
+```r
+# print object name to return object metadata & attribute data
 
-    ## Error in eval(expr, envir, enclos): object 'myExtent' not found
+DSM_HARV
+```
 
-    # print object name to return object metadata & attribute data
-    
-    DSM_HARV
-
-    ## Error in eval(expr, envir, enclos): object 'DSM_HARV' not found
+```
+## class       : RasterLayer 
+## dimensions  : 1367, 1697, 2319799  (nrow, ncol, ncell)
+## resolution  : 1, 1  (x, y)
+## extent      : 731453, 733150, 4712471, 4713838  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## data source : /Users/lewa8222/Documents/data/NEON-DS-Airborne-Remote-Sensing/HARV/DSM/HARV_dsmCrop.tif 
+## names       : HARV_dsmCrop 
+## values      : 305.07, 416.07  (min, max)
+```
 
 
 We can use embedded metadata to programmatically perform processing tasks
@@ -320,17 +364,32 @@ Compare the extent and crs to the CHM and DSM. Are they different?
 </div>
 
 
-    ## Error in .rasterObjectFromFile(x, band = band, objecttype = "RasterLayer", : Cannot create a RasterLayer object from this file. (file does not exist)
+```
+## CRS arguments:
+##  +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84
+## +towgs84=0,0,0
+```
 
-    ## Error in crs(CHM.HARV): object 'CHM.HARV' not found
+```
+## class       : Extent 
+## xmin        : 731453 
+## xmax        : 733150 
+## ymin        : 4712471 
+## ymax        : 4713838
+```
 
-    ## Error in extent(CHM.HARV): object 'CHM.HARV' not found
+```
+## CRS arguments:
+##  +proj=utm +zone=19 +ellps=WGS84 +units=m +no_defs
+```
 
-    ## Error in .rasterObjectFromFile(x, band = band, objecttype = "RasterLayer", : Cannot create a RasterLayer object from this file. (file does not exist)
-
-    ## Error in crs(ndvi1.HARV): object 'ndvi1.HARV' not found
-
-    ## Error in extent(ndvi1.HARV): object 'ndvi1.HARV' not found
+```
+## class       : Extent 
+## xmin        : 239415 
+## xmax        : 239535 
+## ymin        : 4714215 
+## ymax        : 4714365
+```
 
 It appears as if there are some differences between the objects **extent** and
 **crs**. What does this mean for us as we work with these data in the coming
@@ -405,27 +464,41 @@ To begin, we will load the `EML` package directly from
 <a href="https://github.com/ropensci" target="_blank">ropensci's Git repository </a>.
 
 
-    # install R EML tools
-    library("devtools")
+```r
+# install R EML tools
+library("devtools")
+```
 
-    ## Error in library("devtools"): there is no package called 'devtools'
+```
+## Error in library("devtools"): there is no package called 'devtools'
+```
 
-    install_github("ropensci/EML", build=FALSE, dependencies=c("DEPENDS", "IMPORTS"))
+```r
+install_github("ropensci/EML", build=FALSE, dependencies=c("DEPENDS", "IMPORTS"))
+```
 
-    ## Error in eval(expr, envir, enclos): could not find function "install_github"
+```
+## Error in eval(expr, envir, enclos): could not find function "install_github"
+```
 
-    # load ROpenSci EML package
-    library("EML")
+```r
+# load ROpenSci EML package
+library("EML")
+```
 
-    ## Error in library("EML"): there is no package called 'EML'
+```
+## Error in library("EML"): there is no package called 'EML'
+```
 
-    # load ggmap for mapping
-    library(ggmap)
-    
-    
-    # EML / data location
-    # http://harvardforest.fas.harvard.edu:8080/exist/apps/datasets/showData.html?id=hf001
-    # table 4 http://harvardforest.fas.harvard.edu/data/p00/hf001/hf001-04-monthly-m.csv
+```r
+# load ggmap for mapping
+library(ggmap)
+
+
+# EML / data location
+# http://harvardforest.fas.harvard.edu:8080/exist/apps/datasets/showData.html?id=hf001
+# table 4 http://harvardforest.fas.harvard.edu/data/p00/hf001/hf001-04-monthly-m.csv
+```
 
 Next, we will read in the Harvard Forest LTER `EML` file directly from the
 online URL using the `read_eml()` function. This file describes multiple data
@@ -437,24 +510,36 @@ load.
 
 
 
-    # import EML from Harvard Forest Met Data
-    
-    # note: the original xml file is below commented out
-    # eml_HARV <- read_eml("http://harvardforest.fas.harvard.edu/data/eml/hf001.xml")
-    # import a truncated version of the eml file for quicker demonstration
-    eml_HARV <- read_eml("http://neon-workwithdata.github.io/NEON-R-Spatio-Temporal-Data-and-Management-Intro/hf001-revised.xml")
+```r
+# import EML from Harvard Forest Met Data
 
-    ## Error in eval(expr, envir, enclos): could not find function "read_eml"
+# note: the original xml file is below commented out
+# eml_HARV <- read_eml("http://harvardforest.fas.harvard.edu/data/eml/hf001.xml")
+# import a truncated version of the eml file for quicker demonstration
+eml_HARV <- read_eml("http://neon-workwithdata.github.io/NEON-R-Spatio-Temporal-Data-and-Management-Intro/hf001-revised.xml")
+```
 
-    # view size of object
-    object.size(eml_HARV)
+```
+## Error in eval(expr, envir, enclos): could not find function "read_eml"
+```
 
-    ## Error in structure(.Call(C_objectSize, x), class = "object_size"): object 'eml_HARV' not found
+```r
+# view size of object
+object.size(eml_HARV)
+```
 
-    # view the object class
-    class(eml_HARV)
+```
+## Error in structure(.Call(C_objectSize, x), class = "object_size"): object 'eml_HARV' not found
+```
 
-    ## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```r
+# view the object class
+class(eml_HARV)
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```
 
 The `read_eml()` function creates an `EML` class object. This object can be
 accessed using `slots` in `R` (`@`) rather than a typical subset `[ ]` approach.
@@ -466,16 +551,24 @@ describes. Let's start at the **dataset** level. We can use `slots` to view
 the contact information for the dataset and a description of the methods.
 
 
-    # view the contact name listed in the file
-    
-    eml_HARV@dataset@creator
+```r
+# view the contact name listed in the file
 
-    ## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+eml_HARV@dataset@creator
+```
 
-    # view information about the methods used to collect the data as described in EML
-    eml_HARV@dataset@methods
+```
+## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```
 
-    ## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```r
+# view information about the methods used to collect the data as described in EML
+eml_HARV@dataset@methods
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```
 
 
 ## Identify & Map Data Location
@@ -493,26 +586,38 @@ process the data.
 
 
 
-    # grab x coordinate from the coverage information
-    XCoord <- eml_HARV@dataset@coverage@geographicCoverage[[1]]@boundingCoordinates@westBoundingCoordinate@.Data
+```r
+# grab x coordinate from the coverage information
+XCoord <- eml_HARV@dataset@coverage@geographicCoverage[[1]]@boundingCoordinates@westBoundingCoordinate@.Data
+```
 
-    ## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```
+## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```
 
-    # grab y coordinate from the coverage information
-    YCoord <- eml_HARV@dataset@coverage@geographicCoverage[[1]]@boundingCoordinates@northBoundingCoordinate@.Data
+```r
+# grab y coordinate from the coverage information
+YCoord <- eml_HARV@dataset@coverage@geographicCoverage[[1]]@boundingCoordinates@northBoundingCoordinate@.Data
+```
 
-    ## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```
+## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```
 
-    # map <- get_map(location='Harvard', maptype="terrain")
-    
-    # plot the NW corner of the site.
-    map <- get_map(location='massachusetts', maptype="toner", zoom=8)
-    
-    ggmap(map, extent=TRUE) +
-      geom_point(aes(x=as.numeric(XCoord), y=as.numeric(YCoord)),
-                 color="darkred", size=6, pch=18)
+```r
+# map <- get_map(location='Harvard', maptype="terrain")
 
-    ## Error in eval(expr, envir, enclos): object 'XCoord' not found
+# plot the NW corner of the site.
+map <- get_map(location='massachusetts', maptype="toner", zoom=8)
+
+ggmap(map, extent=TRUE) +
+  geom_point(aes(x=as.numeric(XCoord), y=as.numeric(YCoord)),
+             color="darkred", size=6, pch=18)
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'XCoord' not found
+```
 
 ![ ]({{ site.baseurl }}/images/rfigs/dc-spatio-temporal-intro/03-metadata-formats-and-files/map-location-1.png)
 

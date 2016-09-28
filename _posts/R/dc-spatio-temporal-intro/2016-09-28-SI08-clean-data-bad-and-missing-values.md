@@ -119,19 +119,31 @@ values we have.
 
 REPLACE CODE TO BE FOR THE SAME SMALLISH DATA SET USED FOR BAD DATA VALUES BELOW
 
-    # Check for NA values
-    sum(is.na(harMet15.09.11$datetime))
+```r
+# Check for NA values
+sum(is.na(harMet15.09.11$datetime))
+```
 
-    ## Error in eval(expr, envir, enclos): object 'harMet15.09.11' not found
+```
+## Error in eval(expr, envir, enclos): object 'harMet15.09.11' not found
+```
 
-    sum(is.na(harMet15.09.11$airt))
+```r
+sum(is.na(harMet15.09.11$airt))
+```
 
-    ## Error in eval(expr, envir, enclos): object 'harMet15.09.11' not found
+```
+## Error in eval(expr, envir, enclos): object 'harMet15.09.11' not found
+```
 
-    # view rows where the air temperature is NA
-    harMet15.09.11[is.na(harMet15.09.11$airt),]
+```r
+# view rows where the air temperature is NA
+harMet15.09.11[is.na(harMet15.09.11$airt),]
+```
 
-    ## Error in eval(expr, envir, enclos): object 'harMet15.09.11' not found
+```
+## Error in eval(expr, envir, enclos): object 'harMet15.09.11' not found
+```
 
 The results above tell us there are `NoData` values in the `datetime` column.
 However, there are `NoData` values in other variables.

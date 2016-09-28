@@ -175,25 +175,29 @@ The codes and more information can be found on these websites:
 * <a href="http://spatialreference.org/ref/epsg/" target="_blank">list of ESPG codes.</a>
 
 
-    library('rgdal')
-    epsg = make_EPSG()
-    # View(epsg)
-    head(epsg)
+```r
+library('rgdal')
+epsg = make_EPSG()
+# View(epsg)
+head(epsg)
+```
 
-    ##   code                                               note
-    ## 1 3819                                           # HD1909
-    ## 2 3821                                            # TWD67
-    ## 3 3824                                            # TWD97
-    ## 4 3889                                             # IGRS
-    ## 5 3906                                         # MGI 1901
-    ## 6 4001 # Unknown datum based upon the Airy 1830 ellipsoid
-    ##                                                                                            prj4
-    ## 1 +proj=longlat +ellps=bessel +towgs84=595.48,121.69,515.35,4.115,-2.9383,0.853,-3.408 +no_defs
-    ## 2                                                         +proj=longlat +ellps=aust_SA +no_defs
-    ## 3                                    +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs
-    ## 4                                    +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs
-    ## 5                            +proj=longlat +ellps=bessel +towgs84=682,-203,480,0,0,0,0 +no_defs
-    ## 6                                                            +proj=longlat +ellps=airy +no_defs
+```
+##   code                                               note
+## 1 3819                                           # HD1909
+## 2 3821                                            # TWD67
+## 3 3824                                            # TWD97
+## 4 3889                                             # IGRS
+## 5 3906                                         # MGI 1901
+## 6 4001 # Unknown datum based upon the Airy 1830 ellipsoid
+##                                                                                            prj4
+## 1 +proj=longlat +ellps=bessel +towgs84=595.48,121.69,515.35,4.115,-2.9383,0.853,-3.408 +no_defs
+## 2                                                         +proj=longlat +ellps=aust_SA +no_defs
+## 3                                    +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs
+## 4                                    +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs
+## 5                            +proj=longlat +ellps=bessel +towgs84=682,-203,480,0,0,0,0 +no_defs
+## 6                                                            +proj=longlat +ellps=airy +no_defs
+```
 
 #### WKT or Well-known Text
 Well-known Text (WKT) allows for compact machine- and human-readable representation of

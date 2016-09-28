@@ -179,37 +179,53 @@ the central meridian on the globe (0,0).
 
 
 
-    library(rgdal)
-    library(ggplot2)
-    library(rgeos)
-    library(raster)
-    
-    # be sure to set your working directory
-    # setwd("~/Documents/data")
-    
-    # read shapefile
-    worldBound <- readOGR(dsn="Global/Boundaries/ne_110m_land",
-                          layer="ne_110m_land")
+```r
+library(rgdal)
+library(ggplot2)
+library(rgeos)
+library(raster)
 
-    ## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
+# be sure to set your working directory
+# setwd("~/Documents/data")
 
-    # convert to dataframe
-    worldBound_df <- fortify(worldBound)
+# read shapefile
+worldBound <- readOGR(dsn="Global/Boundaries/ne_110m_land",
+                      layer="ne_110m_land")
+```
 
-    ## Error in fortify(worldBound): object 'worldBound' not found
+```
+## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
+```
 
-    # plot map
-    worldMap <- ggplot(worldBound_df, aes(long,lat, group=group)) +
-      geom_polygon() +
-      xlab("Longitude (Degrees)") + ylab("Latitude (Degrees)") +
-      coord_equal() +
-      ggtitle("Global Map - Geographic Coordinate System - WGS84 Datum\n Units: Degrees - Latitude / Longitude")
+```r
+# convert to dataframe
+worldBound_df <- fortify(worldBound)
+```
 
-    ## Error in ggplot(worldBound_df, aes(long, lat, group = group)): object 'worldBound_df' not found
+```
+## Error in fortify(worldBound): object 'worldBound' not found
+```
 
-    worldMap
+```r
+# plot map
+worldMap <- ggplot(worldBound_df, aes(long,lat, group=group)) +
+  geom_polygon() +
+  xlab("Longitude (Degrees)") + ylab("Latitude (Degrees)") +
+  coord_equal() +
+  ggtitle("Global Map - Geographic Coordinate System - WGS84 Datum\n Units: Degrees - Latitude / Longitude")
+```
 
-    ## Error in eval(expr, envir, enclos): object 'worldMap' not found
+```
+## Error in ggplot(worldBound_df, aes(long, lat, group = group)): object 'worldBound_df' not found
+```
+
+```r
+worldMap
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'worldMap' not found
+```
 
 We can add three coordinate locations to our map. Note that the UNITS are
 in decimal **degrees** (latitude, longitude):
@@ -222,25 +238,33 @@ Let's create a second map with the locations overlayed on top of the continental
 boundary layer.
 
 
-    # define locations of Boulder, CO and Oslo, Norway
-    # store them in a data.frame format
-    loc.df <- data.frame(lon=c(-105.2519, 10.7500, 2.9833),
-                    lat=c(40.0274, 59.9500, 39.6167))
-    
-    # only needed if the above is a spatial points object
-    # loc.df <- fortify(loc)
-    
-    # add a point to the map
-    mapLocations <- worldMap + geom_point(data=loc.df,
-                            aes(x=lon, y=lat, group=NULL),
-                          colour = "springgreen",
-                          size=5)
+```r
+# define locations of Boulder, CO and Oslo, Norway
+# store them in a data.frame format
+loc.df <- data.frame(lon=c(-105.2519, 10.7500, 2.9833),
+                lat=c(40.0274, 59.9500, 39.6167))
 
-    ## Error in eval(expr, envir, enclos): object 'worldMap' not found
+# only needed if the above is a spatial points object
+# loc.df <- fortify(loc)
 
-    mapLocations + theme(legend.position="none")
+# add a point to the map
+mapLocations <- worldMap + geom_point(data=loc.df,
+                        aes(x=lon, y=lat, group=NULL),
+                      colour = "springgreen",
+                      size=5)
+```
 
-    ## Error in eval(expr, envir, enclos): object 'mapLocations' not found
+```
+## Error in eval(expr, envir, enclos): object 'worldMap' not found
+```
+
+```r
+mapLocations + theme(legend.position="none")
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'mapLocations' not found
+```
 
 ## Geographic CRS - The Good & The Less Good
 
@@ -269,46 +293,70 @@ different shape compared to the map that we created above in the `CRS`:
 **Geographic lat/long WGS84**.
 
 
-    # reproject from longlat to robinson
-    worldBound_robin <- spTransform(worldBound,
-                                    CRS("+proj=robin"))
+```r
+# reproject from longlat to robinson
+worldBound_robin <- spTransform(worldBound,
+                                CRS("+proj=robin"))
+```
 
-    ## Error in spTransform(worldBound, CRS("+proj=robin")): object 'worldBound' not found
+```
+## Error in spTransform(worldBound, CRS("+proj=robin")): object 'worldBound' not found
+```
 
-    worldBound_df_robin <- fortify(worldBound_robin)
+```r
+worldBound_df_robin <- fortify(worldBound_robin)
+```
 
-    ## Error in fortify(worldBound_robin): object 'worldBound_robin' not found
+```
+## Error in fortify(worldBound_robin): object 'worldBound_robin' not found
+```
 
-    # force R to plot x and y values without abbrev
-    options(scipen=100)
-    
-    robMap <- ggplot(worldBound_df_robin, aes(long,lat, group=group)) +
-      geom_polygon() +
-      labs(title="World map (robinson)") +
-      xlab("X Coordinates (meters)") + ylab("Y Coordinates (meters)") +
-      coord_equal()
+```r
+# force R to plot x and y values without abbrev
+options(scipen=100)
 
-    ## Error in ggplot(worldBound_df_robin, aes(long, lat, group = group)): object 'worldBound_df_robin' not found
+robMap <- ggplot(worldBound_df_robin, aes(long,lat, group=group)) +
+  geom_polygon() +
+  labs(title="World map (robinson)") +
+  xlab("X Coordinates (meters)") + ylab("Y Coordinates (meters)") +
+  coord_equal()
+```
 
-    robMap
+```
+## Error in ggplot(worldBound_df_robin, aes(long, lat, group = group)): object 'worldBound_df_robin' not found
+```
 
-    ## Error in eval(expr, envir, enclos): object 'robMap' not found
+```r
+robMap
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'robMap' not found
+```
 
 Now what happens if you try to add the same Lat / Long coordinate locations that
 we used above, to our map, with the `CRS` of `Robinsons`?
 
 
-    # add a point to the map
-    newMap <- robMap + geom_point(data=loc.df,
-                          aes(x=lon, y=lat, group=NULL),
-                          colour = "springgreen",
-                          size=5)
+```r
+# add a point to the map
+newMap <- robMap + geom_point(data=loc.df,
+                      aes(x=lon, y=lat, group=NULL),
+                      colour = "springgreen",
+                      size=5)
+```
 
-    ## Error in eval(expr, envir, enclos): object 'robMap' not found
+```
+## Error in eval(expr, envir, enclos): object 'robMap' not found
+```
 
-    newMap + theme(legend.position="none")
+```r
+newMap + theme(legend.position="none")
+```
 
-    ## Error in eval(expr, envir, enclos): object 'newMap' not found
+```
+## Error in eval(expr, envir, enclos): object 'newMap' not found
+```
 
 Notice above that when we try to add lat/long coordinates in degrees, to a map
 in a different `CRS`, that the points are not in the correct location. We need
@@ -316,60 +364,100 @@ to first convert the points to the  new projection - a process often referred
 to as **reprojection** but performed by the `spTransform()` function in `R`.
 
 
-    # define locations of Boulder, CO and Oslo, Norway
-    loc.df
+```r
+# define locations of Boulder, CO and Oslo, Norway
+loc.df
+```
 
-    ##         lon     lat
-    ## 1 -105.2519 40.0274
-    ## 2   10.7500 59.9500
-    ## 3    2.9833 39.6167
+```
+##         lon     lat
+## 1 -105.2519 40.0274
+## 2   10.7500 59.9500
+## 3    2.9833 39.6167
+```
 
-    # convert to spatial Points data frame
-    loc.spdf <- SpatialPointsDataFrame(coords = loc.df, data=loc.df,
-                                proj4string=crs(worldBound))
+```r
+# convert to spatial Points data frame
+loc.spdf <- SpatialPointsDataFrame(coords = loc.df, data=loc.df,
+                            proj4string=crs(worldBound))
+```
 
-    ## Error in crs(worldBound): object 'worldBound' not found
+```
+## Error in crs(worldBound): object 'worldBound' not found
+```
 
-    loc.spdf
+```r
+loc.spdf
+```
 
-    ## Error in eval(expr, envir, enclos): object 'loc.spdf' not found
+```
+## Error in eval(expr, envir, enclos): object 'loc.spdf' not found
+```
 
-    # reproject data to Robinson
-    loc.spdf.rob <- spTransform(loc.spdf, CRSobj = CRS("+proj=robin"))
+```r
+# reproject data to Robinson
+loc.spdf.rob <- spTransform(loc.spdf, CRSobj = CRS("+proj=robin"))
+```
 
-    ## Error in spTransform(loc.spdf, CRSobj = CRS("+proj=robin")): object 'loc.spdf' not found
+```
+## Error in spTransform(loc.spdf, CRSobj = CRS("+proj=robin")): object 'loc.spdf' not found
+```
 
-    loc.rob.df <- as.data.frame(cbind(loc.spdf.rob$lon, loc.spdf.rob$lat))
+```r
+loc.rob.df <- as.data.frame(cbind(loc.spdf.rob$lon, loc.spdf.rob$lat))
+```
 
-    ## Error in cbind(loc.spdf.rob$lon, loc.spdf.rob$lat): object 'loc.spdf.rob' not found
+```
+## Error in cbind(loc.spdf.rob$lon, loc.spdf.rob$lat): object 'loc.spdf.rob' not found
+```
 
-    # rename each column
-    names(loc.rob.df ) <- c("X","Y")
+```r
+# rename each column
+names(loc.rob.df ) <- c("X","Y")
+```
 
-    ## Error in names(loc.rob.df) <- c("X", "Y"): object 'loc.rob.df' not found
+```
+## Error in names(loc.rob.df) <- c("X", "Y"): object 'loc.rob.df' not found
+```
 
-    # convert spatial object to a data.frame for ggplot
-    loc.rob <- fortify(loc.rob.df)
+```r
+# convert spatial object to a data.frame for ggplot
+loc.rob <- fortify(loc.rob.df)
+```
 
-    ## Error in fortify(loc.rob.df): object 'loc.rob.df' not found
+```
+## Error in fortify(loc.rob.df): object 'loc.rob.df' not found
+```
 
-    # notice the coordinate system in the Robinson projection (CRS) is DIFFERENT
-    # from the coordinate values for the same locations in a geographic CRS.
-    loc.rob
+```r
+# notice the coordinate system in the Robinson projection (CRS) is DIFFERENT
+# from the coordinate values for the same locations in a geographic CRS.
+loc.rob
+```
 
-    ## Error in eval(expr, envir, enclos): object 'loc.rob' not found
+```
+## Error in eval(expr, envir, enclos): object 'loc.rob' not found
+```
 
-    # add a point to the map
-    newMap <- robMap + geom_point(data=loc.rob,
-                          aes(x=X, y=Y, group=NULL),
-                          colour = "springgreen",
-                          size=5)
+```r
+# add a point to the map
+newMap <- robMap + geom_point(data=loc.rob,
+                      aes(x=X, y=Y, group=NULL),
+                      colour = "springgreen",
+                      size=5)
+```
 
-    ## Error in eval(expr, envir, enclos): object 'robMap' not found
+```
+## Error in eval(expr, envir, enclos): object 'robMap' not found
+```
 
-    newMap + theme(legend.position="none")
+```r
+newMap + theme(legend.position="none")
+```
 
-    ## Error in eval(expr, envir, enclos): object 'newMap' not found
+```
+## Error in eval(expr, envir, enclos): object 'newMap' not found
+```
 
 ## Compare Maps
 
@@ -382,29 +470,53 @@ be found in the .R document that is available for download at the bottom of this
 page!
 
 
-    ## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
+```
+## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
+```
 
-    ## Error in fortify(graticule): object 'graticule' not found
+```
+## Error in fortify(graticule): object 'graticule' not found
+```
 
-    ## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
+```
+## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
+```
 
-    ## Error in fortify(data): object 'worldBound_df' not found
+```
+## Error in fortify(data): object 'worldBound_df' not found
+```
 
-    ## Error in eval(expr, envir, enclos): object 'latLongMap' not found
+```
+## Error in eval(expr, envir, enclos): object 'latLongMap' not found
+```
 
-    ## Error in spTransform(graticule, CRS("+proj=robin")): object 'graticule' not found
+```
+## Error in spTransform(graticule, CRS("+proj=robin")): object 'graticule' not found
+```
 
-    ## Error in fortify(graticule_robin): object 'graticule_robin' not found
+```
+## Error in fortify(graticule_robin): object 'graticule_robin' not found
+```
 
-    ## Error in (function (classes, fdef, mtable) : unable to find an inherited method for function 'spTransform' for signature '"standardGeneric", "CRS"'
+```
+## Error in (function (classes, fdef, mtable) : unable to find an inherited method for function 'spTransform' for signature '"standardGeneric", "CRS"'
+```
 
-    ## Error in fortify(bbox_robin): object 'bbox_robin' not found
+```
+## Error in fortify(bbox_robin): object 'bbox_robin' not found
+```
 
-    ## Error in ggplot(bbox_robin_df, aes(long, lat, group = group)): object 'bbox_robin_df' not found
+```
+## Error in ggplot(bbox_robin_df, aes(long, lat, group = group)): object 'bbox_robin_df' not found
+```
 
-    ## Error in eval(expr, envir, enclos): object 'finalRobMap' not found
+```
+## Error in eval(expr, envir, enclos): object 'finalRobMap' not found
+```
 
-    ## Error in arrangeGrob(...): object 'latLongMap' not found
+```
+## Error in arrangeGrob(...): object 'latLongMap' not found
+```
 
 
 ## Why Multiple CRS?

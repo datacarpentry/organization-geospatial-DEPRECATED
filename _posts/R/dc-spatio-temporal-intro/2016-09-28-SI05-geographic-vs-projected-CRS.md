@@ -117,15 +117,25 @@ located at the intersection of the
 Equator (0° latitude) and Prime Meridian (0° longitude) on the globe.
 
 
-    ## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
+```
+## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
+```
 
-    ## Error in fortify(worldGrat30): object 'worldGrat30' not found
+```
+## Error in fortify(worldGrat30): object 'worldGrat30' not found
+```
 
-    ## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
+```
+## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
+```
 
-    ## Error in fortify(wgs84Box): object 'wgs84Box' not found
+```
+## Error in fortify(wgs84Box): object 'wgs84Box' not found
+```
 
-    ## Error in ggplot(wgs84Box_df, aes(long, lat, group = group)): object 'wgs84Box_df' not found
+```
+## Error in ggplot(wgs84Box_df, aes(long, lat, group = group)): object 'wgs84Box_df' not found
+```
 
 
 

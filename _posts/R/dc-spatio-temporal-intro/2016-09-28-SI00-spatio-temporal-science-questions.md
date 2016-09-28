@@ -124,20 +124,7 @@ located in the central region of the US state of California.
 
 Both sites are mapped below:
 
-
-    ## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
-
-    ## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
-
-    ## Error in plot(State.Boundary.US, main = "NEON Field Site Locations \nHarvard Forest & San Joachin Experimental Range", : object 'State.Boundary.US' not found
-
-    ## Error in plot(Boundary.US, add = TRUE): object 'Boundary.US' not found
-
-    ## Error in plot.xy(xy.coords(x, y), type = type, ...): plot.new has not been called yet
-
-    ## Error in plot.xy(xy.coords(x, y), type = type, ...): plot.new has not been called yet
-
-    ## Error in strwidth(legend, units = "user", cex = cex, font = text.font): plot.new has not been called yet
+![ ]({{ site.baseurl }}/images/rfigs/dc-spatio-temporal-intro/00-spatio-temporal-science-questions/Field-Site-Map-1.png)
 
 These two sites are about 4,900km (3,000 miles) apart! Do we expect to see
 differences in the timing of greening and browning of plants (phenophase timing)

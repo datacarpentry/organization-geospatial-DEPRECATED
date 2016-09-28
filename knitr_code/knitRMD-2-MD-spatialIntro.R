@@ -16,7 +16,7 @@ gitRepoPath <-"~/Documents/github/R-Spatio-Temporal-Data-and-Management-Intro/"
 add.date <- "2016-09-28-SI"
 
 #set working dir - this is where the data are located
-wd <- "~/Documents/data/spatio-intro"
+wd <- "~/Documents/data"
 
 
 ################### CONFIG BELOW IS REQUIRED BY JEKYLL - DON"T CHANGE ##########
@@ -117,7 +117,8 @@ for (files in rmd.files) {
   opts_chunk$set(fig.path = fig.path)
   opts_chunk$set(fig.cap = " ")
   # render_jekyll()
-  render_markdown(strict = TRUE)
+  render_markdown(strict = FALSE, fence_char = "`")
+  #render_jekyll(highlight = "rouge")
   # create the markdown file name - add a date at the beginning to Jekyll recognizes
   # it as a post
   mdFile <- paste0(gitRepoPath,postsDir,add.date ,sub(".Rmd$", "", input), ".md")
@@ -133,7 +134,7 @@ for (files in rmd.files) {
   }
   
   # copy rmd file to the rmd directory on git
-  file.copy(paste0(wd,"/",basename(files)), gitRepoPath, recursive=TRUE)
+  file.copy(paste0(wd, "/", basename(files)), gitRepoPath, recursive=TRUE)
   
   # delete local repo copies of RMD files just so things are cleaned up??
   
