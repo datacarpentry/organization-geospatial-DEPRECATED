@@ -1,10 +1,10 @@
 ---
-layout: post
+layout: single
 title: "Spatial Intro 02: Spatial Data Formats -- Intro to Shapefiles (Vector
 Data) and GeoTIFFs (Raster Data)"
 date:   2015-10-28
-authors: [Leah A. Wasser, Megan A. Jones]
-contributors: [ ]
+authors: [Leah A. Wasser]
+contributors: [Megan Jones]
 dateCreated: 2015-10-23
 lastModified: `r format(Sys.time(), "%Y-%m-%d")`
 packagesLibraries: [raster, rgdal, sp]
@@ -18,14 +18,13 @@ provides a brief overview of other formats that you may encounter when working
 with spatial data."
 code1: /R/dc-spatio-temporal-intro/02-spatial-data-formats.R
 image:
-  feature: NEONCarpentryHeader_2.png
-  credit: A collaboration between the National Ecological Observatory Network (NEON) and Data Carpentry
+  feature:
+  credit:
   creditlink:
 permalink: /R/spatial-data-formats
 comments: true
 ---
 
-{% include _toc.html %}
 
 This tutorial covers the basics of key data formats that may contain spatial
 information including shapefile, GeoTIFF and .csv. It also provides a brief
@@ -54,8 +53,6 @@ formats.
 * **raster:** `install.packages("raster")`
 * **rgdal:** `install.packages("rgdal")`
 
-
-{% include/_greyBox-wd-rscript.html %}
 
 ****
 
@@ -128,7 +125,7 @@ include:
 	+ outlines of plot boundaries,
 	+ lakes,
 	+ oceans and
-	+ states or country boundaries.  
+	+ states or country boundaries.
 
 
 <i class="fa fa-star"></i> **Data Tip:** A shapefile will only contain **one
@@ -373,7 +370,7 @@ the date the photo was taken.
 complex, heterogeneous data. More on HDF5 formated rasters can be found in the
 NEON Data Skills [tutorials focusing on HDF5](http://neondataskills.org/HDF5/).
 * **.grd:** An ESRI specific raster format.
-* **netCDF:**  
+* **netCDF:**
     + <a href="http://www.unidata.ucar.edu/software/netcdf/docs/faq.html" target="_blank">About netCDF (UCAR)</a>
     + <a href="https://publicwiki.deltares.nl/display/OET/Creating+a+netCDF+file+with+R" target="_blank">Create netCDF in R</a>
     + <a href="http://geog.uoregon.edu/bartlein/courses/geog607/Rmd/netCDF_01.htm" target="_blank">A tutorial for version 3 in R</a>

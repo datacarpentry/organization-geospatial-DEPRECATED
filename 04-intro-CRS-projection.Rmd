@@ -1,10 +1,10 @@
 ---
-layout: post
+layout: single
 title: "Spatial Intro 04: Intro to Coordinate Reference Systems & Spatial
 Projections"
 date: 2015-10-26
-authors: [Leah A. Wasser, Megan A. Jones]
-contributors: [ ]
+authors: [Leah A. Wasser]
+contributors: [Megan A. Jones]
 dateCreated: 2015-10-23
 lastModified: `r format(Sys.time(), "%Y-%m-%d")`
 packagesLibraries: [ ]
@@ -23,7 +23,6 @@ permalink: R/intro-to-coordinate-reference-systems
 comments: true
 ---
 
-{% include _toc.html %}
 
 ## About
 
@@ -66,17 +65,15 @@ Download all Graticules - Natural Earth Global Graticules Layer</a>
 
 ****
 
-{% include/_greyBox-wd-rscript.html %}
-
 **Spatial-Temporal Data & Data Management Lesson Series:** This lesson is part
 of a lesson series introducing
 [spatial data and data management in `R` ]({{ site.baseurl }}tutorial/URL).
 It is also part of a larger
 [spatio-temporal Data Carpentry Workshop ]({{ site.baseurl }}workshops/spatio-temporal-workshop)
-that includes working with  
+that includes working with
 [raster data in `R`]({{ site.baseurl }}tutorial/spatial-raster-series),
 [vector data in `R`]({{ site.baseurl }}tutorial/spatial-vector-series)
-and  
+and
 [tabular time series in `R`]({{ site.baseurl }}tutorial/tabular-time-series).
 
 ****
@@ -97,7 +94,7 @@ look proportionally larger or smaller than they actually are!
 <iframe width="560" height="315" src="https://www.youtube.com/embed/KUF_Ckv8HbE" frameborder="0" allowfullscreen></iframe>
 
 * For more on types of projections, visit
-<a href="http://help.arcgis.com/en/arcgisdesktop/10.0/help/index.html#/Datums/003r00000008000000/" target="_blank"> ESRI's ArcGIS reference on projection types.</a>.  
+<a href="http://help.arcgis.com/en/arcgisdesktop/10.0/help/index.html#/Datums/003r00000008000000/" target="_blank"> ESRI's ArcGIS reference on projection types.</a>.
 * Read more about <a href="https://source.opennews.org/en-US/learning/choosing-right-map-projection/" target="_blank"> choosing a projection/datum.</a>
 
 
@@ -196,7 +193,7 @@ worldBound <- readOGR(dsn="Global/Boundaries/ne_110m_land",
                       layer="ne_110m_land")
 
 # convert to dataframe
-worldBound_df <- fortify(worldBound)  
+worldBound_df <- fortify(worldBound)
 
 # plot map
 worldMap <- ggplot(worldBound_df, aes(long,lat, group=group)) +
@@ -227,7 +224,7 @@ loc.df <- data.frame(lon=c(-105.2519, 10.7500, 2.9833),
                 lat=c(40.0274, 59.9500, 39.6167))
 
 # only needed if the above is a spatial points object
-# loc.df <- fortify(loc)  
+# loc.df <- fortify(loc)
 
 # add a point to the map
 mapLocations <- worldMap + geom_point(data=loc.df,
@@ -262,7 +259,7 @@ have been developed.
 
 We can view the same data above, in another CRS - `Robinson`. `Robinson` is a
 **projected** `CRS`. Notice that the country boundaries on the map - have a
-different shape compared to the map that we created above in the `CRS`:  
+different shape compared to the map that we created above in the `CRS`:
 **Geographic lat/long WGS84**.
 
 ```{r global-map-robinson }
@@ -312,7 +309,7 @@ loc.df
 
 # convert to spatial Points data frame
 loc.spdf <- SpatialPointsDataFrame(coords = loc.df, data=loc.df,
-                            proj4string=crs(worldBound))  
+                            proj4string=crs(worldBound))
 
 loc.spdf
 # reproject data to Robinson

@@ -1,9 +1,9 @@
 ---
-layout: post
+layout: single
 title: "Spatial Intro 03: Data About Data -- Intro to Metadata File Formats and Structure"
 date:   2015-10-27
-authors: [Leah A. Wasser, Megan A. Jones]
-contributors: [ ]
+authors: [Leah A. Wasser]
+contributors: [Megan Jones ]
 dateCreated: 2015-10-27
 lastModified: `r format(Sys.time(), "%Y-%m-%d")`
 packagesLibraries: [raster, rgdal, eml, devtools]
@@ -24,7 +24,6 @@ permalink: /R/metadata-file-formats-structures
 comments: true
 ---
 
-{% include _toc.html %}
 
 This tutorial covers what metadata are and why we need to work
 with metadata in the context of spatio-temporal data. It
@@ -63,8 +62,6 @@ the data.
 * [More on Packages in R - Adapted from Software Carpentry.]({{site.baseurl}}R/Packages-In-R/)
 
 ****
-
-{% include/_greyBox-wd-rscript.html %}
 
 
 ### Additional Resources
@@ -345,7 +342,7 @@ series!
 ## Embedded Metadata - Hierarchical Data Formats (HDF5)
 
 HDF5 is another file type that supports embedded metadata format. Check out the
-[NEON Data Skills HDF5 tutorials](http://www.neondataskills.org/tutorial-series/intro-hdf5-r-series/)  
+[NEON Data Skills HDF5 tutorials](http://www.neondataskills.org/tutorial-series/intro-hdf5-r-series/)
 to learn more about how HDF5 stores metadata.
 
 ## Structured Metadata - EML

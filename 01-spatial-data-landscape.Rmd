@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Spatial Intro 01: The Spatial Data Landscape"
 date:   2015-10-29
 authors: []
@@ -24,7 +24,6 @@ permalink: /R/spatial-data-landscape
 comments: true
 ---
 
-{% include _toc.html %}
 
 This tutorial introduces the spatial data tool landscape. It
 covers the types of gui and non-gui tools that are available. The tutorial
@@ -44,8 +43,6 @@ After completing this activity, you will:
 * Be aware of a variety of tools that can be used to access spatial data.
 
 ****
-
-{% include/_greyBox-wd-rscript.html %}
 
 ### Additional Resources
 For a list of tools to work with spatial data, visit:

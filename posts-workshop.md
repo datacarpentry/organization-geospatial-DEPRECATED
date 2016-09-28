@@ -1,5 +1,5 @@
 ---
-layout: post-index
+layout: default
 permalink: /workshops/
 title: Potential workshops
 tagline: A List of Posts

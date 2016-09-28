@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Spatial Intro 08: Intro to Spatial Metadata -- Spatial Resolution and
 Spatial Extent"
 date: 2015-10-22
@@ -23,7 +23,6 @@ permalink: R/key-spatial-metadata
 comments: true
 ---
 
-{% include _toc.html %}
 
 ## About
 
@@ -59,17 +58,15 @@ preferably, RStudio loaded on your computer.
 
 ****
 
-{% include/_greyBox-wd-rscript.html %}
-
 **Spatial-Temporal Data & Data Management Lesson Series:** This lesson is part
 of a lesson series introducing
 [spatial data and data management in `R` ]({{ site.baseurl }}tutorial/URL).
 It is also part of a larger
 [spatio-temporal Data Carpentry Workshop ]({{ site.baseurl }}workshops/spatio-temporal-workshop)
-that includes working with  
+that includes working with
 [raster data in `R` ]({{ site.baseurl }}tutorial/spatial-raster-series),
 [vector data in `R` ]({{ site.baseurl }}tutorial/spatial-vector-series)
-and  
+and
 [tabular time series in `R` ]({{ site.baseurl }}tutorial/tabular-time-series).
 
 ****
@@ -94,11 +91,11 @@ in order to effectively work with spatial data:
 
 ## Spatial Extent
 The spatial extent of a spatial object is just how much area does it cover. A
-map of Paris has a smaller spatial extent than a map of all of France.  
+map of Paris has a smaller spatial extent than a map of all of France.
 
 ### Units
 The units of the extent are defined by the coordinate system that the spatial
-data is in.  
+data is in.
 
 ### Extent in Vector Data
 GRAPHIC FROM COLIN
@@ -194,7 +191,7 @@ library(raster)
 library(rgdal)
 
 # Load raster in an R object called 'DEM'
-DEM <- raster("DigitalTerrainModel/SJER2013_DTM.tif")  
+DEM <- raster("DigitalTerrainModel/SJER2013_DTM.tif")
 
 # View raster attributes
 DEM

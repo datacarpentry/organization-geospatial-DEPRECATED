@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Spatial Intro 00: Answer a Spatio-temporal Research Question with Data - Where to Start?"
 date:   2015-10-30
 authors: [Megan A. Jones, Leah A. Wasser]
@@ -23,7 +23,6 @@ permalink: /R/spatio-temporal-research-questions
 comments: true
 ---
 
-{% include _toc.html %}
 
 This tutorial provides an overview of finding spatial data to support your
 research question. It covers some of the key data sources, providers and
@@ -47,7 +46,6 @@ answer a spatio-temporal research question.
 
 ****
 
-{% include/_greyBox-wd-rscript.html %}
 
 </div>
 
@@ -59,7 +57,7 @@ answer a spatio-temporal research question.
 	what data are needed and finding/collecting the metadata needed to understand
 	and work with the data. Once this is decided we can then decide on what tools/
 	program we want to work with to manipulate, visualize, and analyze our data to
-	answer our questions. Source: National Ecological Observatory Network (NEON)  
+	answer our questions. Source: National Ecological Observatory Network (NEON)
 	</figcaption>
 </figure>
 
@@ -195,7 +193,7 @@ sites that are located 3,000+ miles apart!
 	<figcaption>
 	An example plot of NDVI (Normalized Difference Vegetative Index). We see when the
 	vegetation is greener (a larger value) throughout a year or a growing season.
-	Source: National Ecological Observatory Network (NEON)  
+	Source: National Ecological Observatory Network (NEON)
 	</figcaption>
 </figure>
 
@@ -237,7 +235,7 @@ sites for a future publication.
 	+ How large (spatial extent) are the sites?
 	+ How dense is the vegetation?
 	+ Where are the field sites located?
-	+ Are the sites accessible by roads or difficult to get to?  
+	+ Are the sites accessible by roads or difficult to get to?
 * **Plots of temperature and precipitation:** Both are drivers of phenophase
 timing. We want to plot each at both sites for the same *temporal duration* as
 our greenness data.
@@ -467,7 +465,7 @@ available at 15-minute and daily intervals.
 	<figcaption>The Fischer Meteorological Station in two seasons. Source:
 	<a href="http://harvardforest.fas.harvard.edu/" target="_blank"> Harvard Forest</a>
 	</figcaption>
-</figure>   
+</figure>
 
 ### Work With Time Series Data in R
 

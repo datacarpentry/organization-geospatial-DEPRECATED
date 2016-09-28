@@ -10,17 +10,17 @@ require(knitr)
 
 #################### Set up Input Variables #############################
 #Inputs - Where the git repo is on your computer
-gitRepoPath <-"~/Documents/GitHub/NEON-R-Spatio-Temporal-Data-and-Management-Intro/"
+gitRepoPath <-"~/Documents/github/R-Spatio-Temporal-Data-and-Management-Intro/"
 
 #jekyll will only render md posts that begin with a date. Add one.
-add.date <- "2016-01-12-SI"
+add.date <- "2016-09-28-SI"
 
 #set working dir - this is where the data are located
-wd <- "~/Documents/data/1_DataPortal_Workshop/1_WorkshopData"
+wd <- "~/Documents/data/spatio-intro"
 
 
 ################### CONFIG BELOW IS REQUIRED BY JEKYLL - DON"T CHANGE ##########
-#set data working dir
+# set data working dir
 setwd(wd)
 
 # set series subdir
@@ -80,11 +80,11 @@ if (file.exists(paste0(gitRepoPath, codeDir))){
 # NOTE: comment this out if you just want to rebuild one lesson
 
 # clean out images dir to avoid the issue of duplicate files 
-#unlink(paste0(gitRepoPath, postsDir,"*"), recursive = TRUE)
+unlink(paste0(gitRepoPath, postsDir,"*"), recursive = TRUE)
 # clean out images dir to avoid the issue of duplicate files 
-#unlink(paste0(gitRepoPath, codeDir,"*"), recursive = TRUE)
+unlink(paste0(gitRepoPath, codeDir,"*"), recursive = TRUE)
 # clean out images dir to avoid the issue of duplicate files 
-#unlink(paste0(gitRepoPath, imagePath,"*"), recursive = TRUE)
+unlink(paste0(gitRepoPath, imagePath,"*"), recursive = TRUE)
 
 
 # copy image directory over
@@ -101,7 +101,7 @@ rmd.files <- list.files(gitRepoPath, pattern="*.Rmd", full.names = TRUE )
 #################### Set up Image Directory #############################
 
 # just render one file
-rmd.files <- rmd.files[5]
+# rmd.files <- rmd.files[3]
 
 for (files in rmd.files) {
   
