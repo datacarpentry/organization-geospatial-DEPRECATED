@@ -4,7 +4,7 @@ title                    : "Earth Lab Resources"
 title_separator          : "-"
 name                     : "Earth Analytics"
 description              : "Code, tutorials, and tools for modern Earth analytics"
-url                      : "https://lwasser.github.io"
+url                      : # "https://lwasser.github.io"
 baseurl                  : "/R-Spatio-Temporal-Data-and-Management-Intro"
 gh_repo                  :
 teaser                   : # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
@@ -113,6 +113,7 @@ exclude:
   - Rakefile
   - README
   - tmp
+  - "*.Rmd"
 keep_files:
   - .git
   - .svn
@@ -214,6 +215,3 @@ defaults:
       comments: true
       share: true
       related: true
-
-
-exclude: ["*.Rmd", "lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]      
