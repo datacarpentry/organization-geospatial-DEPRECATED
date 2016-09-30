@@ -1,11 +1,10 @@
 ---
-layout: single
 title: "Spatial Intro 03: Data About Data -- Intro to Metadata File Formats and Structure"
 date:   2015-10-27
 authors: [Leah A. Wasser]
 contributors: [Megan Jones ]
-dateCreated: 2015-10-27
-lastModified: 2016-09-28
+dateCreated: 2016-09-27
+lastModified: 2016-09-30
 packagesLibraries: [raster, rgdal, eml, devtools]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis, metadata]
@@ -22,6 +21,9 @@ image:
   creditlink:
 permalink: /R/metadata-file-formats-structures
 comments: true
+sidebar:
+  nav: "spatial-intro"
+author_profile: false
 ---
 
 
@@ -32,7 +34,8 @@ format, web page format and Ecological Metadata Language (EML).
 
 **R Skill Level:** Beginner
 
-<div id="objectives" markdown="1">
+<div class="notice--success" markdown="1">
+
 
 # Goals / Objectives
 

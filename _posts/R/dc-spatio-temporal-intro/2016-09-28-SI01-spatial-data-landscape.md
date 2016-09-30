@@ -1,11 +1,10 @@
 ---
-layout: single
 title: "Spatial Intro 01: The Spatial Data Landscape"
 date:   2015-10-29
 authors: []
 contributors: [ ]
 dateCreated: 2015-10-23
-lastModified: 2016-09-28
+lastModified: 2016-09-30
 packagesLibraries: [ ]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis]

@@ -1,20 +1,16 @@
 ---
-layout: single
-title: "Spatial Intro 02.1: Components of a Shapefile - Shp, Shx, DBF"
-date:   2015-10-28
+title: "Spatial Intro 02.2: Components of a Shapefile - Shp, Shx, DBF"
+date:   2016-09-24
 authors: [Leah A. Wasser]
 contributors: [Megan Jones]
-dateCreated: 2015-10-23
-lastModified: 2016-09-28
+dateCreated: 2016-09-24
+lastModified: 2016-09-30
 packagesLibraries: [raster, rgdal, sp]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis]
 mainTag: spatial-data-management-series
 workshopSeries: [spatial-data-management-series]
-description: "This tutorial covers the basics of key data formats that may
-contain spatial information including shapefile, GeoTIFF and .csv. It also
-provides a brief overview of other formats that you may encounter when working
-with spatial data."
+description: "This tutorial covers the various files that make up a shapefile."
 code1: /R/dc-spatio-temporal-intro/02-spatial-data-formats.R
 image:
   feature:
@@ -22,6 +18,9 @@ image:
   creditlink:
 permalink: /R/components-of-a-shapefile
 comments: true
+sidebar:
+  nav: "spatial-intro"
+author_profile: false
 ---
 
 
@@ -31,7 +30,8 @@ with a shapefile and how to share shapefiles with colleagues.
 
 **R Skill Level:** Beginner
 
-<div id="objectives" markdown="1">
+<div class="notice--success" markdown="1">
+
 
 # Goals / Objectives
 
@@ -57,14 +57,12 @@ GIS file formats.</a>
 </div>
 
 
-
 ## One Dataset - Many Files
 
 While text files often are self contained (one CSV) is composed of one unique file,
 many spatial formats are composed of several files. A shapefile is created by
 3 or more files, all of which must retain the same NAME and be
 stored in the same file directory, in order for you to be able to work with them.
-
 
 
 ### Shapefile Structure
@@ -95,4 +93,4 @@ important to zip up all of these files into one package before you send it to
 them!
 
 NOTE: for a nice tutorial series on shapefiles in `R`, check out:
-[*Introduction to Working With Vector Data in R* series](http://neondataskills.org/tutorial-series/vector-data-series/).
+[*NEON's Intro to Working With Vector Data in R* series](http://neondataskills.org/tutorial-series/vector-data-series/).

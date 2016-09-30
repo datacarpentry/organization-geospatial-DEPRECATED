@@ -6,7 +6,7 @@ date: 2015-10-26
 authors: [Leah A. Wasser]
 contributors: [Megan A. Jones]
 dateCreated: 2015-10-23
-lastModified: 2016-09-28
+lastModified: 2016-09-30
 packagesLibraries: [ ]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis]

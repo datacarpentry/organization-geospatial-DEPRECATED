@@ -1,11 +1,10 @@
 ---
-layout: single
 title: "Spatial Intro 00: Answer a Spatio-temporal Research Question with Data - Where to Start?"
 date:   2015-10-30
 authors: [Megan A. Jones, Leah A. Wasser]
 contributors: [Natalie Robinson ]
 dateCreated: 2015-10-23
-lastModified: 2016-09-28
+lastModified: 2016-09-30
 packagesLibraries: [ ]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis]

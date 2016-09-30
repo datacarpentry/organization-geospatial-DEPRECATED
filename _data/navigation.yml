@@ -12,3 +12,19 @@ main:
 
   - title: "About"
     url: /about/
+
+
+spatial-intro:
+
+  - title: Spatial Data Intro
+    children:
+      - title: "Raster vs Vector"
+        url: /R/spatial-data-formats
+      - title: "About Shapefiles"
+        url: /R/about-shapefiles
+      - title: "Shapefile Structure"
+        url: /R/components-of-a-shapefile
+      - title: "Raster Data"
+        url: /R/about-raster-data
+      - title: "more??"
+        url: /docs/upgrading
