@@ -4,7 +4,7 @@ title: "Spatial Intro 04: Intro to Coordinate Reference Systems & Spatial
 Projections"
 date: 2015-10-26
 authors: [Leah A. Wasser]
-contributors: [Megan A. Jones]
+contributors: [Megan Jones]
 dateCreated: 2015-10-23
 lastModified: `r format(Sys.time(), "%Y-%m-%d")`
 packagesLibraries: [ ]

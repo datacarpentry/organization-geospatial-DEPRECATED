@@ -4,7 +4,7 @@ date:   2016-09-23
 authors: [Leah A. Wasser]
 contributors: [Megan Jones]
 dateCreated: 2016-09-23
-lastModified: 2016-09-30
+lastModified: 2016-10-04
 packagesLibraries: [raster, rgdal, sp]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis]

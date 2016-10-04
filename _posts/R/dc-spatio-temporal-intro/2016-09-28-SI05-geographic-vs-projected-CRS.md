@@ -1,12 +1,12 @@
 ---
 layout: single
-title: "Spatial Intro 05: Introduction to the UTM Projected CRS and a Brief overview
+title: "Spatial Intro 04.1: Introduction to the UTM Projected CRS and a Brief overview
 of datums"
 date: 2015-10-25
-authors: [Leah A. Wasser, Megan A. Jones]
-contributors: [ ]
+authors: [Leah A. Wasser]
+contributors: [Megan Jones]
 dateCreated: 2015-10-23
-lastModified: 2016-09-30
+lastModified: 2016-10-04
 packagesLibraries: [ ]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis]

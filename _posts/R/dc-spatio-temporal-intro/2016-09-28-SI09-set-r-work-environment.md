@@ -5,7 +5,7 @@ date:   2015-10-21
 authors: []
 contributors: [ ]
 dateCreated: 2015-10-23
-lastModified: 2016-09-30
+lastModified: 2016-10-04
 packagesLibraries: [ ]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis]

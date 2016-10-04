@@ -26,5 +26,21 @@ spatial-intro:
         url: /R/components-of-a-shapefile
       - title: "Raster Data"
         url: /R/about-raster-data
-      - title: "more??"
-        url: /docs/upgrading
+
+  - title: Metadata
+    children:
+      - title: "About Metadata"
+        url: /R/metadata-file-formats-structures
+      - title: "Embedded Metadata"
+        url: /R/embedded-metadata-geotiff
+      - title: "Structured Metadata"
+        url: /R/structured-metadata-EML
+
+  - title: Coordinate Reference Systems
+    children:
+      - title: "Intro to CRS"
+        url: /R/intro-to-coordinate-reference-systems
+      - title: "Geographic vs Projected"
+        url: /R/key-spatial-metadata
+      - title: "CRS formats"
+        url: /R/intro-to-CRS-formats-proj4-EPSG-R

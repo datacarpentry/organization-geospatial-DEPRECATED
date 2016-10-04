@@ -4,7 +4,7 @@ date:   2015-10-27
 authors: [Leah A. Wasser]
 contributors: [Megan Jones]
 dateCreated: 2016-09-27
-lastModified: `r format(Sys.time(), "%Y-%m-%d")`
+lastModified: 2016-10-04
 packagesLibraries: [raster, rgdal, eml, devtools]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis, metadata]
@@ -107,8 +107,8 @@ The code below provides an example of how we can access spatial metadata
 in `R`. We cover this in more detail, in the
 [*Intro to Raster Data in R* tutorial](http://www.neondataskills.org/R/Introduction-to-Raster-Data-In-R).
 
-```{r load-libraries }
 
+```r
 # load libraries
 library(raster)
 library(rgdal)
@@ -121,7 +121,12 @@ DSM_HARV <- raster("NEON-DS-Airborne-Remote-Sensing/HARV/DSM/HARV_dsmCrop.tif")
 
 # view Coordinate Reference System (note, this often contains horizontal units!)
 crs(DSM_HARV)
+```
 
+```
+## CRS arguments:
+##  +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84
+## +towgs84=0,0,0
 ```
 
 ### Spatial Classes in R
@@ -130,34 +135,94 @@ There are specific classes designed to store some of the spatial metadata
 associated with spatial data in R. Let's have a look.
 
 
-```{r crs-class}
+
+```r
 # assign crs to an object (class) to use for reprojection and other tasks
 myCRS <- crs(DSM_HARV)
 myCRS
+```
 
+```
+## CRS arguments:
+##  +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84
+## +towgs84=0,0,0
+```
+
+```r
 # what class is the new CRS object?
 class(myCRS)
+```
 
+```
+## [1] "CRS"
+## attr(,"package")
+## [1] "sp"
+```
+
+```r
 # view spatial extent
 extent(DSM_HARV)
+```
 
+```
+## class       : Extent 
+## xmin        : 731453 
+## xmax        : 733150 
+## ymin        : 4712471 
+## ymax        : 4713838
+```
+
+```r
 # view spatial resolution
 res(DSM_HARV)
+```
 
+```
+## [1] 1 1
 ```
 
 The spatial `extent()` is a class as well. Let's have a look.
 
-```{r view-extent}
 
+```r
 # view object extent
 myExtent <- extent(DSM_HARV)
 myExtent
-class(myExtent)
+```
 
+```
+## class       : Extent 
+## xmin        : 731453 
+## xmax        : 733150 
+## ymin        : 4712471 
+## ymax        : 4713838
+```
+
+```r
+class(myExtent)
+```
+
+```
+## [1] "Extent"
+## attr(,"package")
+## [1] "raster"
+```
+
+```r
 # print object name to return object metadata & attribute data
 
 DSM_HARV
+```
+
+```
+## class       : RasterLayer 
+## dimensions  : 1367, 1697, 2319799  (nrow, ncol, ncell)
+## resolution  : 1, 1  (x, y)
+## extent      : 731453, 733150, 4712471, 4713838  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## data source : /Users/lewa8222/Documents/data/NEON-DS-Airborne-Remote-Sensing/HARV/DSM/HARV_dsmCrop.tif 
+## names       : HARV_dsmCrop 
+## values      : 305.07, 416.07  (min, max)
 ```
 
 
@@ -179,18 +244,32 @@ Compare the extent and crs to the CHM and DSM. Are they different?
 
 </div>
 
-```{r challenge-extent, echo=FALSE}
 
-# 1. they should create both objects
-CHM.HARV <- raster("NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif")
-crs(CHM.HARV)
-extent(CHM.HARV)
+```
+## CRS arguments:
+##  +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84
+## +towgs84=0,0,0
+```
 
-# 2. the extent and CRS should be the same
-# 3. The extent and CRS are different.
-ndvi1.HARV <- raster("NEON-DS-Landsat-NDVI/HARV/2011/ndvi/005_HARV_ndvi_crop.tif")
-crs(ndvi1.HARV)
-extent(ndvi1.HARV)
+```
+## class       : Extent 
+## xmin        : 731453 
+## xmax        : 733150 
+## ymin        : 4712471 
+## ymax        : 4713838
+```
+
+```
+## CRS arguments:
+##  +proj=utm +zone=19 +ellps=WGS84 +units=m +no_defs
+```
+
+```
+## class       : Extent 
+## xmin        : 239415 
+## xmax        : 239535 
+## ymin        : 4714215 
+## ymax        : 4714365
 ```
 
 It appears as if there are some differences between the objects **extent** and

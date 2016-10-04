@@ -4,7 +4,7 @@ date:   2016-09-25
 authors: [Leah A. Wasser]
 contributors: [Megan Jones]
 dateCreated: 2016-09-25
-lastModified: 2016-09-30
+lastModified: 2016-10-04
 packagesLibraries: [raster, rgdal, sp]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis]
@@ -216,7 +216,7 @@ roads_HARV@lines[14]
 ```
 
 
-<div id="challenge" markdown="1">
+<div class="notice--warning" markdown="1">
 Question - Why didn't `roads_HARV@lines[14]` return any vertex coordinates?
 </div>
 
@@ -287,7 +287,7 @@ the
     </figcaption>
 </figure>
 
-<div id="challenge" markdown="1">
+<div class="notice--warning" markdown="1">
 
 ## Challenge: Shapefiles
 

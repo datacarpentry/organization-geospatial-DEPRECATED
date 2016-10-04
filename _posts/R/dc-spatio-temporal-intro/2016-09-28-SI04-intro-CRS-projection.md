@@ -4,9 +4,9 @@ title: "Spatial Intro 04: Intro to Coordinate Reference Systems & Spatial
 Projections"
 date: 2015-10-26
 authors: [Leah A. Wasser]
-contributors: [Megan A. Jones]
+contributors: [Megan Jones]
 dateCreated: 2015-10-23
-lastModified: 2016-09-30
+lastModified: 2016-10-04
 packagesLibraries: [ ]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis]
@@ -183,6 +183,16 @@ the central meridian on the globe (0,0).
 library(rgdal)
 library(ggplot2)
 library(rgeos)
+```
+
+```
+## rgeos version: 0.3-20, (SVN revision 535)
+##  GEOS runtime version: 3.4.2-CAPI-1.8.2 r3921 
+##  Linking to sp version: 1.2-3 
+##  Polygon checking: TRUE
+```
+
+```r
 library(raster)
 
 # be sure to set your working directory

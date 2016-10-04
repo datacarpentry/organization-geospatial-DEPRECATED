@@ -4,7 +4,7 @@ date:   2016-09-26
 authors: [Leah A. Wasser]
 contributors: [Megan Jones]
 dateCreated: 2016-09-26
-lastModified: 2016-09-30
+lastModified: 2016-10-04
 packagesLibraries: [raster, rgdal, sp]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis]
@@ -27,20 +27,17 @@ author_profile: false
 ---
 
 
-This tutorial covers the basics of key data formats that may contain spatial
-information including shapefile, GeoTIFF and .csv. It also provides a brief
-overview of other formats that you may encounter when working with spatial data.
+This tutorial introduces issues associated with spatial data management.
 
 **R Skill Level:** Beginner
 
 <div class="notice--success" markdown="1">
 
-
 # Goals / Objectives
 
 After completing this activity, you will:
 
-* Know stuff
+* know stuff
 
 ### Install R Packages
 
@@ -58,9 +55,8 @@ GIS file formats.</a>
 
 </div>
 
-
-This lesson should be a basic intro to spatial data management and key things that need
-to be considered (which we will discuss in this series)
+This should introduce the user to spatial data management issues - that we
+will discuss in this series.
 
 ## Get Started With Your Project -  File Organization
 
@@ -78,3 +74,6 @@ stored in the same file directory, in order for you to be able to work with them
 We will discuss these issues as they related to two key spatial data formats -
 .shp (shapefile) which stores **vector** data and .tif (geotiff) which stores
 **raster** data in more detail, below.
+
+
+#

@@ -1,11 +1,11 @@
 ---
 layout: single
-title: "Spatial Intro 06: A Quick Overview of CRS Formats - Proj4 & EPSG - in R"
+title: "Spatial Intro 04.2: A Quick Overview of CRS Formats - Proj4 & EPSG - in R"
 date: 2015-10-24
-authors: [Leah A. Wasser, Megan A. Jones]
-contributors: [ ]
+authors: [Leah A. Wasser]
+contributors: [Megan Jones]
 dateCreated: 2016-02-26
-lastModified: 2016-09-30
+lastModified: 2016-10-04
 packagesLibraries: [ ]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis]

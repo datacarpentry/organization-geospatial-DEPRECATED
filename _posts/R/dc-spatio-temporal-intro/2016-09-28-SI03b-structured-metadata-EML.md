@@ -4,7 +4,7 @@ date:   2015-10-27
 authors: [Leah A. Wasser]
 contributors: [Megan Jones]
 dateCreated: 2016-09-27
-lastModified: `r format(Sys.time(), "%Y-%m-%d")`
+lastModified: 2016-10-04
 packagesLibraries: [raster, rgdal, eml, devtools]
 category: [self-paced-tutorial]
 tags: [R, spatial-data-gis, metadata]
@@ -127,7 +127,8 @@ EML metadata programmatically using the `EML` package.
 To begin, we will load the `EML` package directly from
 <a href="https://github.com/ropensci" target="_blank">ropensci's Git repository </a>.
 
-```{r install-EML-package, results="hide", warning=FALSE }
+
+```r
 # install R EML tools
 library("devtools")
 # install_github("ropensci/EML", build=FALSE, dependencies=c("DEPENDS", "IMPORTS"))
@@ -153,20 +154,36 @@ Note that because this EML file is large, it takes quite a few seconds for the f
 load.
 
 
-```{r read-eml, warning=FALSE, message=FALSE}
+
+```r
 # import EML from Harvard Forest Met Data
 
 # note: the original xml file is below commented out
 # eml_HARV <- read_eml("http://harvardforest.fas.harvard.edu/data/eml/hf001.xml")
 # import a truncated version of the eml file for quicker demonstration
 eml_HARV <- read_eml("https://lwasser.github.io/R-Spatio-Temporal-Data-and-Management-Intro/hf001-revised.xml")
+```
 
+```
+## Error: XML content does not seem to be XML: 'https://lwasser.github.io/R-Spatio-Temporal-Data-and-Management-Intro/hf001-revised.xml'
+```
+
+```r
 # view size of object
 object.size(eml_HARV)
+```
 
+```
+## Error in structure(.Call(C_objectSize, x), class = "object_size"): object 'eml_HARV' not found
+```
+
+```r
 # view the object class
 class(eml_HARV)
+```
 
+```
+## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
 ```
 
 The `read_eml()` function creates an `EML` class object. This object can be
@@ -178,15 +195,24 @@ We can begin to explore the contents of our EML file and associated data that it
 describes. Let's start at the **dataset** level. We can use `slots` to view
 the contact information for the dataset and a description of the methods.
 
-```{r view-eml-content }
+
+```r
 # view the contact name listed in the file
 
 eml_HARV@dataset@creator
+```
 
+```
+## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```
+
+```r
 # view information about the methods used to collect the data as described in EML
 eml_HARV@dataset@methods
+```
 
-
+```
+## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
 ```
 
 
@@ -204,14 +230,26 @@ process the data.
 {: .notice}
 
 
-```{r map-location, warning=FALSE, message=FALSE}
 
+```r
 # grab x coordinate from the coverage information
 XCoord <- eml_HARV@dataset@coverage@geographicCoverage[[1]]@boundingCoordinates@westBoundingCoordinate@.Data
+```
 
+```
+## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```
+
+```r
 # grab y coordinate from the coverage information
 YCoord <- eml_HARV@dataset@coverage@geographicCoverage[[1]]@boundingCoordinates@northBoundingCoordinate@.Data
+```
 
+```
+## Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+```
+
+```r
 # map <- get_map(location='Harvard', maptype="terrain")
 
 # plot the NW corner of the site.
@@ -220,8 +258,13 @@ map <- get_map(location='massachusetts', maptype="toner", zoom=8)
 ggmap(map, extent=TRUE) +
   geom_point(aes(x=as.numeric(XCoord), y=as.numeric(YCoord)),
              color="darkred", size=6, pch=18)
+```
 
 ```
+## Error in eval(expr, envir, enclos): object 'XCoord' not found
+```
+
+![ ]({{ site.baseurl }}/images/rfigs/dc-spatio-temporal-intro/03b-structured-metadata-EML/map-location-1.png)
 
 The above example demonstrates how we can extract information from an **EML**
 document and use it programmatically in `R`! This is just the beginning of what
@@ -271,17 +314,7 @@ HINT: Can you answer all of the questions above from the information provided
 on this website? Is there information that you might prefer to find on that page?
 </div>
 
-```{r challenge-code-metadata, echo=FALSE}
-# Metadata Notes from hf001_10-15-m_Metadata.txt
-# 1. 2001-2015
-# 2. Emery Boos - located at the top of the document, email is available
-# 3. a lat long is available in the metadata at the top, we see the location # described as Prospect Hill Tract (Harvard Forest).
-# 4. 342 m elevation, the veg type is not clear in the metadata
-# 5. Found in the methods: Delayed melting of snow and ice (caused by problems with rain gage heater or heavy precipitation) is noted in log - daily values are corrected if necessary but 15-minute values are not. The gauge may underestimate actual precipitation under windy or cold conditions.
-# 6. this could be a discussion. things like units, time zone, etc are all useful
-# if accessed programmatically
 
-```
 
 NOTE: This data and metadata are used in the
 [*Introduction to Working With Time Series Data in Text Formats in R* series](http://www.neondataskills.org/tutorial-series/tabular-time-series/).
