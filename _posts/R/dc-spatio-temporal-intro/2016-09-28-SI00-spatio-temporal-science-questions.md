@@ -1,5 +1,5 @@
 ---
-title: "Spatial Intro 00: Answer a Spatio-temporal Research Question with Data - Where to Start?"
+title: "test Spatial Intro 00: Answer a Spatio-temporal Research Question with Data - Where to Start?"
 date:   2015-10-30
 authors: [Megan A. Jones, Leah A. Wasser]
 contributors: [Natalie Robinson ]
