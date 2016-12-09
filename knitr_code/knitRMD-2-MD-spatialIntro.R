@@ -9,11 +9,13 @@
 require(knitr)
 
 #################### Set up Input Variables #############################
-#Inputs - Where the git repo is on your computer
-gitRepoPath <-"~/Documents/github/R-Spatio-Temporal-Data-and-Management-Intro/"
+# Inputs - Where the git repo is on your computer
+# gitRepoPath <-"~/Documents/github/R-Spatio-Temporal-Data-and-Management-Intro/"
+gitRepoPath <-"~/Documents/github/dev-earthlab-site/"
+
 
 #jekyll will only render md posts that begin with a date. Add one.
-add.date <- "2016-09-28-SI"
+add.date <- "2016-11-28-SI"
 
 #set working dir - this is where the data are located
 wd <- "~/Documents/data"
@@ -26,7 +28,7 @@ setwd(wd)
 # set series subdir
 subDir <- "dc-spatio-temporal-intro/"
 
-#don't change - this is the posts dir location required by jekyll
+# don't change - this is the posts dir location required by jekyll
 postsDir <- paste0("_posts/R/", subDir)
 codeDir <- paste0("code/R/", subDir)
 
