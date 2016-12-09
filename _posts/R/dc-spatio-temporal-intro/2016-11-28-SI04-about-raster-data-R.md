@@ -1,27 +1,22 @@
 ---
-title: "Spatial Intro 02.3: Spatial Data Formats -- About Raster Data"
-date:   2016-09-23
-authors: [Leah A. Wasser]
-contributors: [Megan Jones]
+layout: single
+title: "Intro to Raster Data in R"
+authors: [Leah Wasser]
+contributors: [NEON Data Skills]
 dateCreated: 2016-09-23
-lastModified: 2016-10-04
+lastModified: 2016-11-29
 packagesLibraries: [raster, rgdal, sp]
-category: [self-paced-tutorial]
-tags: [R, spatial-data-gis]
-mainTag: spatial-data-management-series
-workshopSeries: [spatial-data-management-series]
-description: "This tutorial introduces the raster data format, stored in .GeoTIFF
+category: [course-materials]
+excerpt: "This tutorial introduces the raster data format, stored in .GeoTIFF
 format."
-code1: /R/dc-spatio-temporal-intro/02-about-raster-data.R
-image:
-  feature:
-  credit:
-  creditlink:
-permalink: /R/about-raster-data
-comments: true
-sidebar:
-  nav: "spatial-intro"
+permalink: course-materials/spatial-data/about-raster-data
+class-lesson: ['intro-spatial-data-r']
 author_profile: false
+sidebar:
+  nav:
+nav-title: 'raster intro'
+comments: false
+order: 4
 ---
 
 
@@ -68,8 +63,8 @@ as pixels. Each pixel contains a value that represents an area on the Earth's
 surface.
 
 <figure>
-    <a href="{{site.baseurl}}/images/dc-spatial-raster/raster_concept.png">
-    <img src="{{site.baseurl}}/images/dc-spatial-raster/raster_concept.png">
+    <a href="{{site.baseurl}}/images/dc-spatio-temporal-intro/raster_concept.png">
+    <img src="{{site.baseurl}}/images/dc-spatio-temporal-intro/raster_concept.png">
     </a>
     <figcaption> Source: National Ecological Observatory Network (NEON)
     </figcaption>

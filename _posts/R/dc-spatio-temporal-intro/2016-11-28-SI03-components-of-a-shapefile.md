@@ -1,26 +1,21 @@
 ---
-title: "Spatial Intro 02.2: Components of a Shapefile - Shp, Shx, DBF"
-date:   2016-09-24
-authors: [Leah A. Wasser]
-contributors: [Megan Jones]
+layout: single
+title: "Files that Makeup A Shapefile - Shapefile Structure - Shp, Shx, DBF"
+authors: [Leah Wasser]
+contributors: [NEON Data Skills]
 dateCreated: 2016-09-24
-lastModified: 2016-10-04
+lastModified: 2016-11-29
 packagesLibraries: [raster, rgdal, sp]
-category: [self-paced-tutorial]
-tags: [R, spatial-data-gis]
-mainTag: spatial-data-management-series
-workshopSeries: [spatial-data-management-series]
-description: "This tutorial covers the various files that make up a shapefile."
-code1: /R/dc-spatio-temporal-intro/02-spatial-data-formats.R
-image:
-  feature:
-  credit:
-  creditlink:
-permalink: /R/components-of-a-shapefile
-comments: true
+category: [course-materials]
+excerpt: "This tutorial covers the various files that make up a shapefile."
+permalink: course-materials/spatial-data/components-of-a-shapefile
+class-lesson: ['intro-spatial-data-r']
 sidebar:
-  nav: "spatial-intro"
+  nav:
+nav-title: 'shapefile structure'
 author_profile: false
+comments: false
+order: 3
 ---
 
 

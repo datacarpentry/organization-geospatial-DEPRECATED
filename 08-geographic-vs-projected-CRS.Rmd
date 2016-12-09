@@ -1,27 +1,22 @@
 ---
-layout: single
-title: "Spatial Intro 04.1: Introduction to the UTM Projected CRS and a Brief overview
-of datums"
-date: 2015-10-25
-authors: [Leah A. Wasser]
-contributors: [Megan Jones]
+title: "Intro to the UTM Projected CRS and a Brief overview of datums"
+authors: [Leah Wasser]
+contributors: [NEON Data Skills]
 dateCreated: 2015-10-23
-lastModified: 2016-10-04
+lastModified: `r format(Sys.time(), "%Y-%m-%d")`
 packagesLibraries: [ ]
-category: [self-paced-tutorial]
-tags: [R, spatial-data-gis]
-mainTag: spatial-data-management-series
-workshopSeries: [spatial-data-management-series]
-description: "This tutorial focuses on the Universal Trans Mercator (UTM)
+category: [course-materials]
+excerpt: "This tutorial focuses on the Universal Trans Mercator (UTM)
 projected Coordinate Reference which divides the globe into zones to optimize
 projection results in each zone. It also briefly introduces the concept of a datum."
-code1: /R/dc-spatio-temporal-intro/05-geographic-vs-projected-CRS.R
-image:
-  feature: NEONCarpentryHeader_2.png
-  credit: A collaboration between the National Ecological Observatory Network (NEON) and Data Carpentry
-  creditlink:
-permalink: R/geographic-vs-projected-coordinate-reference-systems-UTM
-comments: true
+permalink: course-materials/spatial-data/geographic-vs-projected-coordinate-reference-systems-UTM
+sidebar:
+  nav:
+class-lesson: ['intro-spatial-data-r']
+author_profile: false
+nav-title: 'geog vs. projected'
+comments: false
+order: 8
 ---
 
 
@@ -116,25 +111,29 @@ The **geographic WGS84 lat/long** `CRS` has an origin - (0,0) -
 located at the intersection of the
 Equator (0° latitude) and Prime Meridian (0° longitude) on the globe.
 
+```{r, geographic-WGS84, echo=FALSE, message=FALSE, results='hide'}
 
-```
-## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
-```
+# read grat shapefile
+worldGrat30 <- readOGR(dsn="../../Global/Boundaries/ne_110m_graticules_all",
+                      layer="ne_110m_graticules_30")
+# convert to dataframe
+worldGrat30_df <- fortify(worldGrat30)
 
-```
-## Error in fortify(worldGrat30): object 'worldGrat30' not found
-```
+#import box
+wgs84Box <- readOGR("../../Global/Boundaries/ne_110m_graticules_all",
+                    layer="ne_110m_wgs84_bounding_box")
+wgs84Box_df<- fortify(wgs84Box)
 
-```
-## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
-```
-
-```
-## Error in fortify(wgs84Box): object 'wgs84Box' not found
-```
-
-```
-## Error in ggplot(wgs84Box_df, aes(long, lat, group = group)): object 'wgs84Box_df' not found
+#plot data
+ggplot(wgs84Box_df, aes(long,lat, group=group)) +
+  geom_polygon(fill="white") +
+  xlab("Longitude (Degrees)") + ylab("Latitude (Degrees)") +
+  ggtitle("World Map - Geographic WGS84 (lat/lon)") +
+  geom_polygon(data=worldBound_df, aes(long,lat, group=group, fill=hole))+
+  geom_path(data=worldGrat30, aes(long, lat, group=group, fill=NULL), linetype="dashed", color="grey50") +
+  labs(title="World map + graticule (longlat)") +
+  coord_equal() +
+  scale_fill_manual(values=c("black", "white"), guide="none") # change colors &
 ```
 
 

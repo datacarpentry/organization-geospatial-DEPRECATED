@@ -1,28 +1,22 @@
 ---
-layout: single
-title: "Spatial Intro 04: Intro to Coordinate Reference Systems & Spatial
-Projections"
-date: 2015-10-26
-authors: [Leah A. Wasser]
-contributors: [Megan Jones]
+title: "Intro to Coordinate Reference Systems & Spatial Projections"
+authors: [Leah Wasser]
+contributors: [NEON Data Skills]
 dateCreated: 2015-10-23
-lastModified: 2016-10-04
+lastModified: `r format(Sys.time(), "%Y-%m-%d")`
 packagesLibraries: [ ]
-category: [self-paced-tutorial]
-tags: [R, spatial-data-gis]
-mainTag: spatial-data-management-series
-workshopSeries: [spatial-data-management-series]
-description: "This lesson covers the key spatial attributes that are needed to work with
+category: [course-materials]
+excerpt: "This lesson covers the key spatial attributes that are needed to work with
 spatial data including: Coordinate Reference Systems (CRS), Extent and spatial resolution."
-code1: /R/dc-spatio-temporal-intro/04-intro-CRS-projection.R
-image:
-  feature: NEONCarpentryHeader_2.png
-  credit: A collaboration between the National Ecological Observatory Network (NEON) and Data Carpentry
-  creditlink:
-permalink: R/intro-to-coordinate-reference-systems
-comments: true
+permalink: course-materials/spatial-data/intro-to-coordinate-reference-systems
+class-lesson: ['intro-spatial-data-r']
+author_profile: false
+sidebar:
+  nav:
+nav-title: 'coordinate reference systems'
+comments: false
+order: 7
 ---
-
 
 ## About
 
@@ -178,21 +172,11 @@ units are Degrees and the coordinate system itself is **latitude** and
 the central meridian on the globe (0,0).
 
 
+```{r lat-long-example }
 
-```r
 library(rgdal)
 library(ggplot2)
 library(rgeos)
-```
-
-```
-## rgeos version: 0.3-20, (SVN revision 535)
-##  GEOS runtime version: 3.4.2-CAPI-1.8.2 r3921 
-##  Linking to sp version: 1.2-3 
-##  Polygon checking: TRUE
-```
-
-```r
 library(raster)
 
 # be sure to set your working directory
@@ -201,40 +185,19 @@ library(raster)
 # read shapefile
 worldBound <- readOGR(dsn="Global/Boundaries/ne_110m_land",
                       layer="ne_110m_land")
-```
 
-```
-## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
-```
-
-```r
 # convert to dataframe
 worldBound_df <- fortify(worldBound)
-```
 
-```
-## Error in fortify(worldBound): object 'worldBound' not found
-```
-
-```r
 # plot map
 worldMap <- ggplot(worldBound_df, aes(long,lat, group=group)) +
   geom_polygon() +
   xlab("Longitude (Degrees)") + ylab("Latitude (Degrees)") +
   coord_equal() +
   ggtitle("Global Map - Geographic Coordinate System - WGS84 Datum\n Units: Degrees - Latitude / Longitude")
-```
 
-```
-## Error in ggplot(worldBound_df, aes(long, lat, group = group)): object 'worldBound_df' not found
-```
-
-```r
 worldMap
-```
 
-```
-## Error in eval(expr, envir, enclos): object 'worldMap' not found
 ```
 
 We can add three coordinate locations to our map. Note that the UNITS are
@@ -247,8 +210,8 @@ in decimal **degrees** (latitude, longitude):
 Let's create a second map with the locations overlayed on top of the continental
 boundary layer.
 
+```{r add-lat-long-locations }
 
-```r
 # define locations of Boulder, CO and Oslo, Norway
 # store them in a data.frame format
 loc.df <- data.frame(lon=c(-105.2519, 10.7500, 2.9833),
@@ -262,18 +225,9 @@ mapLocations <- worldMap + geom_point(data=loc.df,
                         aes(x=lon, y=lat, group=NULL),
                       colour = "springgreen",
                       size=5)
-```
 
-```
-## Error in eval(expr, envir, enclos): object 'worldMap' not found
-```
-
-```r
 mapLocations + theme(legend.position="none")
-```
 
-```
-## Error in eval(expr, envir, enclos): object 'mapLocations' not found
 ```
 
 ## Geographic CRS - The Good & The Less Good
@@ -302,26 +256,14 @@ We can view the same data above, in another CRS - `Robinson`. `Robinson` is a
 different shape compared to the map that we created above in the `CRS`:
 **Geographic lat/long WGS84**.
 
+```{r global-map-robinson }
 
-```r
 # reproject from longlat to robinson
 worldBound_robin <- spTransform(worldBound,
                                 CRS("+proj=robin"))
-```
 
-```
-## Error in spTransform(worldBound, CRS("+proj=robin")): object 'worldBound' not found
-```
-
-```r
 worldBound_df_robin <- fortify(worldBound_robin)
-```
 
-```
-## Error in fortify(worldBound_robin): object 'worldBound_robin' not found
-```
-
-```r
 # force R to plot x and y values without abbrev
 options(scipen=100)
 
@@ -330,42 +272,23 @@ robMap <- ggplot(worldBound_df_robin, aes(long,lat, group=group)) +
   labs(title="World map (robinson)") +
   xlab("X Coordinates (meters)") + ylab("Y Coordinates (meters)") +
   coord_equal()
-```
 
-```
-## Error in ggplot(worldBound_df_robin, aes(long, lat, group = group)): object 'worldBound_df_robin' not found
-```
-
-```r
 robMap
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'robMap' not found
 ```
 
 Now what happens if you try to add the same Lat / Long coordinate locations that
 we used above, to our map, with the `CRS` of `Robinsons`?
 
+```{r add-locations-robinson }
 
-```r
 # add a point to the map
 newMap <- robMap + geom_point(data=loc.df,
                       aes(x=lon, y=lat, group=NULL),
                       colour = "springgreen",
                       size=5)
-```
 
-```
-## Error in eval(expr, envir, enclos): object 'robMap' not found
-```
-
-```r
 newMap + theme(legend.position="none")
-```
 
-```
-## Error in eval(expr, envir, enclos): object 'newMap' not found
 ```
 
 Notice above that when we try to add lat/long coordinates in degrees, to a map
@@ -373,100 +296,37 @@ in a different `CRS`, that the points are not in the correct location. We need
 to first convert the points to the  new projection - a process often referred
 to as **reprojection** but performed by the `spTransform()` function in `R`.
 
+```{r reproject-robinson }
 
-```r
 # define locations of Boulder, CO and Oslo, Norway
 loc.df
-```
 
-```
-##         lon     lat
-## 1 -105.2519 40.0274
-## 2   10.7500 59.9500
-## 3    2.9833 39.6167
-```
-
-```r
 # convert to spatial Points data frame
 loc.spdf <- SpatialPointsDataFrame(coords = loc.df, data=loc.df,
                             proj4string=crs(worldBound))
-```
 
-```
-## Error in crs(worldBound): object 'worldBound' not found
-```
-
-```r
 loc.spdf
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'loc.spdf' not found
-```
-
-```r
 # reproject data to Robinson
 loc.spdf.rob <- spTransform(loc.spdf, CRSobj = CRS("+proj=robin"))
-```
 
-```
-## Error in spTransform(loc.spdf, CRSobj = CRS("+proj=robin")): object 'loc.spdf' not found
-```
-
-```r
 loc.rob.df <- as.data.frame(cbind(loc.spdf.rob$lon, loc.spdf.rob$lat))
-```
-
-```
-## Error in cbind(loc.spdf.rob$lon, loc.spdf.rob$lat): object 'loc.spdf.rob' not found
-```
-
-```r
 # rename each column
 names(loc.rob.df ) <- c("X","Y")
-```
 
-```
-## Error in names(loc.rob.df) <- c("X", "Y"): object 'loc.rob.df' not found
-```
-
-```r
 # convert spatial object to a data.frame for ggplot
 loc.rob <- fortify(loc.rob.df)
-```
 
-```
-## Error in fortify(loc.rob.df): object 'loc.rob.df' not found
-```
-
-```r
 # notice the coordinate system in the Robinson projection (CRS) is DIFFERENT
 # from the coordinate values for the same locations in a geographic CRS.
 loc.rob
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'loc.rob' not found
-```
-
-```r
 # add a point to the map
 newMap <- robMap + geom_point(data=loc.rob,
                       aes(x=X, y=Y, group=NULL),
                       colour = "springgreen",
                       size=5)
-```
 
-```
-## Error in eval(expr, envir, enclos): object 'robMap' not found
-```
-
-```r
 newMap + theme(legend.position="none")
-```
 
-```
-## Error in eval(expr, envir, enclos): object 'newMap' not found
 ```
 
 ## Compare Maps
@@ -479,53 +339,69 @@ NOTE: The code for this map can
 be found in the .R document that is available for download at the bottom of this
 page!
 
+```{r plot-w-graticules, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+#this is not taught in the lesson but use it to display ggplot next to each other
+require(gridExtra)
 
-```
-## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
-```
+# turn off axis elements in ggplot for better visual comparison
+newTheme <- list(theme(line = element_blank(),
+      line = element_blank(),
+      axis.text.x = element_blank(),
+      axis.text.y = element_blank(),
+      axis.ticks = element_blank(), #turn off ticks
+      axis.title.x = element_blank(), #turn off titles
+      axis.title.y = element_blank(),
+      legend.position="none")) #turn off legend
 
-```
-## Error in fortify(graticule): object 'graticule' not found
-```
+## add graticules
+graticule <- readOGR("Global/Boundaries/ne_110m_graticules_all",
+                     layer="ne_110m_graticules_15")
+# convert spatial object into a ggplot ready, data.frame
+graticule_df <- fortify(graticule)
 
-```
-## Error in ogrInfo(dsn = dsn, layer = layer, encoding = encoding, use_iconv = use_iconv, : Cannot open file
-```
+bbox <- readOGR("Global/Boundaries/ne_110m_graticules_all", layer="ne_110m_wgs84_bounding_box")
+bbox_df<- fortify(bbox)
 
-```
-## Error in fortify(data): object 'worldBound_df' not found
-```
 
-```
-## Error in eval(expr, envir, enclos): object 'latLongMap' not found
-```
+latLongMap <- ggplot(bbox_df, aes(long,lat, group=group)) +
+  geom_polygon(fill="white") +
+  geom_polygon(data=worldBound_df, aes(long,lat, group=group, fill=hole)) +
+  geom_path(data=graticule_df, aes(long, lat, group=group, fill=NULL), linetype="dashed", color="grey70") +
+  labs(title="World Map - Geographic (long/lat degrees)") +
+  coord_equal() + newTheme +
+  scale_fill_manual(values=c("black", "white"), guide="none") # change colors & remove legend
 
-```
-## Error in spTransform(graticule, CRS("+proj=robin")): object 'graticule' not found
-```
+latLongMap <- latLongMap + geom_point(data=loc.df,
+                      aes(x=lon, y=lat, group=NULL),
+                      colour="springgreen",
+                      size=5)
 
-```
-## Error in fortify(graticule_robin): object 'graticule_robin' not found
-```
+# reproject grat into robinson
+graticule_robin <- spTransform(graticule, CRS("+proj=robin"))  # reproject graticule
+grat_df_robin <- fortify(graticule_robin)
+bbox_robin <- spTransform(bbox, CRS("+proj=robin"))  # reproject bounding box
+bbox_robin_df <- fortify(bbox_robin)
 
-```
-## Error in (function (classes, fdef, mtable) : unable to find an inherited method for function 'spTransform' for signature '"standardGeneric", "CRS"'
-```
+# plot using robinson
 
-```
-## Error in fortify(bbox_robin): object 'bbox_robin' not found
-```
+finalRobMap <- ggplot(bbox_robin_df, aes(long,lat, group=group)) +
+  geom_polygon(fill="white") +
+  geom_polygon(data=worldBound_df_robin, aes(long,lat, group=group, fill=hole)) +
+  geom_path(data=grat_df_robin, aes(long, lat, group=group, fill=NULL), linetype="dashed", color="grey70") +
+  labs(title="World Map Projected - Robinson (Meters)") +
+  coord_equal() + newTheme +
+  scale_fill_manual(values=c("black", "white"), guide="none") # change colors & remove legend
 
-```
-## Error in ggplot(bbox_robin_df, aes(long, lat, group = group)): object 'bbox_robin_df' not found
-```
+# add a point to the map
+finalRobMap <- finalRobMap + geom_point(data=loc.rob,
+                      aes(x=X, y=Y, group=NULL),
+                      colour="springgreen",
+                      size=5)
 
-```
-## Error in eval(expr, envir, enclos): object 'finalRobMap' not found
-```
 
-```
-## Error in arrangeGrob(...): object 'latLongMap' not found
+# display side by side
+grid.arrange(latLongMap, finalRobMap)
+
 ```
 
 
@@ -560,7 +436,20 @@ the graphic below optimize?
 
 </div>
 
+```{r challenge-1, echo=FALSE}
 
+## notes about robinson -- you will see distortion above 40 = 45 degrees latitude
+## it is optimized for the latitudes between 0-45 (north and south).
+
+## geographic - notice that the latitude lines are closer together are you move
+## north...
+
+# What each CRS optimizes:
+## Mercator:
+## ALbers Equal Area
+## UTM Zone 11n
+## Geographic WGS84 (lat/lon):
+```
 
 ***
 

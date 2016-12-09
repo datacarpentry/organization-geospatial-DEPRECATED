@@ -1,25 +1,21 @@
 ---
-layout: single
-title: "Spatial Intro 04.2: A Quick Overview of CRS Formats - Proj4 & EPSG - in R"
-date: 2015-10-24
-authors: [Leah A. Wasser]
-contributors: [Megan Jones]
+title: "A Abridged Overview of CRS Formats - Proj4 & EPSG - in R"
+authors: [Leah Wasser]
+contributors: [NEON Data Skills]
 dateCreated: 2016-02-26
-lastModified: 2016-10-04
+lastModified: `r format(Sys.time(), "%Y-%m-%d")`
 packagesLibraries: [ ]
-category: [self-paced-tutorial]
-tags: [R, spatial-data-gis]
-mainTag: spatial-data-management-series
-workshopSeries: [spatial-data-management-series]
-description: "This lesson covers formats that CRS information may be in including
+category: [course-materials]
+excerpt: "This lesson covers formats that CRS information may be in including
 proj4 and EPGS and how to work with them in R."
-code1: /R/dc-spatio-temporal-intro/06-CRS-formats-proj4-EPSG.R
-image:
-  feature: NEONCarpentryHeader_2.png
-  credit: A collaboration between the National Ecological Observatory Network (NEON) and Data Carpentry
-  creditlink:
-permalink: R/intro-to-CRS-formats-proj4-EPSG-R
-comments: true
+permalink: course-materials/spatial-data/intro-to-CRS-formats-proj4-EPSG-R
+sidebar:
+  nav:
+class-lesson: ['intro-spatial-data-r']
+author_profile: false
+comments: false
+nav-title: 'proj4 & epsg'
+order: 9
 ---
 
 
@@ -174,29 +170,12 @@ The codes and more information can be found on these websites:
 * <a href="http://spatialreference.org/" target="_blank">Spatialreference.org</a>
 * <a href="http://spatialreference.org/ref/epsg/" target="_blank">list of ESPG codes.</a>
 
+``` {r crs-strings}
 
-```r
 library('rgdal')
 epsg = make_EPSG()
 # View(epsg)
 head(epsg)
-```
-
-```
-##   code                                               note
-## 1 3819                                           # HD1909
-## 2 3821                                            # TWD67
-## 3 3824                                            # TWD97
-## 4 3889                                             # IGRS
-## 5 3906                                         # MGI 1901
-## 6 4001 # Unknown datum based upon the Airy 1830 ellipsoid
-##                                                                                            prj4
-## 1 +proj=longlat +ellps=bessel +towgs84=595.48,121.69,515.35,4.115,-2.9383,0.853,-3.408 +no_defs
-## 2                                                         +proj=longlat +ellps=aust_SA +no_defs
-## 3                                    +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs
-## 4                                    +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs
-## 5                            +proj=longlat +ellps=bessel +towgs84=682,-203,480,0,0,0,0 +no_defs
-## 6                                                            +proj=longlat +ellps=airy +no_defs
 ```
 
 #### WKT or Well-known Text

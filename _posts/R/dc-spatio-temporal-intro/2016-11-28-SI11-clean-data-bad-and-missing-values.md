@@ -1,25 +1,22 @@
 ---
-layout: single
-title: "Spatial Intro 07: Cleaning Data -- Missing and Bad Data Values"
-date:   2015-10-23
-authors: []
-contributors: [ ]
+title: "Missing and Bad Data Values - Cleaning Spatial Data"
+authors: [Leah Wasser]
+contributors: [NEON Data Skills]
 dateCreated: 2015-10-23
-lastModified: 2016-10-04
+lastModified: 2016-11-29
 packagesLibraries: [ ]
-category: [self-paced-tutorial]
-tags: [R, spatial-data-gis]
-mainTag: spatial-data-management-series
-workshopSeries: [spatial-data-management-series]
-description: "This tutorial covers spatial data cleaning - specifically dealing with missing
+category: [course-materials]
+excerpt: "This tutorial covers spatial data cleaning - specifically dealing with missing
 (NA / NAN) values and bad values when working with spatial data in R."
-code1: /R/dc-spatio-temporal-intro/08-clean-data-bad-and-missing-values.R
-image:
-  feature: NEONCarpentryHeader_2.png
-  credit: A collaboration between the National Ecological Observatory Network (NEON) and Data Carpentry
-  creditlink:
-permalink: R/missing-bad-data
-comments: true
+permalink: course-materials/spatial-data/missing-bad-data
+sidebar:
+  nav:
+class-lesson: ['intro-spatial-data-r']
+author_profile: false
+comments: false
+nav-title: 'missing data'
+comments: false
+order: 11
 ---
 
 

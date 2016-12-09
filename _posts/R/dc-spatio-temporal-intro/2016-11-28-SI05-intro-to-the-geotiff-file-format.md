@@ -1,29 +1,21 @@
 ---
-title: "Spatial Intro 03.1: Spatial Formats that Support Embedded Metadata - Into To the GeoTiff"
+title: "Embedded Metadata - Into To the GeoTiff in R"
 date:   2015-10-27
-authors: [Leah A. Wasser]
-contributors: [Megan Jones]
+authors: [Leah Wasser]
+contributors: [NEON Data Skills]
 dateCreated: 2016-09-27
-lastModified: 2016-10-04
+lastModified: 2016-11-29
 packagesLibraries: [raster, rgdal, eml, devtools]
-category: [self-paced-tutorial]
-tags: [R, spatial-data-gis, metadata]
-mainTag: spatial-data-management-series
-workshopSeries: [spatial-data-management-series]
-description: "This tutorial covers what metadata are and why we need to work
-with metadata in the context of spatio-temporal data. It
-covers the three common metadata formats: text file
-format, web page format and Ecological Metadata Language (EML)."
-code1: /R/dc-spatio-temporal-intro/03a-embedded-metadata-tif-tags.R
-image:
-  feature: NEONCarpentryHeader_2.png
-  credit: A collaboration between the National Ecological Observatory Network (NEON) and Data Carpentry
-  creditlink:
-permalink: /R/embedded-metadata-geotiff
-comments: true
+category: [course-materials]
+excerpt: "This tutorial explains the geotiff file format that can be used to store raster data. It also covers metadata embedded within a geotiff - stored as tif tags."
+permalink: course-materials/spatial-data/embedded-metadata-geotiff
+class-lesson: ['intro-spatial-data-r']
 sidebar:
-  nav: "spatial-intro"
+  nav:
 author_profile: false
+nav-title: 'the geotiff format'
+comments: false
+order: 5
 ---
 
 
