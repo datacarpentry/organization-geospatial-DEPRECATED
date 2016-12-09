@@ -1,0 +1,61 @@
+---
+title: "Spatial Intro 02: Intro to Spatial Data Formats -- Raster vs. Vector"
+date:   2016-09-26
+authors: [Leah A. Wasser]
+contributors: [Megan Jones]
+dateCreated: 2016-09-26
+lastModified: `r format(Sys.time(), "%Y-%m-%d")`
+packagesLibraries: [raster, rgdal, sp]
+category: [self-paced-tutorial]
+tags: [R, spatial-data-gis]
+mainTag: spatial-data-management-series
+workshopSeries: [spatial-data-management-series]
+description: "This tutorial covers the basics of key data formats that may
+contain spatial information including shapefile, GeoTIFF and .csv. It also
+provides a brief overview of other formats that you may encounter when working
+with spatial data."
+code1: /R/dc-spatio-temporal-intro/02-spatial-data-formats.R
+image:
+  feature:
+  credit:
+  creditlink:
+permalink: /R/spatial-data-formats
+comments: true
+sidebar:
+  nav: "spatial-intro"
+author_profile: false
+---
+
+
+This tutorial introduces issues associated with spatial data management.
+
+**R Skill Level:** Beginner
+
+<div class="notice--success" markdown="1">
+
+# Goals / Objectives
+
+After completing this activity, you will:
+
+* know stuff
+
+### Install R Packages
+
+* **raster:** `install.packages("raster")`
+* **rgdal:** `install.packages("rgdal")`
+
+
+****
+
+### Additional Resources
+
+* Wikipedia article on
+<a href="https://en.wikipedia.org/wiki/GIS_file_formats" target="_blank">
+GIS file formats.</a>
+
+</div>
+
+This should introduce the user to spatial data management issues - that we
+will discuss in this series.
+
+## Raster vs Vector Data
