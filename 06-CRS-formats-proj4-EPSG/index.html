@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-03-19 21:57:08 +0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon-dc.ico" />
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>Introduction to Spatio-Temporal Data: A Quick Overview of CRS Formats - Proj4 & EPSG - in R</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="../conduct/">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="../setup.html">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../00-spatio-temporal-science-questions/">Answer a Spatio-temporal Research Question with Data - Where to Start?</a></li>
+            
+            <li><a href="../01-spatial-data-landscape/">The Spatial Data Landscape</a></li>
+            
+            <li><a href="../02-spatial-data-formats/">Spatial Data Formats -- Intro to Shapefiles (Vector Data) and GeoTIFFs (Raster Data)</a></li>
+            
+            <li><a href="../03-metadata-formats-and-files/">Data About Data -- Intro to Metadata File Formats and Structure</a></li>
+            
+            <li><a href="../04-intro-CRS-projection/">Intro to Coordinate Reference Systems & Spatial Projections</a></li>
+            
+            <li><a href="../05-geographic-vs-projected-CRS/">Introduction to the UTM Projected CRS and a Brief overview of datums</a></li>
+            
+            <li><a href="../06-CRS-formats-proj4-EPSG/">A Quick Overview of CRS Formats - Proj4 & EPSG - in R</a></li>
+            
+            <li><a href="../07-spatial-resolution-extent/">Intro to Spatial Metadata -- Spatial Resolution and Spatial Extent</a></li>
+            
+            <li><a href="../08-clean-data-bad-and-missing-values/">Cleaning Data -- Missing and Bad Data Values</a></li>
+            
+            <li><a href="../09-set-r-work-environment/">R Packages for Spatial-temporal Data -- Setting Up Your Working Environment</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../reference.html">Reference</a></li>
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="../LICENSE.md">License</a></li>
+	
+	
+	<li><a href="/edit/gh-pages/_episodes_rmd/06-CRS-formats-proj4-EPSG.Rmd">Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../05-geographic-vs-projected-CRS/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">Introduction to Spatio-Temporal Data</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../07-spatial-resolution-extent/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">A Quick Overview of CRS Formats - Proj4 & EPSG - in R</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br/>
+      <strong>Exercises:</strong> 30 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="about">About</h2>
+
+<p>This lesson covers formats that CRS information may be in including
+proj4 and EPGS and how to work with them in R.</p>
+
+<p><strong>R Skill Level:</strong> Beginner - you’ve got the basics of <code class="highlighter-rouge">R</code> down.</p>
+
+<h1 id="goals--objectives">Goals / Objectives</h1>
+
+<p>After completing this activity, you will:</p>
+
+<p>*</p>
+
+<h2 id="things-youll-need-to-complete-this-lesson">Things You’ll Need To Complete This Lesson</h2>
+
+<p>To complete this lesson you will need the most current version of <code class="highlighter-rouge">R</code>, and
+preferably, <code class="highlighter-rouge">RStudio</code> loaded on your computer.</p>
+
+<h3 id="install-r-packages">Install R Packages</h3>
+
+<ul>
+  <li><strong>NAME:</strong> <code class="highlighter-rouge">install.packages("NAME")</code></li>
+</ul>
+
+<p><a href="R/Packages-In-R/">More on Packages in R - Adapted from Software Carpentry.</a></p>
+
+<h3 id="download-data">Download Data</h3>
+
+<hr />
+
+<p><strong>Spatial-Temporal Data &amp; Data Management Lesson Series:</strong> This lesson is part
+of a lesson series introducing
+<a href="tutorial/URL">spatial data and data management in <code class="highlighter-rouge">R</code> </a>.
+It is also part of a larger
+<a href="workshops/spatio-temporal-workshop">spatio-temporal Data Carpentry Workshop </a>
+that includes working with<br />
+<a href="tutorial/spatial-raster-series">raster data in <code class="highlighter-rouge">R</code> </a>,
+<a href="tutorial/spatial-vector-series">vector data in <code class="highlighter-rouge">R</code> </a>
+and<br />
+<a href="tutorial/tabular-time-series">tabular time series in <code class="highlighter-rouge">R</code> </a>.</p>
+
+<hr />
+
+<h3 id="additional-resources">Additional Resources</h3>
+<ul>
+  <li>Read more on coordinate systems in the
+<a href="http://docs.qgis.org/2.0/en/docs/gentle_gis_introduction/coordinate_reference_systems.html" target="_blank">
+QGIS documentation.</a></li>
+  <li>NEON Data Skills Lesson <a href="/GIS-Spatial-Data/Working-With-Rasters/" target="_blank">The Relationship Between Raster Resolution, Spatial extent &amp; Number of Pixels - in R</a></li>
+</ul>
+
+<p>&lt;/div&gt;</p>
+
+<h2 id="what-is-a-coordinate-reference-system">What is a Coordinate Reference System</h2>
+
+<p>To define the location of something we often use a coordinate system. This system
+consists of an X and a Y value, located within a 2 (or more) -dimensional
+(as shown below) space.</p>
+
+<figure>
+	<a href="http://open.senecac.on.ca/clea/label/projectImages/15_276_xy-grid.jpg">
+	<img src="http://open.senecac.on.ca/clea/label/projectImages/15_276_xy-grid.jpg" /></a>
+	<figcaption> We use coordinate systems with X, Y (and sometimes Z axes) to
+	define the location of objects in space.
+	Source: http://open.senecac.on.ca
+	</figcaption>
+</figure>
+
+<h3 id="coordinate-reference-system-formats">Coordinate Reference System Formats</h3>
+
+<p>There are numerous formats that are used to document a <code class="highlighter-rouge">CRS</code>. Three common
+formats include:</p>
+
+<ul>
+  <li><strong>proj.4</strong></li>
+  <li><strong>EPSG</strong></li>
+  <li>Well-known Text (<strong>WKT</strong>)
+formats.</li>
+</ul>
+
+<h4 id="proj-or-proj4-strings">PROJ or PROJ.4 strings</h4>
+
+<p>PROJ.4 strings are a compact way to identify a spatial or coordinate reference
+system. PROJ.4 strings are the primary output from most of the spatial data <code class="highlighter-rouge">R</code>
+packages that we will use (e.g. <code class="highlighter-rouge">raster</code>, <code class="highlighter-rouge">rgdal</code>).</p>
+
+<p>Using the PROJ.4 syntax, we specify the complete set of parameters (e.g. ellipse, datum,
+units, etc) that define a particular CRS.</p>
+
+<h2 id="understanding-crs-in-proj4-format">Understanding CRS in Proj4 Format</h2>
+<p>The <code class="highlighter-rouge">CRS</code> for our data are given to us by <code class="highlighter-rouge">R</code> in <code class="highlighter-rouge">proj4</code> format. Let’s break
+down the pieces of <code class="highlighter-rouge">proj4</code> string. The string contains all of the individual
+<code class="highlighter-rouge">CRS</code> elements that <code class="highlighter-rouge">R</code> or another <code class="highlighter-rouge">GIS</code> might need. Each element is specified
+with a <code class="highlighter-rouge">+</code> sign, similar to how a <code class="highlighter-rouge">.csv</code> file is delimited or broken up by
+a <code class="highlighter-rouge">,</code>. After each <code class="highlighter-rouge">+</code> we see the <code class="highlighter-rouge">CRS</code> element being defined. For example
+<code class="highlighter-rouge">+proj=</code> and <code class="highlighter-rouge">+datum=</code>.</p>
+
+<h3 id="utm-proj4-string">UTM Proj4 String</h3>
+<p>Our project string for <code class="highlighter-rouge">point_HARV</code> specifies the UTM projection as follows:</p>
+
+<p><code class="highlighter-rouge">+proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0</code></p>
+
+<ul>
+  <li><strong>+proj=utm:</strong> the projection is UTM, UTM has several zones.</li>
+  <li><strong>+zone=18:</strong> the zone is 18</li>
+  <li><strong>datum=WGS84:</strong> the datum WGS84 (the datum refers to the  0,0 reference for
+the coordinate system used in the projection)</li>
+  <li><strong>+units=m:</strong> the units for the coordinates are in METERS.</li>
+  <li><strong>+ellps=WGS84:</strong> the ellipsoid (how the earth’s  roundness is calculated) for
+the data is WGS84</li>
+</ul>
+
+<p>Note that the <code class="highlighter-rouge">zone</code> is unique to the UTM projection. Not all <code class="highlighter-rouge">CRS</code> will have a
+zone.</p>
+
+<h3 id="geographic-lat--long-proj4-string">Geographic (lat / long) Proj4 String</h3>
+
+<p>Our project string for <code class="highlighter-rouge">State.boundary.US</code> and <code class="highlighter-rouge">Country.boundary.US</code> specifies
+the lat/long projection as follows:</p>
+
+<p><code class="highlighter-rouge">+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0</code></p>
+
+<ul>
+  <li><strong>+proj=longlat:</strong> the data are in a geographic (latitude and longitude)
+coordinate system</li>
+  <li><strong>datum=WGS84:</strong> the datum WGS84 (the datum refers to the  0,0 reference for
+the coordinate system used in the projection)</li>
+  <li><strong>+ellps=WGS84:</strong> the ellipsoid (how the earth’s roundness is calculated)
+is WGS84</li>
+</ul>
+
+<p>Note that there are no specified units above. This is because this geographic
+coordinate reference system is in latitude and longitude which is most
+often recorded in <em>Decimal Degrees</em>.</p>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Tip:</strong> the last portion of each <code class="highlighter-rouge">proj4</code> string
+is <code class="highlighter-rouge">+towgs84=0,0,0 </code>. This is a conversion factor that is used if a <code class="highlighter-rouge">datum</code>
+conversion is required. We will not deal with datums in this particular series.</p>
+
+<ul>
+  <li>
+    <p>Read more about <a href="https://www.nceas.ucsb.edu/scicomp/recipes/projections" target="_blank">all three formats from the National Center for Ecological Analysis and Synthesis.</a></p>
+  </li>
+  <li>
+    <p>A handy four page overview of CRS <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/OverviewCoordinateReferenceSystems.pdf" target="_blank">including file formats on page 1.</a></p>
+  </li>
+</ul>
+
+<h4 id="epsg-codes">EPSG codes</h4>
+<p>The EPSG codes are a structured dataset of CRSs that are used around the world. They were
+originally compiled by the, now defunct, European Petroleum Survey Group, hence the
+EPSG acronym. Each code is a four digit number.</p>
+
+<p>The codes and more information can be found on these websites:</p>
+<ul>
+  <li><a href="http://www.epsg-registry.org/" target="_blank">The EPSG registry. </a></li>
+  <li><a href="http://spatialreference.org/" target="_blank">Spatialreference.org</a></li>
+  <li><a href="http://spatialreference.org/ref/epsg/" target="_blank">list of ESPG codes.</a></li>
+</ul>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="s1">'rgdal'</span><span class="p">)</span><span class="w">
+</span><span class="n">epsg</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">make_EPSG</span><span class="p">()</span><span class="w">
+</span><span class="c1"># View(epsg)</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">epsg</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  code                                               note
+1 3819                                           # HD1909
+2 3821                                            # TWD67
+3 3824                                            # TWD97
+4 3889                                             # IGRS
+5 3906                                         # MGI 1901
+6 4001 # Unknown datum based upon the Airy 1830 ellipsoid
+                                                                                           prj4
+1 +proj=longlat +ellps=bessel +towgs84=595.48,121.69,515.35,4.115,-2.9383,0.853,-3.408 +no_defs
+2                                                         +proj=longlat +ellps=aust_SA +no_defs
+3                                    +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs
+4                                    +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs
+5                            +proj=longlat +ellps=bessel +towgs84=682,-203,480,0,0,0,0 +no_defs
+6                                                            +proj=longlat +ellps=airy +no_defs
+</code></pre></div></div>
+
+<h4 id="wkt-or-well-known-text">WKT or Well-known Text</h4>
+<p>Well-known Text (WKT) allows for compact machine- and human-readable representation of
+geometric objects as well as to consisely describing the critical elements of
+coordinate reference system (CRS) definitions.</p>
+
+<p>The codes and more information can be found on these websites:</p>
+<ul>
+  <li><a href="http://docs.opengeospatial.org/is/12-063r5/12-063r5.html#43" target="_blank">Open Geospatial Consortium WKT document. </a></li>
+</ul>
+
+<hr />
+<p>##Additional Resources
+ESRI help on CRS
+QGIS help on CRS
+NCEAS cheatsheets</p>
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>TBD</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../05-geographic-vs-projected-CRS/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../07-spatial-resolution-extent/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-6" align="left">
+      <h4>
+	Copyright &copy; 2016–2018
+	
+	<a href="http://datacarpentry.org">Data Carpentry</a>
+	
+      </h4>
+    </div>
+    <div class="col-md-6" align="right">
+      <h4>
+	
+	
+	<a href="/edit/gh-pages/_episodes_rmd/06-CRS-formats-proj4-EPSG.Rmd">Edit on GitHub</a>
+	
+	
+	/
+	<a href="/blob/gh-pages/CONTRIBUTING.md">Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob/gh-pages/CITATION">Cite</a>
+	/
+	<a href="mailto:lessons@software-carpentry.org">Contact</a>
+      </h4>
+    </div>
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

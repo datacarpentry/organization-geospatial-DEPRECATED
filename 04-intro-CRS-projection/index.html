@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-03-19 21:57:08 +0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon-dc.ico" />
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>Introduction to Spatio-Temporal Data: Intro to Coordinate Reference Systems & Spatial Projections</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="../conduct/">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="../setup.html">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../00-spatio-temporal-science-questions/">Answer a Spatio-temporal Research Question with Data - Where to Start?</a></li>
+            
+            <li><a href="../01-spatial-data-landscape/">The Spatial Data Landscape</a></li>
+            
+            <li><a href="../02-spatial-data-formats/">Spatial Data Formats -- Intro to Shapefiles (Vector Data) and GeoTIFFs (Raster Data)</a></li>
+            
+            <li><a href="../03-metadata-formats-and-files/">Data About Data -- Intro to Metadata File Formats and Structure</a></li>
+            
+            <li><a href="../04-intro-CRS-projection/">Intro to Coordinate Reference Systems & Spatial Projections</a></li>
+            
+            <li><a href="../05-geographic-vs-projected-CRS/">Introduction to the UTM Projected CRS and a Brief overview of datums</a></li>
+            
+            <li><a href="../06-CRS-formats-proj4-EPSG/">A Quick Overview of CRS Formats - Proj4 & EPSG - in R</a></li>
+            
+            <li><a href="../07-spatial-resolution-extent/">Intro to Spatial Metadata -- Spatial Resolution and Spatial Extent</a></li>
+            
+            <li><a href="../08-clean-data-bad-and-missing-values/">Cleaning Data -- Missing and Bad Data Values</a></li>
+            
+            <li><a href="../09-set-r-work-environment/">R Packages for Spatial-temporal Data -- Setting Up Your Working Environment</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../reference.html">Reference</a></li>
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="../LICENSE.md">License</a></li>
+	
+	
+	<li><a href="/edit/gh-pages/_episodes_rmd/04-intro-CRS-projection.Rmd">Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../03-metadata-formats-and-files/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">Introduction to Spatio-Temporal Data</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../05-geographic-vs-projected-CRS/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Intro to Coordinate Reference Systems & Spatial Projections</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br/>
+      <strong>Exercises:</strong> 30 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="about">About</h2>
+
+<p>This lesson covers the key spatial attributes that are needed to work with
+spatial data including: Coordinate Reference Systems (CRS), Extent and spatial resolution.</p>
+
+<p><strong>R Skill Level:</strong> Beginner - you’ve got the basics of <code class="highlighter-rouge">R</code> down.</p>
+
+<h1 id="goals--objectives">Goals / Objectives</h1>
+
+<p>After completing this activity, you will:</p>
+
+<ul>
+  <li>appreciate the basic concept of what a Coordinate Reference System (<code class="highlighter-rouge">CRS</code>) is
+and how it impacts data processing, analysis and visualization.</li>
+  <li>Understand the basic differences between a geographic and a projected <code class="highlighter-rouge">CRS</code>.</li>
+  <li>Become familiar with the Universal Trans Mercator (UTM) and Geographic (WGS84) CRSs</li>
+</ul>
+
+<h2 id="things-youll-need-to-complete-this-lesson">Things You’ll Need To Complete This Lesson</h2>
+
+<p>To complete this lesson you will need the most current version of <code class="highlighter-rouge">R</code>, and
+preferably, <code class="highlighter-rouge">RStudio</code> loaded on your computer.</p>
+
+<h3 id="install-r-packages">Install R Packages</h3>
+
+<ul>
+  <li><strong>NAME:</strong> <code class="highlighter-rouge">install.packages("NAME")</code></li>
+</ul>
+
+<p><a href="R/Packages-In-R/">More on Packages in R - Adapted from Software Carpentry.</a></p>
+
+<h3 id="download-data">Download Data</h3>
+
+<p>If you want to follow along, please download</p>
+
+<p><a href="http://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/" target="_blank" class="btn btn-success">
+Download “land” - Natural Earth Global Continent Boundary Layer</a></p>
+
+<p><a href="http://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-graticules/" target="_blank" class="btn btn-success">
+Download all Graticules - Natural Earth Global Graticules Layer</a></p>
+
+<p><strong>Spatial-Temporal Data &amp; Data Management Lesson Series:</strong> This lesson is part
+of a lesson series introducing
+<a href="tutorial/URL">spatial data and data management in <code class="highlighter-rouge">R</code> </a>.
+It is also part of a larger
+<a href="workshops/spatio-temporal-workshop">spatio-temporal Data Carpentry Workshop </a>
+that includes working with<br />
+<a href="tutorial/spatial-raster-series">raster data in <code class="highlighter-rouge">R</code></a>,
+<a href="tutorial/spatial-vector-series">vector data in <code class="highlighter-rouge">R</code></a>
+and<br />
+<a href="tutorial/tabular-time-series">tabular time series in <code class="highlighter-rouge">R</code></a>.</p>
+
+<h3 id="additional-resources">Additional Resources</h3>
+<ul>
+  <li>Read more on coordinate systems in the
+<a href="http://docs.qgis.org/2.0/en/docs/gentle_gis_introduction/coordinate_reference_systems.html" target="_blank">
+QGIS documentation.</a></li>
+  <li>NEON Data Skills Lesson <a href="/GIS-Spatial-Data/Working-With-Rasters/" target="_blank">The Relationship Between Raster Resolution, Spatial extent &amp; Number of Pixels - in R</a></li>
+</ul>
+
+<h4 id="getting-started-with-crs">Getting Started with CRS</h4>
+<p>Check out this short video highlighting how map projections can make continents
+look proportionally larger or smaller than they actually are!</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KUF_Ckv8HbE" frameborder="0" allowfullscreen=""></iframe>
+
+<ul>
+  <li>For more on types of projections, visit
+<a href="http://help.arcgis.com/en/arcgisdesktop/10.0/help/index.html#/Datums/003r00000008000000/" target="_blank"> ESRI’s ArcGIS reference on projection types.</a>.</li>
+  <li>Read more about <a href="https://source.opennews.org/en-US/learning/choosing-right-map-projection/" target="_blank"> choosing a projection/datum.</a></li>
+</ul>
+
+<h2 id="what-is-a-coordinate-reference-system">What is a Coordinate Reference System</h2>
+
+<p>To define the location of something we often use a coordinate system. This system
+consists of an X and a Y value, located within a 2 (or more) -dimensional space.</p>
+
+<figure>
+	<a href="http://open.senecac.on.ca/clea/label/projectImages/15_276_xy-grid.jpg">
+	<img src="http://open.senecac.on.ca/clea/label/projectImages/15_276_xy-grid.jpg" /></a>
+	<figcaption> We use coordinate systems with X, Y (and sometimes Z axes) to
+	define the location of objects in space.
+	Source: http://open.senecac.on.ca
+	</figcaption>
+</figure>
+
+<p>While the above coordinate system is 2-dimensional, we live on a 3-dimensional
+earth that happens to be “round”. To define the location of objects on the earth, which is round, we need
+a coordinate system that adapts to the Earth’s shape. When we make maps on paper
+or on a flat computer screen, we move from a 3-Dimensional space (the globe) to
+a 2-Dimensional space (our computer
+screens or a piece of paper). The components of the CRS define how the
+“flattening” of data that exists in a 3-D globe space. The CRS also defines the
+the coordinate system itself.</p>
+
+<figure>
+	<a href="http://ayresriverblog.com/wp-content/uploads/2011/05/image.png">
+	<img src="http://ayresriverblog.com/wp-content/uploads/2011/05/image.png" /></a>
+	<figcaption>A CRS defines the translation between a location on the round earth
+	and that same location, on a flattened, 2 dimensional coordinate system.
+	Source: http://ayresriverblog.com
+	</figcaption>
+</figure>
+
+<blockquote>
+  <p>A coordinate reference system (CRS) is a
+coordinate-based local, regional or global system used to locate geographical
+entities. – Wikipedia</p>
+</blockquote>
+
+<h2 id="the-components-of-a-crs">The Components of a CRS</h2>
+
+<p>The coordinate reference system is made up of several key components:</p>
+
+<ul>
+  <li><strong>Coordinate System:</strong> the X, Y grid upon which our data is overlayed and how we define where a point is located in space.</li>
+  <li><strong>Horizontal and vertical units:</strong> The units used to define the grid along the
+x, y (and z) axis.</li>
+  <li><strong>Datum:</strong> A modeled version of the shape of the earth which defines the
+origin used to place the coordinate system in space. We will explain this further,
+below.</li>
+  <li><strong>Projection Information:</strong> the mathematical equation used to flatten objects
+that are on a round surface (e.g. the earth) so we can view them on a flat surface
+(e.g. our computer screens or a paper map).</li>
+</ul>
+
+<h2 id="why-crs-is-important">Why CRS is Important</h2>
+
+<p>It is important to understand the coordinate system that your data uses -
+particularly if you are working with different data stored in different coordinate
+systems. If you have data from the same location that are stored in different
+coordinate reference systems, <strong>they will not line up in any GIS or other program</strong>
+unless you have a program like ArcGIS or QGIS that supports <strong>projection on the
+fly</strong>. Even if you work in a tool that supports projection on the fly, you will
+want to all of your data in the same projection for performing analysis and processing
+tasks.</p>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Tip:</strong> Spatialreference.org provides an
+excellent <a href="http://spatialreference.org/ref/epsg/" target="_blank">online
+library of CRS information.</a></p>
+
+<h3 id="coordinate-system--units">Coordinate System &amp; Units</h3>
+
+<p>We can define a spatial location, such as a plot location, using an x- and a
+y-value - similar to our cartesian coordinate system displayed in the figure,
+above.</p>
+
+<p>For example, the map below, generated in <code class="highlighter-rouge">R</code> with <code class="highlighter-rouge">ggplot2</code> shows all of the
+continents in the world, in a <code class="highlighter-rouge">Geographic</code> Coordinate Reference System. The
+units are Degrees and the coordinate system itself is <strong>latitude</strong> and
+<strong>longitude</strong> with the <code class="highlighter-rouge">origin</code> being the location where the equator meets
+the central meridian on the globe (0,0).</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">rgdal</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rgeos</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rgeos version: 0.3-26, (SVN revision 560)
+ GEOS runtime version: 3.4.2-CAPI-1.8.2 r3921 
+ Linking to sp version: 1.2-7 
+ Polygon checking: TRUE 
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># read shapefile</span><span class="w">
+</span><span class="n">worldBound</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readOGR</span><span class="p">(</span><span class="n">dsn</span><span class="o">=</span><span class="s2">"data/Global/Boundaries/ne_110m_land"</span><span class="p">,</span><span class="w">
+                      </span><span class="n">layer</span><span class="o">=</span><span class="s2">"ne_110m_land"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OGR data source with driver: ESRI Shapefile 
+Source: "/home/travis/build/datacarpentry/r-spatial-data-management-intro/_episodes_rmd/data/Global/Boundaries/ne_110m_land", layer: "ne_110m_land"
+with 127 features
+It has 3 fields
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># convert to dataframe</span><span class="w">
+</span><span class="n">worldBound_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fortify</span><span class="p">(</span><span class="n">worldBound</span><span class="p">)</span><span class="w">  
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Regions defined for each Polygons
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># plot map</span><span class="w">
+</span><span class="n">worldMap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">worldBound_df</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">long</span><span class="p">,</span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_polygon</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">xlab</span><span class="p">(</span><span class="s2">"Longitude (Degrees)"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ylab</span><span class="p">(</span><span class="s2">"Latitude (Degrees)"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_equal</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Global Map - Geographic Coordinate System - WGS84 Datum\n Units: Degrees - Latitude / Longitude"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">worldMap</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="../fig/rmd-04-lat-long-example-1.png" title="plot of chunk lat-long-example" alt="plot of chunk lat-long-example" style="display: block; margin: auto;" /></p>
+
+<p>We can add three coordinate locations to our map. Note that the UNITS are
+in decimal <strong>degrees</strong> (latitude, longitude):</p>
+
+<ul>
+  <li>Boulder, Colorado:  40.0274, -105.2519</li>
+  <li>Oslo, Norway: 59.9500, 10.7500</li>
+  <li>Mallorca, Spain: 39.6167, 2.9833</li>
+</ul>
+
+<p>Let’s create a second map with the locations overlayed on top of the continental
+boundary layer.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># define locations of Boulder, CO and Oslo, Norway</span><span class="w">
+</span><span class="c1"># store them in a data.frame format</span><span class="w">
+</span><span class="n">loc.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">lon</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">-105.2519</span><span class="p">,</span><span class="w"> </span><span class="m">10.7500</span><span class="p">,</span><span class="w"> </span><span class="m">2.9833</span><span class="p">),</span><span class="w">
+                </span><span class="n">lat</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">40.0274</span><span class="p">,</span><span class="w"> </span><span class="m">59.9500</span><span class="p">,</span><span class="w"> </span><span class="m">39.6167</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># only needed if the above is a spatial points object</span><span class="w">
+</span><span class="c1"># loc.df &lt;- fortify(loc)  </span><span class="w">
+
+</span><span class="c1"># add a point to the map</span><span class="w">
+</span><span class="n">mapLocations</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">worldMap</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">geom_point</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">loc.df</span><span class="p">,</span><span class="w">
+                        </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="kc">NULL</span><span class="p">),</span><span class="w">
+                      </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"springgreen"</span><span class="p">,</span><span class="w">
+                      </span><span class="n">size</span><span class="o">=</span><span class="m">5</span><span class="p">)</span><span class="w">
+
+</span><span class="n">mapLocations</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="../fig/rmd-04-add-lat-long-locations-1.png" title="plot of chunk add-lat-long-locations" alt="plot of chunk add-lat-long-locations" style="display: block; margin: auto;" /></p>
+
+<h2 id="geographic-crs---the-good--the-less-good">Geographic CRS - The Good &amp; The Less Good</h2>
+
+<p>Geographic coordinate systems in decimal degrees are helpful when we need to
+locate places on the Earth. However, latitude and longitude
+locations are not located using uniform measurement units. Thus, geographic
+CRSs are not ideal for measuring distance. This is why other projected <code class="highlighter-rouge">CRS</code>
+have been developed.</p>
+
+<figure>
+	<a href="/fig/dc-spatio-temporal-intro/LatLongfromGlobeCenter-ESRI.gif">
+	<img src="/fig/dc-spatio-temporal-intro/LatLongfromGlobeCenter-ESRI.gif" /></a>
+	<figcaption>A geographic coordinate system locates latitude and longitude
+	location using angles. Thus the spacing of each line of latitude moving north
+	and south is not uniform.
+	Source: ESRI
+	</figcaption>
+</figure>
+
+<h2 id="projected-crs---robinson">Projected CRS - Robinson</h2>
+
+<p>We can view the same data above, in another CRS - <code class="highlighter-rouge">Robinson</code>. <code class="highlighter-rouge">Robinson</code> is a
+<strong>projected</strong> <code class="highlighter-rouge">CRS</code>. Notice that the country boundaries on the map - have a
+different shape compared to the map that we created above in the <code class="highlighter-rouge">CRS</code>:<br />
+<strong>Geographic lat/long WGS84</strong>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># reproject from longlat to robinson</span><span class="w">
+</span><span class="n">worldBound_robin</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">spTransform</span><span class="p">(</span><span class="n">worldBound</span><span class="p">,</span><span class="w">
+                                </span><span class="n">CRS</span><span class="p">(</span><span class="s2">"+proj=robin"</span><span class="p">))</span><span class="w">
+
+</span><span class="n">worldBound_df_robin</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fortify</span><span class="p">(</span><span class="n">worldBound_robin</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Regions defined for each Polygons
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># force R to plot x and y values without abbrev</span><span class="w">
+</span><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="o">=</span><span class="m">100</span><span class="p">)</span><span class="w">
+
+</span><span class="n">robMap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">worldBound_df_robin</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">long</span><span class="p">,</span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_polygon</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"World map (robinson)"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">xlab</span><span class="p">(</span><span class="s2">"X Coordinates (meters)"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ylab</span><span class="p">(</span><span class="s2">"Y Coordinates (meters)"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_equal</span><span class="p">()</span><span class="w">
+
+</span><span class="n">robMap</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="../fig/rmd-04-global-map-robinson-1.png" title="plot of chunk global-map-robinson" alt="plot of chunk global-map-robinson" style="display: block; margin: auto;" /></p>
+
+<p>Now what happens if you try to add the same Lat / Long coordinate locations that
+we used above, to our map, with the <code class="highlighter-rouge">CRS</code> of <code class="highlighter-rouge">Robinsons</code>?</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># add a point to the map</span><span class="w">
+</span><span class="n">newMap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">robMap</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">geom_point</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">loc.df</span><span class="p">,</span><span class="w">
+                      </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="kc">NULL</span><span class="p">),</span><span class="w">
+                      </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"springgreen"</span><span class="p">,</span><span class="w">
+                      </span><span class="n">size</span><span class="o">=</span><span class="m">5</span><span class="p">)</span><span class="w">
+
+</span><span class="n">newMap</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="../fig/rmd-04-add-locations-robinson-1.png" title="plot of chunk add-locations-robinson" alt="plot of chunk add-locations-robinson" style="display: block; margin: auto;" /></p>
+
+<p>Notice above that when we try to add lat/long coordinates in degrees, to a map
+in a different <code class="highlighter-rouge">CRS</code>, that the points are not in the correct location. We need
+to first convert the points to the  new projection - a process often referred
+to as <strong>reprojection</strong> but performed by the <code class="highlighter-rouge">spTransform()</code> function in <code class="highlighter-rouge">R</code>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># define locations of Boulder, CO and Oslo, Norway</span><span class="w">
+</span><span class="n">loc.df</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        lon     lat
+1 -105.2519 40.0274
+2   10.7500 59.9500
+3    2.9833 39.6167
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># convert to spatial Points data frame</span><span class="w">
+</span><span class="n">loc.spdf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">SpatialPointsDataFrame</span><span class="p">(</span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loc.df</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">loc.df</span><span class="p">,</span><span class="w">
+                            </span><span class="n">proj4string</span><span class="o">=</span><span class="n">crs</span><span class="p">(</span><span class="n">worldBound</span><span class="p">))</span><span class="w">  
+
+</span><span class="n">loc.spdf</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class       : SpatialPointsDataFrame 
+features    : 3 
+extent      : -105.2519, 10.75, 39.6167, 59.95  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+variables   : 2
+names       :       lon,     lat 
+min values  : -105.2519, 39.6167 
+max values  :     10.75,   59.95 
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># reproject data to Robinson</span><span class="w">
+</span><span class="n">loc.spdf.rob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">spTransform</span><span class="p">(</span><span class="n">loc.spdf</span><span class="p">,</span><span class="w"> </span><span class="n">CRSobj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CRS</span><span class="p">(</span><span class="s2">"+proj=robin"</span><span class="p">))</span><span class="w">
+
+</span><span class="n">loc.rob.df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">cbind</span><span class="p">(</span><span class="n">loc.spdf.rob</span><span class="o">$</span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">loc.spdf.rob</span><span class="o">$</span><span class="n">lat</span><span class="p">))</span><span class="w">
+</span><span class="c1"># rename each column</span><span class="w">
+</span><span class="nf">names</span><span class="p">(</span><span class="n">loc.rob.df</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"X"</span><span class="p">,</span><span class="s2">"Y"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># convert spatial object to a data.frame for ggplot</span><span class="w">
+</span><span class="n">loc.rob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">fortify</span><span class="p">(</span><span class="n">loc.rob.df</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># notice the coordinate system in the Robinson projection (CRS) is DIFFERENT</span><span class="w">
+</span><span class="c1"># from the coordinate values for the same locations in a geographic CRS.</span><span class="w">
+</span><span class="n">loc.rob</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>           X       Y
+1 -9162993.5 4279262
+2   811462.5 6331141
+3   260256.6 4244127
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># add a point to the map</span><span class="w">
+</span><span class="n">newMap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">robMap</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">geom_point</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">loc.rob</span><span class="p">,</span><span class="w">
+                      </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">group</span><span class="o">=</span><span class="kc">NULL</span><span class="p">),</span><span class="w">
+                      </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"springgreen"</span><span class="p">,</span><span class="w">
+                      </span><span class="n">size</span><span class="o">=</span><span class="m">5</span><span class="p">)</span><span class="w">
+
+</span><span class="n">newMap</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="../fig/rmd-04-reproject-robinson-1.png" title="plot of chunk reproject-robinson" alt="plot of chunk reproject-robinson" style="display: block; margin: auto;" /></p>
+
+<h2 id="compare-maps">Compare Maps</h2>
+
+<p>Both of the plots above look visually different and also use a different
+coordinate system. Let’s look at both, side by side, with the actual <strong>graticules</strong>
+or latitude and longitude lines rendered on the map.</p>
+
+<p>NOTE: The code for this map can
+be found in the .R document that is available for download at the bottom of this
+page!</p>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in theme(line = element_blank(), line = element_blank(), axis.text.x = element_blank(), : formal argument "line" matched by multiple actual arguments
+</code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OGR data source with driver: ESRI Shapefile 
+Source: "/home/travis/build/datacarpentry/r-spatial-data-management-intro/_episodes_rmd/data/Global/Boundaries/ne_110m_graticules_all", layer: "ne_110m_graticules_15"
+with 35 features
+It has 5 fields
+</code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OGR data source with driver: ESRI Shapefile 
+Source: "/home/travis/build/datacarpentry/r-spatial-data-management-intro/_episodes_rmd/data/Global/Boundaries/ne_110m_graticules_all", layer: "ne_110m_wgs84_bounding_box"
+with 1 features
+It has 2 fields
+</code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'newTheme' not found
+</code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'latLongMap' not found
+</code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'newTheme' not found
+</code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'finalRobMap' not found
+</code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in arrangeGrob(...): object 'latLongMap' not found
+</code></pre></div></div>
+
+<h2 id="why-multiple-crs">Why Multiple CRS?</h2>
+
+<p>You may be wondering, why bother with different CRSs if it makes our
+analysis more complicated? Well, each <code class="highlighter-rouge">CRS</code> is optimized to best represent:</p>
+
+<ul>
+  <li>Shape and/or</li>
+  <li>Scale / distance and/or</li>
+  <li>Area</li>
+</ul>
+
+<p>of features in the data. And no one CRS is great at optimizing shape, distance AND
+area. Some CRSs are optimized for shape, some distance, some area. Some
+CRSs are also optimized for particular regions -
+for instance the United States, or Europe. Discussing <code class="highlighter-rouge">CRS</code> as it optimizes shape,
+distance and area is beyond the scope of this tutorial, but it’s important to
+understand that the <code class="highlighter-rouge">CRS</code> that you chose for your data, will impact working with
+the data!</p>
+
+<blockquote class="challenge">
+  <h2 id="challenge">Challenge</h2>
+
+  <ol>
+    <li>
+      <p>Compare the maps of the globe above. What do you notice about the shape of
+the various countries. Are there any signs of distortion in certain areas on
+either map? Which one is better?</p>
+    </li>
+    <li>
+      <p>Look at the image below - which depicts maps of the United States in 4
+different <code class="highlighter-rouge">CRS</code>s. What visual differences do you notice in each map? Look up
+each projection online, what elements (shape,area or distance) does each
+projection used in the graphic below optimize?</p>
+    </li>
+  </ol>
+</blockquote>
+
+<hr />
+
+<figure>
+    <a href="https://source.opennews.org/media/cache/b9/4f/b94f663c79024f0048ae7b4f88060cb5.jpg">
+    <img src="https://source.opennews.org/media/cache/b9/4f/b94f663c79024f0048ae7b4f88060cb5.jpg" />
+    </a>
+
+    <figcaption>Maps of the United States in different CRS including Mercator
+    (upper left), Albers equal area (lower left), UTM (Upper RIGHT) and
+    WGS84 Geographic (Lower RIGHT).
+    Notice the differences in shape and orientation associated with each
+    CRS. These differences are a direct result of the
+    calculations used to "flatten" the data onto a two dimensional map.
+    Source: opennews.org</figcaption>
+</figure>
+
+<h2 id="geographic-vs-projected-crs">Geographic vs Projected CRS</h2>
+
+<p>The above maps provide examples of the two main types of coordinate systems:</p>
+
+<ol>
+  <li><strong>Geographic coordinate systems:</strong> coordinate systems that span the entire
+globe (e.g. latitude / longitude).</li>
+  <li><strong>Projected coordinate Systems:</strong> coordinate systems that are localized to
+minimize visual distortion in a particular region (e.g. Robinson, UTM, State Plane)</li>
+</ol>
+
+<p>In the next tutorial, we will discuss the differences between these CRSs in
+more detail. Feel
+free to skip over this section and come back to it with fresh eyes if the
+concept of a <code class="highlighter-rouge">CRS</code> is becoming too complex. It’s easisest to take on in
+bite sized pieces!</p>
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>TBD</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../03-metadata-formats-and-files/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../05-geographic-vs-projected-CRS/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-6" align="left">
+      <h4>
+	Copyright &copy; 2016–2018
+	
+	<a href="http://datacarpentry.org">Data Carpentry</a>
+	
+      </h4>
+    </div>
+    <div class="col-md-6" align="right">
+      <h4>
+	
+	
+	<a href="/edit/gh-pages/_episodes_rmd/04-intro-CRS-projection.Rmd">Edit on GitHub</a>
+	
+	
+	/
+	<a href="/blob/gh-pages/CONTRIBUTING.md">Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob/gh-pages/CITATION">Cite</a>
+	/
+	<a href="mailto:lessons@software-carpentry.org">Contact</a>
+      </h4>
+    </div>
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

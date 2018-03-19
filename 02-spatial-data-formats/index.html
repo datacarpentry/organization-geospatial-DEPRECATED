@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-03-19 21:57:08 +0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon-dc.ico" />
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>Introduction to Spatio-Temporal Data: Spatial Data Formats -- Intro to Shapefiles (Vector Data) and GeoTIFFs (Raster Data)</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="../conduct/">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="../setup.html">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../00-spatio-temporal-science-questions/">Answer a Spatio-temporal Research Question with Data - Where to Start?</a></li>
+            
+            <li><a href="../01-spatial-data-landscape/">The Spatial Data Landscape</a></li>
+            
+            <li><a href="../02-spatial-data-formats/">Spatial Data Formats -- Intro to Shapefiles (Vector Data) and GeoTIFFs (Raster Data)</a></li>
+            
+            <li><a href="../03-metadata-formats-and-files/">Data About Data -- Intro to Metadata File Formats and Structure</a></li>
+            
+            <li><a href="../04-intro-CRS-projection/">Intro to Coordinate Reference Systems & Spatial Projections</a></li>
+            
+            <li><a href="../05-geographic-vs-projected-CRS/">Introduction to the UTM Projected CRS and a Brief overview of datums</a></li>
+            
+            <li><a href="../06-CRS-formats-proj4-EPSG/">A Quick Overview of CRS Formats - Proj4 & EPSG - in R</a></li>
+            
+            <li><a href="../07-spatial-resolution-extent/">Intro to Spatial Metadata -- Spatial Resolution and Spatial Extent</a></li>
+            
+            <li><a href="../08-clean-data-bad-and-missing-values/">Cleaning Data -- Missing and Bad Data Values</a></li>
+            
+            <li><a href="../09-set-r-work-environment/">R Packages for Spatial-temporal Data -- Setting Up Your Working Environment</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../reference.html">Reference</a></li>
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="../LICENSE.md">License</a></li>
+	
+	
+	<li><a href="/edit/gh-pages/_episodes_rmd/02-spatial-data-formats.Rmd">Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../01-spatial-data-landscape/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">Introduction to Spatio-Temporal Data</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../03-metadata-formats-and-files/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Spatial Data Formats -- Intro to Shapefiles (Vector Data) and GeoTIFFs (Raster Data)</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br/>
+      <strong>Exercises:</strong> 30 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<p>This tutorial covers the basics of key data formats that may contain spatial
+information including shapefile, GeoTIFF and .csv. It also provides a brief
+overview of other formats that you may encounter when working with spatial data.</p>
+
+<p><strong>R Skill Level:</strong> Beginner</p>
+
+<h1 id="goals--objectives">Goals / Objectives</h1>
+
+<p>After completing this activity, you will:</p>
+
+<ul>
+  <li>Understand two key spatial data formats: raster and vector.</li>
+  <li>Understand the basic structure of a GeoTiff file as a key raster spatial data
+format.</li>
+  <li>Understand the basic file structure of a shapefile as a key vector spatial
+data format.</li>
+  <li>Understand the basic data management / file storage approaches for working
+with shapefiles which contain multiple associated files.</li>
+  <li>Understand where metadata are often stored in both raster and vector data
+formats.</li>
+</ul>
+
+<h3 id="install-r-packages">Install R Packages</h3>
+
+<ul>
+  <li><strong>raster:</strong> <code class="highlighter-rouge">install.packages("raster")</code></li>
+  <li><strong>rgdal:</strong> <code class="highlighter-rouge">install.packages("rgdal")</code></li>
+</ul>
+
+<h3 id="additional-resources">Additional Resources</h3>
+
+<ul>
+  <li>Wikipedia article on
+<a href="https://en.wikipedia.org/wiki/GIS_file_formats" target="_blank">
+GIS file formats.</a></li>
+</ul>
+
+<h2 id="get-started-with-your-project----file-organization">Get Started With Your Project -  File Organization</h2>
+
+<p>When we work with large, spatio-temporal data, it is a good idea to store large
+data sets in a general data directory that you can easily access from many
+projects. If you are working in a collaborative
+environment, use a shared data directory.</p>
+
+<h2 id="one-dataset---many-files">One Dataset - Many Files</h2>
+
+<p>While text files often are self contained (one CSV) is composed of one unique file,
+many spatial formats contain several files. For instance, a shapefile (discussed
+below) contains 3 or more files, all of which must retain the same NAME and be
+stored in the same file directory, in order for you to be able to work with them.
+We will discuss these issues as they related to two key spatial data formats -
+.shp (shapefile) which stores <strong>vector</strong> data and .tif (geotiff) which stores
+<strong>raster</strong> data in more detail, below.</p>
+
+<h2 id="types-of-spatial-data">Types of Spatial Data</h2>
+
+<p>Spatial data are represented in many different ways and are stored in different
+file formats. In this tutorial, we will focus on the two types of spatial data:
+raster and vector data.</p>
+
+<h2 id="vector-data---points-lines-polygons">Vector Data - Points, Lines, Polygons</h2>
+
+<p>Vector data, are often used to store things like road and plot locations,
+boundaries of states, countries and lakes.</p>
+
+<p>Vector data are composed of discrete geometric locations (x,y values) known as
+<strong>vertices</strong> that define the “shape” of the spatial object. The organization
+of the vertices determines the type of vector that we are working
+with: <strong>point</strong>, <strong>line</strong> or <strong>polygon</strong>.</p>
+
+<figure>
+    <a href="/fig/dc-spatial-vector/pnt_line_poly.png">
+    <img src="/fig/dc-spatial-vector/pnt_line_poly.png" /></a>
+    <figcaption> There are 3 types of vector objects: points, lines or
+    polygons. Each vector object type has a different structure.
+    Image Source: National Ecological Observatory Network (NEON)
+    </figcaption>
+</figure>
+
+<ul>
+  <li><strong>Points:</strong> Each individual point is defined by a <strong>single x, y coordinate</strong>.
+There can be many points in a vector point file. Examples of point data include:
+    <ul>
+      <li>sampling locations,</li>
+      <li>the location of individual trees or</li>
+      <li>the location of plots.</li>
+    </ul>
+  </li>
+  <li><strong>Lines:</strong> Lines are composed of <strong>many (at least 2) vertices that
+are connected</strong>. For instance, a road or a stream may be represented by a line.
+This line is composed of a series of segments, each “bend” in the road or stream
+represents a vertex that has defined <code class="highlighter-rouge">x, y</code> location.</li>
+  <li><strong>Polygons:</strong> A polygon consists of <strong>3 or more vertices that are connected
+and “closed”</strong>. Occasionally, a polygon can have a hole in the middle of it
+(like a doughnut), this is something to be aware of but not an issue we will
+deal with in this tutorial series. Objects often represented by polygons
+include:
+    <ul>
+      <li>outlines of plot boundaries,</li>
+      <li>lakes,</li>
+      <li>oceans and</li>
+      <li>states or country boundaries.</li>
+    </ul>
+  </li>
+</ul>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Tip:</strong> A shapefile will only contain <strong>one
+type of vector data</strong>: points, lines or polygons.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># load libraries required to work with spatial data</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span><span class="w"> </span><span class="c1"># commands to view metadata from vector objects</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rgdal</span><span class="p">)</span><span class="w"> </span><span class="c1"># library of common GIS functions</span><span class="w">
+
+</span><span class="c1"># Open shapefile</span><span class="w">
+</span><span class="n">roads_HARV</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readOGR</span><span class="p">(</span><span class="s2">"data/NEON-DS-Site-Layout-Files/HARV"</span><span class="p">,</span><span class="s2">"HARV_roads"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OGR data source with driver: ESRI Shapefile 
+Source: "/home/travis/build/datacarpentry/r-spatial-data-management-intro/_episodes_rmd/data/NEON-DS-Site-Layout-Files/HARV", layer: "HARV_roads"
+with 13 features
+It has 15 fields
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view slots available for the object</span><span class="w">
+</span><span class="n">slotNames</span><span class="p">(</span><span class="n">roads_HARV</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1] "data"        "lines"       "bbox"        "proj4string"
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view all methods available for that object</span><span class="w">
+</span><span class="c1"># methods(class = class(roads_HARV))</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="stucture-of-a-lines-feature">Stucture of a Lines Feature</h2>
+
+<p>If we are working with a shapefile containing <strong>line</strong> data, then each line
+consists of 2 or more vertices that are connected. We can view each set of coordinates
+for that object using <code class="highlighter-rouge">R</code>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view the coordinates for each vertex, for the last feature in the spatial object</span><span class="w">
+</span><span class="n">roads_HARV</span><span class="o">@</span><span class="n">lines</span><span class="p">[</span><span class="m">13</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[1]]
+An object of class "Lines"
+Slot "Lines":
+[[1]]
+An object of class "Line"
+Slot "coords":
+          [,1]    [,2]
+ [1,] 732479.6 4713107
+ [2,] 732485.9 4713115
+ [3,] 732498.2 4713148
+ [4,] 732496.7 4713211
+ [5,] 732487.1 4713259
+ [6,] 732486.9 4713279
+ [7,] 732488.9 4713322
+ [8,] 732491.1 4713349
+ [9,] 732504.8 4713377
+[10,] 732528.3 4713443
+[11,] 732533.0 4713476
+[12,] 732528.8 4713506
+[13,] 732522.0 4713534
+[14,] 732509.9 4713569
+[15,] 732496.6 4713604
+[16,] 732479.4 4713639
+[17,] 732463.5 4713670
+[18,] 732454.0 4713697
+[19,] 732439.3 4713734
+[20,] 732428.8 4713763
+[21,] 732416.5 4713816
+[22,] 732414.5 4713829
+[23,] 732413.4 4713845
+[24,] 732415.0 4713879
+[25,] 732416.5 4713905
+[26,] 732421.4 4713932
+[27,] 732427.6 4713961
+[28,] 732437.7 4713996
+[29,] 732449.0 4714027
+[30,] 732465.3 4714068
+[31,] 732474.8 4714085
+[32,] 732485.4 4714097
+[33,] 732500.5 4714110
+[34,] 732517.8 4714122
+[35,] 732544.8 4714135
+[36,] 732565.0 4714153
+[37,] 732624.9 4714162
+[38,] 732682.9 4714177
+[39,] 732764.1 4714184
+[40,] 732843.3 4714200
+[41,] 732915.8 4714219
+[42,] 732991.7 4714236
+[43,] 733067.5 4714255
+[44,] 733106.4 4714260
+[45,] 733170.0 4714259
+[46,] 733239.0 4714246
+[47,] 733295.5 4714217
+
+
+
+Slot "ID":
+[1] "12"
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view the coordinates for the last feature in the spatial object</span><span class="w">
+</span><span class="n">roads_HARV</span><span class="o">@</span><span class="n">lines</span><span class="p">[</span><span class="m">14</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[1]]
+NULL
+</code></pre></div></div>
+
+<div id="challenge">
+  <p>Question - Why didn’t <code class="highlighter-rouge">roads_HARV@lines[14]</code> return any vertex coordinates?</p>
+</div>
+
+<h2 id="spatial-data-attributes">Spatial Data Attributes</h2>
+
+<p>Each object in a shapefile, is called a <code class="highlighter-rouge">feature</code>. Each <code class="highlighter-rouge">feature</code> has one or
+more <code class="highlighter-rouge">attributes</code> associated with it.</p>
+
+<p>Shapefile attributes are similar to fields or columns in a spreadsheet. Each row
+in the spreadsheet has a set of columns associated with it that describe the row
+element. In the case of a shapefile, each row represents a spatial object - for
+example, a road, represented as a line in a line shapefile, will have one “row”
+of attributes associated with it. These attributes can include different types
+of information that describe shapefile <code class="highlighter-rouge">features</code>. Thus, a road,
+may have a name, length, number of lanes, speed limit, type of road and other
+attributes stored with it.</p>
+
+<figure>
+    <a href="/fig/dc-spatial-vector/Attribute_Table.png">
+    <img src="/fig/dc-spatial-vector/Attribute_Table.png" /></a>
+    <figcaption>Each spatial feature in an R spatial object has the same set of
+    associated attributes that describe or characterize the feature.
+    Attribute data are stored in a separate *.dbf file. Attribute data can be
+    compared to a spreadsheet. Each row in a spreadsheet represents one feature
+    in the spatial object.
+    Image Source: National Ecological Observatory Network (NEON)
+    </figcaption>
+</figure>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view all attributes for a spatial object</span><span class="w">
+</span><span class="c1"># note, the code below just looks at the first 3 features</span><span class="w">
+</span><span class="n">head</span><span class="p">(</span><span class="n">roads_HARV</span><span class="o">@</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  OBJECTID_1 OBJECTID       TYPE             NOTES MISCNOTES RULEID
+0         14       48 woods road Locust Opening Rd      &lt;NA&gt;      5
+1         40       91   footpath              &lt;NA&gt;      &lt;NA&gt;      6
+2         41      106   footpath              &lt;NA&gt;      &lt;NA&gt;      6
+           MAPLABEL SHAPE_LENG             LABEL BIKEHORSE RESVEHICLE
+0 Locust Opening Rd  1297.3571 Locust Opening Rd         Y         R1
+1              &lt;NA&gt;   146.2998              &lt;NA&gt;         Y         R1
+2              &lt;NA&gt;   676.7180              &lt;NA&gt;         Y         R2
+  RECMAP Shape_Le_1                            ResVehic_1
+0      Y  1297.1062    R1 - All Research Vehicles Allowed
+1      Y   146.2998    R1 - All Research Vehicles Allowed
+2      Y   676.7181 R2 - 4WD/High Clearance Vehicles Only
+                   BicyclesHo
+0 Bicycles and Horses Allowed
+1 Bicycles and Horses Allowed
+2 Bicycles and Horses Allowed
+</code></pre></div></div>
+
+<p>In the map below of the Harvard Forest field site, there are many different features
+with different spatial object types. We will learn to create maps like this in
+the
+<a href="/tutorial-series/vector-data-series/"><em>Introduction to Working with Vector Data in R</em> tutorial series</a>.</p>
+
+<figure>
+    <a href="/fig/dc-spatio-temporal-intro/plot-color.png">
+    <img src="/fig/dc-spatio-temporal-intro/plot-color.png" /></a>
+    <figcaption>The map above contains point and line format vector data. We will
+    create a map like this in the vector data tutorial series.
+    Image Source: National Ecological Observatory Network (NEON)
+    </figcaption>
+</figure>
+
+<div id="challenge">
+
+  <h2 id="challenge-shapefiles">Challenge: Shapefiles</h2>
+
+  <p>Have a look at the map above:  <strong>Study Plots by Soil Type</strong>. What is the minimum number of
+shapefiles that are required to create this map? How do you know?</p>
+
+</div>
+
+<h3 id="shapefile-structure">Shapefile Structure</h3>
+
+<p>When working with shapefiles, it is important to remember that a shapefile
+ consists of 3 (or more) files:</p>
+
+<ul>
+  <li><strong><code class="highlighter-rouge">.shp</code>:</strong> the file that contains the geometry for all features.</li>
+  <li><strong><code class="highlighter-rouge">.shx</code>:</strong> the file that indexes the geometry.</li>
+  <li><strong><code class="highlighter-rouge">.dbf</code>:</strong> the file that stores feature attributes in a tabular format.</li>
+</ul>
+
+<p>These files need to have the <strong>same name</strong> and to be stored in the same
+directory (folder) to open properly in a GIS, <code class="highlighter-rouge">R</code> or <code class="highlighter-rouge">Python</code> tool.</p>
+
+<p>Sometimes, a shapefile will have other associated files including:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">.prj</code>: the file that contains information on projection format including
+the coordinate system and projection information. It is a plain text file
+describing the projection using well-known text (WKT) format.</li>
+  <li><code class="highlighter-rouge">.sbn</code> and <code class="highlighter-rouge">.sbx</code>: the files that are a spatial index of the features.</li>
+  <li><code class="highlighter-rouge">.shp.xml</code>: the file that is the geospatial metadata in XML format, (e.g.
+ISO 19115 or XML format).</li>
+</ul>
+
+<h2 id="data-management---sharing-shapefiles">Data Management - Sharing Shapefiles</h2>
+
+<p>When you work with a shapefile, you must keep all of the key associated
+file types together. And when you share a shapefile with a colleague, it is
+important to zip up all of these files into one package before you send it to
+them!</p>
+
+<p>We cover working with shapefiles in <code class="highlighter-rouge">R</code> in the
+<a href="http://neondataskills.org/tutorial-series/vector-data-series/"><em>Introduction to Working With Vector Data in R</em> series</a>.</p>
+
+<h3 id="vector-data-in-csv-format">Vector Data in .CSV Format</h3>
+
+<p>The shapefile format is one (very common) way to store vector data. However,
+you may encounter is in other formats. For example, sometimes, point data are
+stored as a Comma Separated Value (.CSV) format.</p>
+
+<p>We cover working with vector points in .csv format in the
+<a href="http://neondataskills.org/Vector 04: Convert from .csv to a Shapefile in R">tutorial: Convert from .csv to a Shapefile in R.</a>.</p>
+
+<h2 id="raster-data">Raster Data</h2>
+
+<p>Raster or “gridded” data are saved on a uniform grid and rendered on a map
+as pixels. Each pixel contains a value that represents an area on the Earth’s
+surface.</p>
+
+<figure>
+    <a href="/fig/dc-spatial-raster/raster_concept.png">
+    <img src="/fig/dc-spatial-raster/raster_concept.png" />
+    </a>
+    <figcaption> Source: National Ecological Observatory Network (NEON)
+    </figcaption>
+</figure>
+
+<h3 id="geotiff">GeoTIFF</h3>
+
+<p>There are many different raster data file formats. In this tutorial series, we
+will focus on the <code class="highlighter-rouge">GeoTIFF</code>. The <code class="highlighter-rouge">GeoTIFF</code> format is similar to the <code class="highlighter-rouge">.tif</code>
+format, however the <code class="highlighter-rouge">GeoTIFF</code> format stores additional spatial <code class="highlighter-rouge">metadata</code>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view attributes for a geotif file</span><span class="w">
+</span><span class="n">GDALinfo</span><span class="p">(</span><span class="s2">"NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in .local(.Object, ...): `NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif' does not exist in the file system,
+and is not recognised as a supported dataset name.
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># import geotiff</span><span class="w">
+</span><span class="n">chm_HARV</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">raster</span><span class="p">(</span><span class="s2">"NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in .rasterObjectFromFile(x, band = band, objecttype = "RasterLayer", : Cannot create a RasterLayer object from this file. (file does not exist)
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">chm_HARV</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'chm_HARV' not found
+</code></pre></div></div>
+
+<h3 id="metadata-in-tif-files">Metadata in .tif Files</h3>
+
+<p>The <code class="highlighter-rouge">tif</code> and <code class="highlighter-rouge">GeoTIFF</code> formats stores <code class="highlighter-rouge">metadata</code> as embedded <code class="highlighter-rouge">tif tags</code>. These
+tags can include the following raster metadata:</p>
+
+<ol>
+  <li>A Coordinate Reference System (<code class="highlighter-rouge">CRS</code>)</li>
+  <li>Spatial Extent (<code class="highlighter-rouge">extent</code>)</li>
+  <li>Values for when no data is provided (<code class="highlighter-rouge">NoData Value</code>)</li>
+  <li>The <code class="highlighter-rouge">resolution</code> of the data</li>
+</ol>
+
+<p>We will explore metadata in tif files in the next, tutorial -
+<a href="R/metadata-file-formats-structures">Spatial Intro 03: Data About Data – Intro to Metadata File Formats and Structure</a></p>
+
+<p>IMPORTANT: just because a <code class="highlighter-rouge">.tif</code> file can store metadata tags, doesn’t mean
+that metadata are always included! If the data creator doesn’t actively add
+<code class="highlighter-rouge">.tif</code> tags, then they may not be there for us to use.</p>
+
+<h3 id="metadata---saving-tif-files-in-r">Metadata - Saving .tif Files in R</h3>
+
+<p>In <code class="highlighter-rouge">R</code>, and many other <code class="highlighter-rouge">GIS</code> tools, it’s important to ensure that <code class="highlighter-rouge">.tif</code> tags
+are properly saved when you export a <code class="highlighter-rouge">.tif</code>. For example, when using the
+<code class="highlighter-rouge">writeRaster()</code>function in <code class="highlighter-rouge">R</code>, if you do not specify the <code class="highlighter-rouge">NA</code> (noData) value
+when you export a GeoTIFF, it will default to a different value which could be
+read incorrectly in other programs!</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># if you want a NA value of -9999, then you have to specify this when you</span><span class="w">
+</span><span class="c1"># export a raster file in R</span><span class="w">
+</span><span class="n">exampleRaster</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">writeRaster</span><span class="p">(</span><span class="n">rasterObject</span><span class="p">,</span><span class="w">  </span><span class="c1"># object to export/write</span><span class="w">
+                             </span><span class="n">FileName.tif</span><span class="p">,</span><span class="w">  </span><span class="c1"># name of new .tif file</span><span class="w">
+                             </span><span class="n">datatype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"INT1U"</span><span class="p">,</span><span class="w">  </span><span class="c1"># the data type</span><span class="w">
+                             </span><span class="n">NAflag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">-9999</span><span class="p">)</span><span class="w">  </span><span class="c1"># your desired NA or noData value</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We cover writing <code class="highlighter-rouge">NA</code> values using the <code class="highlighter-rouge">writeRaster</code> function in R in
+<a href="http://neondataskills.org/R/Raster-Calculations-In-R"><em>Raster Calculations in R - Subtract One Raster from Another and Extract Pixel Values For Defined Locations</em> tutorial</a>.</p>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Note:</strong> <code class="highlighter-rouge">Tif tags</code> - metadata tags stored
+within a <code class="highlighter-rouge">tif</code> or <code class="highlighter-rouge">GeoTIFF</code> file are also what your camera uses to store
+information about how and when a picture was taken! And how your computer reads
+this metadata and identifies, for example, the make and model of the camera or
+the date the photo was taken.</p>
+
+<h3 id="other-raster-file-formats">Other Raster File Formats</h3>
+
+<ul>
+  <li><strong>.asc:</strong> A comma separated text file with a spatial heading.</li>
+  <li><strong>Hierarchical Data Format (HDF5):</strong> An open file format that supports large,
+complex, heterogeneous data. More on HDF5 formated rasters can be found in the
+NEON Data Skills <a href="http://neondataskills.org/HDF5/">tutorials focusing on HDF5</a>.</li>
+  <li><strong>.grd:</strong> An ESRI specific raster format.</li>
+  <li><strong>netCDF:</strong>
+    <ul>
+      <li><a href="http://www.unidata.ucar.edu/software/netcdf/docs/faq.html" target="_blank">About netCDF (UCAR)</a></li>
+      <li><a href="https://publicwiki.deltares.nl/display/OET/Creating+a+netCDF+file+with+R" target="_blank">Create netCDF in R</a></li>
+      <li><a href="http://geog.uoregon.edu/bartlein/courses/geog607/Rmd/netCDF_01.htm" target="_blank">A tutorial for version 3 in R</a></li>
+    </ul>
+  </li>
+  <li><strong>GRIB:</strong> <a href="http://luckgrib.com/tutorials/2015/07/23/what-is-grib.html" target="_blank">What is Grib?</a></li>
+</ul>
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>TBD</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../01-spatial-data-landscape/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../03-metadata-formats-and-files/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-6" align="left">
+      <h4>
+	Copyright &copy; 2016–2018
+	
+	<a href="http://datacarpentry.org">Data Carpentry</a>
+	
+      </h4>
+    </div>
+    <div class="col-md-6" align="right">
+      <h4>
+	
+	
+	<a href="/edit/gh-pages/_episodes_rmd/02-spatial-data-formats.Rmd">Edit on GitHub</a>
+	
+	
+	/
+	<a href="/blob/gh-pages/CONTRIBUTING.md">Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob/gh-pages/CITATION">Cite</a>
+	/
+	<a href="mailto:lessons@software-carpentry.org">Contact</a>
+      </h4>
+    </div>
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

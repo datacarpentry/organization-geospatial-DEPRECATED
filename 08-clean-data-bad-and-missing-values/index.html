@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-03-19 21:57:08 +0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon-dc.ico" />
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>Introduction to Spatio-Temporal Data: Cleaning Data -- Missing and Bad Data Values</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="../conduct/">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="../setup.html">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../00-spatio-temporal-science-questions/">Answer a Spatio-temporal Research Question with Data - Where to Start?</a></li>
+            
+            <li><a href="../01-spatial-data-landscape/">The Spatial Data Landscape</a></li>
+            
+            <li><a href="../02-spatial-data-formats/">Spatial Data Formats -- Intro to Shapefiles (Vector Data) and GeoTIFFs (Raster Data)</a></li>
+            
+            <li><a href="../03-metadata-formats-and-files/">Data About Data -- Intro to Metadata File Formats and Structure</a></li>
+            
+            <li><a href="../04-intro-CRS-projection/">Intro to Coordinate Reference Systems & Spatial Projections</a></li>
+            
+            <li><a href="../05-geographic-vs-projected-CRS/">Introduction to the UTM Projected CRS and a Brief overview of datums</a></li>
+            
+            <li><a href="../06-CRS-formats-proj4-EPSG/">A Quick Overview of CRS Formats - Proj4 & EPSG - in R</a></li>
+            
+            <li><a href="../07-spatial-resolution-extent/">Intro to Spatial Metadata -- Spatial Resolution and Spatial Extent</a></li>
+            
+            <li><a href="../08-clean-data-bad-and-missing-values/">Cleaning Data -- Missing and Bad Data Values</a></li>
+            
+            <li><a href="../09-set-r-work-environment/">R Packages for Spatial-temporal Data -- Setting Up Your Working Environment</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../reference.html">Reference</a></li>
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="../LICENSE.md">License</a></li>
+	
+	
+	<li><a href="/edit/gh-pages/_episodes_rmd/08-clean-data-bad-and-missing-values.Rmd">Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../07-spatial-resolution-extent/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">Introduction to Spatio-Temporal Data</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../09-set-r-work-environment/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Cleaning Data -- Missing and Bad Data Values</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br/>
+      <strong>Exercises:</strong> 30 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="about">About</h2>
+
+<p>Add description.</p>
+
+<p><strong>R Skill Level:</strong> Intermediate - you’ve got the basics of <code class="highlighter-rouge">R</code> down.</p>
+
+<div id="objectives">
+
+  <p>#Goals / Objectives</p>
+
+  <p>After completing this activity, you will:</p>
+
+  <p>*</p>
+
+  <h2 id="things-youll-need-to-complete-this-lesson">Things You’ll Need To Complete This Lesson</h2>
+  <p>To complete this lesson you will need the most current version of R, and
+preferably, RStudio loaded on your computer.</p>
+
+  <h3 id="install-r-packages">Install R Packages</h3>
+
+  <ul>
+    <li>
+      <p><strong>NAME:</strong> <code class="highlighter-rouge">install.packages("NAME")</code></p>
+    </li>
+    <li>
+      <p><a href="R/Packages-In-R/">More on Packages in R - Adapted from Software Carpentry.</a></p>
+    </li>
+  </ul>
+
+  <h3 id="download-data">Download Data</h3>
+  <p>EDIT AS NEEDED</p>
+
+  <p><strong>Spatial-Temporal Data &amp; Data Management Lesson Series:</strong> This lesson is part
+of a lesson series introducing
+<a href="tutorial/URL">spatial data and data management in <code class="highlighter-rouge">R</code> </a>.
+It is also part of a larger
+<a href="workshops/spatio-temporal-workshop">spatio-temporal Data Carpentry Workshop </a>
+that includes working with<br />
+<a href="tutorial/spatial-raster-series">raster data in <code class="highlighter-rouge">R</code> </a>,
+<a href="tutorial/spatial-vector-series">vector data in <code class="highlighter-rouge">R</code> </a>
+and<br />
+<a href="tutorial/tabular-time-series">tabular time series in <code class="highlighter-rouge">R</code> </a>.</p>
+
+  <hr />
+
+  <h3 id="additional-resources">Additional Resources</h3>
+
+  <ul>
+    <li><a href="http://cran.r-project.org/web/packages/raster/raster.pdf" target="_blank">
+Read more about the <code class="highlighter-rouge">raster</code> package in <code class="highlighter-rouge">R</code>.</a></li>
+    <li><a href="http://neondataskills.org/R/Raster-Data-In-R/" target="_blank">
+NEON Data Skills: Raster Data in R - The Basics</a></li>
+    <li><a href="http://neondataskills.org/R/Image-Raster-Data-In-R/" target="_blank">
+NEON Data Skills: Image Raster Data in R - An Intro</a></li>
+  </ul>
+
+</div>
+
+<h3 id="clean-data">Clean Data</h3>
+<p>No dataset is perfect. It is common to encounter large files containing obviously
+erroneous data (bad data).  It is also common to encounter <code class="highlighter-rouge">NoData</code>
+values that we need to account for when analyzing our data.</p>
+
+<h2 id="nodata-values-na-nan">NoData Values (NA, NAN)</h2>
+<p>If we are lucky when working with external data, the <code class="highlighter-rouge">NoData</code> value is clearly
+specified in the metadata. Sometimes this value is <code class="highlighter-rouge">NA</code> or <code class="highlighter-rouge">nan</code> (not a number). However,
+<code class="highlighter-rouge">NA</code> isn’t always used. Text values can make data storage difficult for some
+programs and thus, sometimes you’ll encounter a large negative value such as
+<code class="highlighter-rouge">-9999</code> used as the <code class="highlighter-rouge">NoData</code> value. At other times, we might see blank values in
+a data file which designate <code class="highlighter-rouge">NoData</code>. Blanks are particularly problematic
+because we can’t be certain if a data value is purposefully missing (not
+measured that day or a bad measurement) or if someone unintentionally deleted
+it.</p>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Tip:</strong><code class="highlighter-rouge">-9999</code> is a common value used in
+both the remote sensing field and the atmospheric fields. It is also
+the standard used by the <a href="http://www.neoninc.org" target="_blank">
+National Ecological Observatory Network (NEON)</a>.</p>
+
+<p>Because the actual value used to designate missing data can vary depending upon
+what data we are working with, it is important to always check the metadata for
+the files associated <code class="highlighter-rouge">NoData</code> value. If the value is <code class="highlighter-rouge">NA</code>, we are in luck, <code class="highlighter-rouge">R</code>
+will recognize and flag this value as <code class="highlighter-rouge">NoData</code>. If the value is numeric (e.g.,
+<code class="highlighter-rouge">-9999</code>),then we might need to assign this value to <code class="highlighter-rouge">NA</code>.</p>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Tip:</strong> <code class="highlighter-rouge">NA</code> values will be ignored when
+performing calculations in <code class="highlighter-rouge">R</code>. However a <code class="highlighter-rouge">NoData</code> value of <code class="highlighter-rouge">-9999</code> will be
+recognized as an integer and processed accordingly. If you encounter a numeric
+<code class="highlighter-rouge">NoData</code> value be sure to assign it to <code class="highlighter-rouge">NA</code> in <code class="highlighter-rouge">R</code>:
+<code class="highlighter-rouge">objectName[objectName==-9999] &lt;- NA</code></p>
+
+<h3 id="check-for-na-values">Check for NA values</h3>
+<p>We can quickly check for <code class="highlighter-rouge">NoData</code> values in our data using the<code class="highlighter-rouge">is.na()</code>
+function. By asking for the <code class="highlighter-rouge">sum()</code> of <code class="highlighter-rouge">is.na()</code> we can see how many NA / missing
+values we have.</p>
+
+<p>REPLACE CODE TO BE FOR THE SAME SMALLISH DATA SET USED FOR BAD DATA VALUES BELOW</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Check for NA values</span><span class="w">
+</span><span class="nf">sum</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">harMet15.09.11</span><span class="o">$</span><span class="n">datetime</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'harMet15.09.11' not found
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">sum</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="n">harMet15.09.11</span><span class="o">$</span><span class="n">airt</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'harMet15.09.11' not found
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view rows where the air temperature is NA</span><span class="w">
+</span><span class="n">harMet15.09.11</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">harMet15.09.11</span><span class="o">$</span><span class="n">airt</span><span class="p">),]</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'harMet15.09.11' not found
+</code></pre></div></div>
+
+<p>The results above tell us there are <code class="highlighter-rouge">NoData</code> values in the <code class="highlighter-rouge">datetime</code> column.
+However, there are <code class="highlighter-rouge">NoData</code> values in other variables.</p>
+
+<h3 id="deal-with-nodata-values">Deal with NoData Values</h3>
+
+<p>When we encounter <code class="highlighter-rouge">NoData</code> values (blank, NaN, -9999, etc.) in our data we
+need to decide how to deal with them. By default <code class="highlighter-rouge">R</code> treats <code class="highlighter-rouge">NoData</code> values
+designated
+with a <code class="highlighter-rouge">NA</code> as a missing value rather than a zero. This is good, as a value of
+zero (no rain today) is not the same as missing data (e.g. we didn’t measure the
+amount of rainfall today).</p>
+
+<p>How we deal with <code class="highlighter-rouge">NoData</code> values will depend on:</p>
+
+<ul>
+  <li>the data type we are working with</li>
+  <li>the analysis we are conducting</li>
+  <li>the significance of the gap or missing value</li>
+</ul>
+
+<p>Sometimes we might need to “gap fill” our data. This means we will interpolate
+or estimate missing values often using statistical methods. Gap filling can be
+complex and is beyond the scope of this lesson. The take away from this lessons
+is simply that it is important to acknowledge missing values in your data and to
+carefully consider how you wish to account for them during analysis.</p>
+
+<p>Other resources:</p>
+
+<ol>
+  <li><a href="http://www.statmethods.net/input/missingdata.html" target="_blank"> Quick-R: Missing Data</a>
+– R code for dealing with missing data</li>
+  <li>The Institute for Digital Research and Education has an <a href="http://www.ats.ucla.edu/stat/r/faq/missing.htm" target="_blank"> R FAQ on Missing Values</a>.</li>
+</ol>
+
+<h2 id="bad-data-values">Bad Data Values</h2>
+<p>Bad data values are different from <code class="highlighter-rouge">NoDataValue</code>. Bad data values are values that
+fall outside of the applicable range of a dataset.
+Examples of Bad Data Values:</p>
+
+<ul>
+  <li>The normalized difference vegetation index (NDVI), which is a measure of
+greenness, has a valid range of -1 to 1. Any value outside of that range would
+be considered a “bad” or miscalculated value.</li>
+  <li>If we are using a Julian day (0-365/366) to represent the days of the year. A value
+of 1110 is clearly not correct.</li>
+</ul>
+
+<h3 id="find-bad-data-values">Find Bad Data Values</h3>
+<p>Sometimes a dataset’s metadata will tell us the range of expected values for a
+variable or common sense dictates the expected value (as in the Julian day example above).
+Values outside of this range are suspect and we need to consider than
+when we analyze the data. Sometimes, we need to use some common sense and
+scientific insight as we examine the data - just as we would for field data to
+identify questionable values.</p>
+
+<p>We can explore the distribution of values contained within our data using the
+<code class="highlighter-rouge">hist</code> function which produces a histogram. Histograms are often useful in
+identifying outliers and bad data values in our raster data.</p>
+
+<p>HIST of SMALLISH DATA SET WITH SOME OUTLANDISH VALUE</p>
+
+<h3 id="deal-with-bad-data-values">Deal with Bad Data Values</h3>
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>TBD</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../07-spatial-resolution-extent/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../09-set-r-work-environment/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-6" align="left">
+      <h4>
+	Copyright &copy; 2016–2018
+	
+	<a href="http://datacarpentry.org">Data Carpentry</a>
+	
+      </h4>
+    </div>
+    <div class="col-md-6" align="right">
+      <h4>
+	
+	
+	<a href="/edit/gh-pages/_episodes_rmd/08-clean-data-bad-and-missing-values.Rmd">Edit on GitHub</a>
+	
+	
+	/
+	<a href="/blob/gh-pages/CONTRIBUTING.md">Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob/gh-pages/CITATION">Cite</a>
+	/
+	<a href="mailto:lessons@software-carpentry.org">Contact</a>
+      </h4>
+    </div>
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

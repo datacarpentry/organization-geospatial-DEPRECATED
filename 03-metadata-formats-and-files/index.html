@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-03-19 21:57:08 +0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon-dc.ico" />
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>Introduction to Spatio-Temporal Data: Data About Data -- Intro to Metadata File Formats and Structure</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="../conduct/">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="../setup.html">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../00-spatio-temporal-science-questions/">Answer a Spatio-temporal Research Question with Data - Where to Start?</a></li>
+            
+            <li><a href="../01-spatial-data-landscape/">The Spatial Data Landscape</a></li>
+            
+            <li><a href="../02-spatial-data-formats/">Spatial Data Formats -- Intro to Shapefiles (Vector Data) and GeoTIFFs (Raster Data)</a></li>
+            
+            <li><a href="../03-metadata-formats-and-files/">Data About Data -- Intro to Metadata File Formats and Structure</a></li>
+            
+            <li><a href="../04-intro-CRS-projection/">Intro to Coordinate Reference Systems & Spatial Projections</a></li>
+            
+            <li><a href="../05-geographic-vs-projected-CRS/">Introduction to the UTM Projected CRS and a Brief overview of datums</a></li>
+            
+            <li><a href="../06-CRS-formats-proj4-EPSG/">A Quick Overview of CRS Formats - Proj4 & EPSG - in R</a></li>
+            
+            <li><a href="../07-spatial-resolution-extent/">Intro to Spatial Metadata -- Spatial Resolution and Spatial Extent</a></li>
+            
+            <li><a href="../08-clean-data-bad-and-missing-values/">Cleaning Data -- Missing and Bad Data Values</a></li>
+            
+            <li><a href="../09-set-r-work-environment/">R Packages for Spatial-temporal Data -- Setting Up Your Working Environment</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../reference.html">Reference</a></li>
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="../LICENSE.md">License</a></li>
+	
+	
+	<li><a href="/edit/gh-pages/_episodes_rmd/03-metadata-formats-and-files.Rmd">Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../02-spatial-data-formats/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">Introduction to Spatio-Temporal Data</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../04-intro-CRS-projection/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Data About Data -- Intro to Metadata File Formats and Structure</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br/>
+      <strong>Exercises:</strong> 30 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<p>This tutorial covers what metadata are and why we need to work
+with metadata in the context of spatio-temporal data. It
+covers the three common metadata formats: text file
+format, web page format and Ecological Metadata Language (EML).</p>
+
+<p><strong>R Skill Level:</strong> Beginner</p>
+
+<h1 id="goals--objectives">Goals / Objectives</h1>
+
+<p>After completing this activity, you will:</p>
+
+<ul>
+  <li>Understand that metadata come in many formats and must be maintained with the
+data.</li>
+  <li>Understand that there is necessary metadata associated with and/or embedded in
+the data.</li>
+  <li>Understand that collecting data requires and includes collecting the metadata.</li>
+  <li>Be able to create metadata files for different data types.</li>
+</ul>
+
+<h3 id="install-r-packages">Install R Packages</h3>
+
+<p><strong>OPTIONAL</strong> This tutorial uses these <code class="highlighter-rouge">R</code> packages in the examples.
+ If you want to follow along, please make sure the following packages
+ are installed:</p>
+
+<ul>
+  <li><strong>raster:</strong> <code class="highlighter-rouge">install.packages("raster")</code></li>
+  <li><strong>rgdal:</strong> <code class="highlighter-rouge">install.packages("rgdal")</code></li>
+  <li><strong>devtools</strong> <code class="highlighter-rouge">install.packages("devtools")</code></li>
+  <li>NOTE: You have to call the devtools library <code class="highlighter-rouge">library(devtools)</code> first, and then <code class="highlighter-rouge">install_github</code> will work.</li>
+  <li>
+    <p><strong>eml</strong> <code class="highlighter-rouge">install_github("ropensci/EML", build=FALSE, dependencies=c("DEPENDS", "IMPORTS"))</code></p>
+  </li>
+  <li><a href="R/Packages-In-R/">More on Packages in R - Adapted from Software Carpentry.</a></li>
+</ul>
+
+<h3 id="additional-resources">Additional Resources</h3>
+
+<ul>
+  <li>Information on the
+<a href="http://cran.r-project.org/web/packages/raster/raster.pdf" target="_blank"> <code class="highlighter-rouge">raster</code> R package</a></li>
+</ul>
+
+<p><img src="../fig/rmd-03-elevation-map-1.png" title="plot of chunk elevation-map" alt="plot of chunk elevation-map" style="display: block; margin: auto;" /></p>
+
+<blockquote class="challenge">
+  <h2 id="what-do-i-know-about-my-data">What Do I Know About My Data?</h2>
+
+  <p>The figure above was created from a dataset that you are given called:
+<code class="highlighter-rouge">HARV_dsmCrop.tif</code>.</p>
+
+  <ul>
+    <li>What other information would you like to know about the data
+used to create the above map before you would feel comfortable using this data
+to address a research question?</li>
+    <li>Think about the data used to create this plot. If you had to share this data
+with a colleague, what information do they need to know, to efficiently work
+with it?</li>
+  </ul>
+</blockquote>
+
+<p>How does thinking about this plot and what you’d like to know about it influence
+how you think about sharing data with a colleague?</p>
+
+<h2 id="why-do-we-need-metadata">Why Do We Need Metadata?</h2>
+
+<p>Looking at the map above, we are missing information needed to begin working
+with the data effectively, including:</p>
+
+<p><strong>Spatial Information</strong></p>
+
+<ul>
+  <li><strong>Spatial Extent:</strong> What area does this dataset cover?</li>
+  <li><strong>Coordinate reference system:</strong> What spatial projection / coordinate reference
+system is used to store the data? Will it line up with other data?</li>
+  <li><strong>Resolution:</strong> The data appears to be in <strong>raster</strong> format. This means it is
+composed of pixels. What area on the ground does each pixel cover - i.e. What is
+its spatial resolution?</li>
+</ul>
+
+<p><strong>Data Collection / Processing Methods</strong></p>
+
+<ul>
+  <li><strong>When was the data collected?</strong> Is it recent or historical?</li>
+  <li><strong>How was this data generated?</strong> Is this an output from a model, is it an image
+from a remote sensing instrument such as a satellite (e.g. Landsat) or collected
+from an airplane? How were the data collected?</li>
+  <li><strong>Units:</strong> We can see a scale bar of values to the right of the data, however,
+what metric and in what units does this represent? Temperature? Elevation? Precipitation?</li>
+  <li><strong>How were the data processed?</strong></li>
+</ul>
+
+<p><strong>Contact Information</strong></p>
+
+<ul>
+  <li><strong>Who created this data?</strong></li>
+  <li><strong>Who do we contact:</strong> We might need permission to use it, have questions
+about the data, or need more information to give correct attribution.</li>
+</ul>
+
+<p>When we are given a dataset, or when we download it online, we do not know
+anything about it without proper documentation. This documentation is called
+<strong>metadata</strong> - data about the data.</p>
+
+<h2 id="what-are-metadata">What are Metadata?</h2>
+<p>Metadata are structured information that describes a dataset. Metadata include
+a suite of information about the data including:</p>
+
+<ul>
+  <li>Contact information,</li>
+  <li>Spatial attributes including: extent, coordinate reference system, resolution,</li>
+  <li>Data collection &amp; processing methods,</li>
+  <li>and much more.</li>
+</ul>
+
+<p>Without sufficient documentation, it is difficult for us to work with external
+data - data that we did not collect ourselves.</p>
+
+<h3 id="why-are-metadata-needed">Why Are Metadata Needed?</h3>
+
+<p>We need metadata to work with external data. When metadata are embedded
+in a file or in provided in a machine readable format, we can access it directly
+in tools like <code class="highlighter-rouge">R</code> or <code class="highlighter-rouge">Python</code> to support automated workflows. We will talk about
+different metadata formats, next.</p>
+
+<h2 id="metadata-formats">Metadata Formats</h2>
+
+<p>Metadata come in different formats. We will discuss three of those in this
+tutorial:</p>
+
+<ul>
+  <li><strong>Structured Embedded Metadata:</strong> Some file formats supported embedded
+metadata which you can access from a tool like <code class="highlighter-rouge">R</code> or <code class="highlighter-rouge">Python</code> directly from the
+imported data (e.g. <strong>GeoTIFF</strong> and <strong>HDF5</strong>). This data is contained in the same
+file (or file set as for shapefiles) as the data.</li>
+  <li><strong>Structured Metadata Files:</strong> Structured metadata files, such as the
+Ecological Metadata Language (<strong>EML</strong>), are stored in a machine readable format
+which means they can be accessed using a tool like <code class="highlighter-rouge">R</code> or <code class="highlighter-rouge">Python</code>. These files
+must be shared with and accompany the separate data files. There are
+different file formats and standards so it’s important to understand that
+standards will vary.</li>
+  <li><strong>Unstructured Metadata Files:</strong> This broad group includes text files,
+web pages and other documentation that does not follow a particular standard or
+format, but documents key attributes required to work with the data.</li>
+</ul>
+
+<p>Structured metadata formats are ideal if you can find them because they are most
+often:</p>
+
+<ul>
+  <li>In a standard, documented format that others use.</li>
+  <li>Are machine readable which means you can use them in scripts and algorithms.</li>
+</ul>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Note:</strong> When you find metadata for a dataset
+that you are working with, <strong>DOWNLOAD AND SAVE IT</strong> immediately to the directory
+on your computer where you saved the data. It is also a good idea to document
+the URL where you found the metadata and the data in a “readme” text file that
+is also stored with the data!</p>
+
+<h2 id="embedded-metadata---geotiff">Embedded Metadata - GeoTIFF</h2>
+
+<p>If we want to automate workflows, it’s ideal for key metadata required to
+process our data to be embedded directly in our data files. The <strong>GeoTIFF</strong>
+(<code class="highlighter-rouge">fileName.tif</code>) is one common spatio-temporal format that can store
+<strong>metadata</strong> directly in the <code class="highlighter-rouge">.tif</code> file itself.</p>
+
+<h3 id="what-is-a-geotiff">What is a GeoTIFF??</h3>
+
+<p>A <strong>GeoTIFF</strong> file stores metadata or attributes about the file as embedded
+<code class="highlighter-rouge">tif tags</code>. A GeoTIFF is a standard <code class="highlighter-rouge">.tif</code> image format with additional spatial
+(georeferencing) information embedded in the file as tags. These tags can
+include the following raster metadata:</p>
+
+<ol>
+  <li>A Coordinate Reference System (<code class="highlighter-rouge">crs()</code>)</li>
+  <li>Spatial Extent (<code class="highlighter-rouge">extent()</code>)</li>
+  <li>Values for when no data is provided (NoData Value)</li>
+  <li>The resolution of the data</li>
+</ol>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Note:</strong>  Your camera uses embedded tags to store
+information about pictures that you take including the camera make and model,
+and the time the image was taken.</p>
+
+<p>More about the  <code class="highlighter-rouge">.tif</code> format:</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/GeoTIFF" target="_blank"> GeoTIFF on Wikipedia</a></li>
+  <li><a href="https://trac.osgeo.org/geotiff/" target="_blank"> OSGEO TIFF documentation</a></li>
+</ul>
+
+<p>The <code class="highlighter-rouge">raster</code> package in <code class="highlighter-rouge">R</code> allows us to directly access <code class="highlighter-rouge">.tif tags</code>
+programmatically. We can quickly view the spatial <strong>extent</strong>,
+<strong>coordinate reference system</strong> and <strong>resolution</strong> of the data.</p>
+
+<p>NOTE: not all geotiffs contain tif tags!</p>
+
+<p>Next, let’s explore the metadata associated with  a <strong>Digital Surface Model</strong> created
+using LiDAR data for the NEON Harvard Forest field site.</p>
+
+<p>The code below provides an example of how we can access spatial metadata
+in <code class="highlighter-rouge">R</code>. We cover this in more detail, in the
+<a href="http://www.neondataskills.org/R/Introduction-to-Raster-Data-In-R"><em>Intro to Raster Data in R</em> tutorial</a>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># load libraries</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rgdal</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># read in a GeoTIFF raster file (.tif) using the raster() function</span><span class="w">
+</span><span class="n">DSM_HARV</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">raster</span><span class="p">(</span><span class="s2">"data/NEON-DS-Airborne-Remote-Sensing/HARV/DSM/HARV_dsmCrop.tif"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># view Coordinate Reference System (note, this often contains horizontal units!)</span><span class="w">
+</span><span class="n">crs</span><span class="p">(</span><span class="n">DSM_HARV</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CRS arguments:
+ +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84
++towgs84=0,0,0 
+</code></pre></div></div>
+
+<h3 id="spatial-classes-in-r">Spatial Classes in R</h3>
+
+<p>There are specific classes designed to store some of the spatial metadata
+associated with spatial data in R. Let’s have a look.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># assign crs to an object (class) to use for reprojection and other tasks</span><span class="w">
+</span><span class="n">myCRS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">crs</span><span class="p">(</span><span class="n">DSM_HARV</span><span class="p">)</span><span class="w">
+</span><span class="n">myCRS</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CRS arguments:
+ +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84
++towgs84=0,0,0 
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># what class is the new CRS object?</span><span class="w">
+</span><span class="nf">class</span><span class="p">(</span><span class="n">myCRS</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1] "CRS"
+attr(,"package")
+[1] "sp"
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view spatial extent</span><span class="w">
+</span><span class="n">extent</span><span class="p">(</span><span class="n">DSM_HARV</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class       : Extent 
+xmin        : 731453 
+xmax        : 733150 
+ymin        : 4712471 
+ymax        : 4713838 
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view spatial resolution</span><span class="w">
+</span><span class="n">res</span><span class="p">(</span><span class="n">DSM_HARV</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1] 1 1
+</code></pre></div></div>
+
+<p>The spatial <code class="highlighter-rouge">extent()</code> is a class as well. Let’s have a look.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view object extent</span><span class="w">
+</span><span class="n">myExtent</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">extent</span><span class="p">(</span><span class="n">DSM_HARV</span><span class="p">)</span><span class="w">
+</span><span class="n">myExtent</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class       : Extent 
+xmin        : 731453 
+xmax        : 733150 
+ymin        : 4712471 
+ymax        : 4713838 
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">class</span><span class="p">(</span><span class="n">myExtent</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1] "Extent"
+attr(,"package")
+[1] "raster"
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># print object name to return object metadata &amp; attribute data</span><span class="w">
+
+</span><span class="n">DSM_HARV</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class       : RasterLayer 
+dimensions  : 1367, 1697, 2319799  (nrow, ncol, ncell)
+resolution  : 1, 1  (x, y)
+extent      : 731453, 733150, 4712471, 4713838  (xmin, xmax, ymin, ymax)
+coord. ref. : +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 
+data source : /home/travis/build/datacarpentry/r-spatial-data-management-intro/_episodes_rmd/data/NEON-DS-Airborne-Remote-Sensing/HARV/DSM/HARV_dsmCrop.tif 
+names       : HARV_dsmCrop 
+values      : 305.07, 416.07  (min, max)
+</code></pre></div></div>
+
+<p>We can use embedded metadata to programmatically perform processing tasks
+on our data including reprojections, cropping and more.</p>
+
+<div id="challenge">
+  <h2 id="challenge---explore-geotiff-metadata">Challenge - Explore GeoTiff Metadata</h2>
+
+  <p>Open the file <code class="highlighter-rouge">NEON-DS-Airborne-Remote-Sensing/HARV/CHM/HARV_chmCrop.tif</code>. This
+file is a Canopy Height Model (CHM) for the Harvard Forest Field site.</p>
+
+  <ol>
+    <li>Create an <strong>extent</strong> and a <strong>crs</strong> object from the file.</li>
+    <li>Is the extent and CRS of the CHM different from the extent and CRS of the DSM
+that we just opened above?</li>
+    <li>Now, open the file <code class="highlighter-rouge">NEON-DS-Landsat-NDVI/HARV/2011/ndvi/005_HARV_ndvi_crop.tif</code>.
+Compare the extent and crs to the CHM and DSM. Are they different?</li>
+  </ol>
+
+</div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CRS arguments:
+ +proj=utm +zone=18 +datum=WGS84 +units=m +no_defs +ellps=WGS84
++towgs84=0,0,0 
+</code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class       : Extent 
+xmin        : 731453 
+xmax        : 733150 
+ymin        : 4712471 
+ymax        : 4713838 
+</code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in .rasterObjectFromFile(x, band = band, objecttype = "RasterLayer", : Cannot create a RasterLayer object from this file. (file does not exist)
+</code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in crs(ndvi1.HARV): object 'ndvi1.HARV' not found
+</code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in extent(ndvi1.HARV): object 'ndvi1.HARV' not found
+</code></pre></div></div>
+
+<p>It appears as if there are some differences between the objects <strong>extent</strong> and
+<strong>crs</strong>. What does this mean for us as we work with these data in the coming
+tutorials? HINT: we will find out!</p>
+
+<p>We will work with embedded metadata in both the
+<a href="http://www.neondataskills.org/tutorial-series/vector-data-series/"><em>Introduction to Working With Vector Data in R</em></a>
+and
+<a href="http://www.neondataskills.org/tutorial-series/raster-data-series/"><em>Introduction to Working With Raster Data in R</em></a>
+series!</p>
+
+<h2 id="embedded-metadata---hierarchical-data-formats-hdf5">Embedded Metadata - Hierarchical Data Formats (HDF5)</h2>
+
+<p>HDF5 is another file type that supports embedded metadata format. Check out the
+<a href="http://www.neondataskills.org/tutorial-series/intro-hdf5-r-series/">NEON Data Skills HDF5 tutorials</a><br />
+to learn more about how HDF5 stores metadata.</p>
+
+<h2 id="structured-metadata---eml">Structured Metadata - EML</h2>
+
+<p>The Ecological Metadata Language (EML) is a data specification developed
+specifically to document ecological data. An EML file is created using a <strong>XML-
+based format</strong>.</p>
+
+<p>This means that content is embedded within hierarchical tags. For example
+the title of a dataset might be embedded in a <code class="highlighter-rouge">&lt;title&gt;</code> tag as follows:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;title&gt;Fisher Meteorological Station at Harvard Forest since 2001&lt;/title&gt;
+</code></pre></div></div>
+
+<p>Similarly, the creator of a dataset is also be found in a hierarchical tag
+structure.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;creator&gt;
+  &lt;individualName&gt;
+    &lt;givenName&gt;Emery&lt;/givenName&gt;
+    &lt;surName&gt;Boose&lt;/surName&gt;
+  &lt;/individualName&gt;
+&lt;/creator&gt;
+</code></pre></div></div>
+
+<h2 id="eml-terminology">EML Terminology</h2>
+
+<p>Let’s first discuss some basic <strong>EML</strong> terminology. In the
+context of EML, a file documents a <strong>dataset</strong>. This dataset may consist of one
+or more files that are documented in the EML document. In the case of our
+tabular meteorology data, the structure of our EML file includes:</p>
+
+<ol>
+  <li>The <strong>dataset</strong>: A dataset may contain one or more data tables associated
+with it that may contain different types of related information. This
+Harvard meteorological dataset contains data tables with the measurements
+collected at the tower.</li>
+  <li>The <strong>data tables</strong>: Data tables refer to the actual data that make up the
+dataset. For the Harvard dataset, each data table contains a suite of
+meteorological metrics including precipitation and temperature (and associated
+quality flags) that are aggregated at a particular time interval (e.g. one data
+table contains monthly average data, another contains 15 minute averaged data,
+etc)</li>
+</ol>
+
+<h2 id="work-with-eml-in-r">Work With EML in R</h2>
+
+<p>The <code class="highlighter-rouge">EML</code> package for <code class="highlighter-rouge">R</code> is designed to open, read and create EML formatted
+metadata. In this tutorial, we will demonstrate how we can use EML
+structured metadata in an automated workflow.</p>
+
+<p>NOTE: To save time, we will not explicitly teach the <code class="highlighter-rouge">EML</code> package given it is
+still being developed. But we will provide an example of how you can access
+EML metadata programmatically using the <code class="highlighter-rouge">EML</code> package.</p>
+
+<p>To begin, we will load the <code class="highlighter-rouge">EML</code> package directly from
+<a href="https://github.com/ropensci" target="_blank">ropensci’s Git repository </a>.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># install R EML tools</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="s2">"devtools"</span><span class="p">)</span><span class="w">
+</span><span class="n">install_github</span><span class="p">(</span><span class="s2">"ropensci/EML"</span><span class="p">,</span><span class="w"> </span><span class="n">build</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">dependencies</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"DEPENDS"</span><span class="p">,</span><span class="w"> </span><span class="s2">"IMPORTS"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Using GitHub PAT from envvar GITHUB_PAT
+</code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Downloading GitHub repo ropensci/EML@master
+from URL https://api.github.com/repos/ropensci/EML/zipball/master
+</code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Installing EML
+</code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'/home/travis/R-bin/lib/R/bin/R' --no-site-file --no-environ --no-save  \
+  --no-restore --quiet CMD INSTALL  \
+  '/tmp/RtmpoGfG4a/devtools41cf2a102e6f/ropensci-EML-679c126'  \
+  --library='/home/travis/R/Library' --install-tests 
+</code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># load ROpenSci EML package</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="s2">"EML"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># load ggmap for mapping</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggmap</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Loading required package: ggplot2
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># EML / data location</span><span class="w">
+</span><span class="c1"># http://harvardforest.fas.harvard.edu:8080/exist/apps/datasets/showData.html?id=hf001</span><span class="w">
+</span><span class="c1"># table 4 http://harvardforest.fas.harvard.edu/data/p00/hf001/hf001-04-monthly-m.csv</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Next, we will read in the Harvard Forest LTER <code class="highlighter-rouge">EML</code> file directly from the
+online URL using the <code class="highlighter-rouge">read_eml()</code> function. This file describes multiple data
+products that are available for downloaded on the
+<a href="http://harvardforest.fas.harvard.edu:8080/exist/apps/datasets/showData.html?id=hf001" target="_blank"> Harvard Forest Data Archive Page for Fisher Meteorological Station.</a></p>
+
+<p>Note that because this EML file is large, it takes quite a few seconds for the file to
+load.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># import EML from Harvard Forest Met Data</span><span class="w">
+
+</span><span class="c1"># note: the original xml file is below commented out</span><span class="w">
+</span><span class="c1"># eml_HARV &lt;- read_eml("http://harvardforest.fas.harvard.edu/data/eml/hf001.xml")</span><span class="w">
+</span><span class="c1"># import a truncated version of the eml file for quicker demonstration</span><span class="w">
+</span><span class="n">eml_HARV</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_eml</span><span class="p">(</span><span class="s2">"http://neon-workwithdata.github.io/NEON-R-Spatio-Temporal-Data-and-Management-Intro/hf001-revised.xml"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in open.connection(x, "rb"): HTTP error 404.
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view size of object</span><span class="w">
+</span><span class="n">object.size</span><span class="p">(</span><span class="n">eml_HARV</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in structure(.Call(C_objectSize, x), class = "object_size"): object 'eml_HARV' not found
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view the object class</span><span class="w">
+</span><span class="nf">class</span><span class="p">(</span><span class="n">eml_HARV</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">read_eml()</code> function creates an <code class="highlighter-rouge">EML</code> class object. This object can be
+accessed using <code class="highlighter-rouge">slots</code> in <code class="highlighter-rouge">R</code> (<code class="highlighter-rouge">@</code>) rather than a typical subset <code class="highlighter-rouge">[ ]</code> approach.</p>
+
+<h2 id="explore-metadata-attributes">Explore Metadata Attributes</h2>
+
+<p>We can begin to explore the contents of our EML file and associated data that it
+describes. Let’s start at the <strong>dataset</strong> level. We can use <code class="highlighter-rouge">slots</code> to view
+the contact information for the dataset and a description of the methods.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view the contact name listed in the file</span><span class="w">
+
+</span><span class="n">eml_HARV</span><span class="o">@</span><span class="n">dataset</span><span class="o">@</span><span class="n">creator</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># view information about the methods used to collect the data as described in EML</span><span class="w">
+</span><span class="n">eml_HARV</span><span class="o">@</span><span class="n">dataset</span><span class="o">@</span><span class="n">methods</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+</code></pre></div></div>
+
+<h2 id="identify--map-data-location">Identify &amp; Map Data Location</h2>
+
+<p>Looking at the coverage for our data, there is only one unique x and y value.
+This suggests that our data were collected at one point (x, y) location. We
+know this is data from a tower so a point location makes sense. Let’s grab the
+x and y coordinates and create a quick context map. We will use <code class="highlighter-rouge">ggmap</code> to create our map.</p>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Note:</strong>  If this were a rectangular extent
+(e.g. from a raster, line or polygon object) we’d want the bounding box, not
+just a point within the extent. We need the extent to properly geolocate and
+process the data.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># grab x coordinate from the coverage information</span><span class="w">
+</span><span class="n">XCoord</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">eml_HARV</span><span class="o">@</span><span class="n">dataset</span><span class="o">@</span><span class="n">coverage</span><span class="o">@</span><span class="n">geographicCoverage</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span><span class="o">@</span><span class="n">boundingCoordinates</span><span class="o">@</span><span class="n">westBoundingCoordinate</span><span class="o">@</span><span class="n">.Data</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># grab y coordinate from the coverage information</span><span class="w">
+</span><span class="n">YCoord</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">eml_HARV</span><span class="o">@</span><span class="n">dataset</span><span class="o">@</span><span class="n">coverage</span><span class="o">@</span><span class="n">geographicCoverage</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span><span class="o">@</span><span class="n">boundingCoordinates</span><span class="o">@</span><span class="n">northBoundingCoordinate</span><span class="o">@</span><span class="n">.Data</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in eval(expr, envir, enclos): object 'eml_HARV' not found
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># map &lt;- get_map(location='Harvard', maptype="terrain")</span><span class="w">
+
+</span><span class="c1"># plot the NW corner of the site.</span><span class="w">
+</span><span class="n">map</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">get_map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s1">'massachusetts'</span><span class="p">,</span><span class="w"> </span><span class="n">maptype</span><span class="o">=</span><span class="s2">"toner"</span><span class="p">,</span><span class="w"> </span><span class="n">zoom</span><span class="o">=</span><span class="m">8</span><span class="p">)</span><span class="w">
+
+</span><span class="n">ggmap</span><span class="p">(</span><span class="n">map</span><span class="p">,</span><span class="w"> </span><span class="n">extent</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">XCoord</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">YCoord</span><span class="p">)),</span><span class="w">
+             </span><span class="n">color</span><span class="o">=</span><span class="s2">"darkred"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">pch</span><span class="o">=</span><span class="m">18</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in FUN(X[[i]], ...): object 'XCoord' not found
+</code></pre></div></div>
+
+<p><img src="../fig/rmd-03-map-location-1.png" title="plot of chunk map-location" alt="plot of chunk map-location" style="display: block; margin: auto;" /></p>
+
+<p>The above example demonstrates how we can extract information from an <strong>EML</strong>
+document and use it programmatically in <code class="highlighter-rouge">R</code>! This is just the beginning of what
+we can do!</p>
+
+<ul>
+  <li>Learn More:<a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf" target="_blank"> A nice cheatsheet for GGMAP created by NCEAS</a></li>
+</ul>
+
+<h2 id="unstructured-metadata---web-pages--text-files">Unstructured Metadata - Web pages &amp; Text Files</h2>
+
+<p>Some metadata are stored in a less or non-structured format such as a web page
+or a text file.</p>
+
+<p>Let’s visit the
+<a href="http://harvardforest.fas.harvard.edu:8080/exist/apps/datasets/showData.html?id=hf001" target="_blank"> Harvard Forest Fisher Tower webpage</a>
+to explore some unstructured metadata.</p>
+
+<p>Visiting this page, we see a list of data files available for Harvard Forest
+that can be downloaded directly. Hovering over the files with our mouse, we can
+see that these are .csv tabular text files.</p>
+
+<p>Scroll down to the <strong>Overview</strong> section. Here we start to see information that
+can be considered metadata about the data available for download.</p>
+
+<div id="challenge">
+
+  <h2 id="challenge---explore-unstructured-metadata">Challenge - Explore Unstructured Metadata</h2>
+
+  <p>Explore the metadata stored on the Harvard Forest LTER web page. Answer the
+following questions.</p>
+
+  <ol>
+    <li>What is the time span of the data available for this site?</li>
+    <li>You have some questions about these data. Who is the lead investigator / who
+do you contact for more information? And how do you contact them?</li>
+    <li>Where is this field site located? How is the site location information stored
+in the metadata? Is there any information that may be useful to you viewing the
+location? (HINT: what if you were not familiar with Harvard as a site or are
+from another country, etc?)</li>
+    <li>Field Site Information: What is the elevation for the site? What is the
+dominant vegetation cover for the site? HINT: Is dominant vegetation easy to
+find in the metadata?</li>
+    <li>How is snow dealt with in the precipitation data?</li>
+    <li>Are there some metadata attributes that might be useful to access in a script
+in <code class="highlighter-rouge">R</code> or <code class="highlighter-rouge">Python</code> rather than viewed on a web page?</li>
+  </ol>
+
+  <p>HINT: Can you answer all of the questions above from the information provided
+on this website? Is there information that you might prefer to find on that page?</p>
+</div>
+
+<p>NOTE: This data and metadata are used in the
+<a href="http://www.neondataskills.org/tutorial-series/tabular-time-series/"><em>Introduction to Working With Time Series Data in Text Formats in R</em> series</a>.</p>
+
+<h2 id="unstructured-vs-structured-metadata">Unstructured vs. Structured Metadata</h2>
+
+<p>Metadata are particularly important when we are working with data that we did
+not collect ourselves. When you download, or gain access to data from a
+colleague, or other data provider, be sure to first find and review the
+metadata. Then, if the data is in a seperate file (e.g., structured or
+unstructured metadata) make sure you save the metadata in a directory that is
+closely associated with wherever you save the data itself!</p>
+
+<h2 id="create-metadata-for-your-data">Create Metadata For Your Data</h2>
+
+<p>When you are creating data that you want to share with others, it is critical
+to create your own metadata. While this is beyond the scope of this tutorial,
+There are many resources available to support metadata documentation including:</p>
+
+<ul>
+  <li><a href="https://knb.ecoinformatics.org/#tools/morpho" target="_blank"> <strong>Morpho</strong></a>:
+an open-source program that can be used to enter metadataa to be stored in a
+file that conforms to the Ecological Metadata Language (EML) specifications.</li>
+</ul>
+
+<blockquote class="challenge">
+  <h2 id="find--explore-metadata">Find &amp; Explore Metadata</h2>
+
+  <p>Refer back to the list of possible data sources at the end of
+<a href="/R/spatio-temporal-research-questions#resources-for-locating-spatial-and-ecological-data"><em>Answer a Spatio-temporal Research Question with Data: Where to Start?</em></a>.
+Choose a site that is relevant to your interests and then find a dataset. For
+this data set find the metadata and answer the following questions:</p>
+
+  <ol>
+    <li>What format are the metadata in?</li>
+    <li>What metric is collected? Does it have units? If so, what?</li>
+    <li>Who collected the data? Using what type of instruments?</li>
+  </ol>
+</blockquote>
+
+<h2 id="atbd-vs-metadata">ATBD vs Metadata</h2>
+
+<p>An Algorithm Theoretical Basis Document (ATBD) is a document which describes the
+collection and processing methods associated with a data product. While these
+documents are beyond the scope of this tutorial, it is important to note that
+often important information about your data may be documented in documents
+such as ATBDs.</p>
+
+<ul>
+  <li><a href="http://data.neonscience.org/documents" target="_blank">NEON</a>
+provides ATBDs for all of it’s data products.</li>
+</ul>
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>TBD</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../02-spatial-data-formats/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../04-intro-CRS-projection/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-6" align="left">
+      <h4>
+	Copyright &copy; 2016–2018
+	
+	<a href="http://datacarpentry.org">Data Carpentry</a>
+	
+      </h4>
+    </div>
+    <div class="col-md-6" align="right">
+      <h4>
+	
+	
+	<a href="/edit/gh-pages/_episodes_rmd/03-metadata-formats-and-files.Rmd">Edit on GitHub</a>
+	
+	
+	/
+	<a href="/blob/gh-pages/CONTRIBUTING.md">Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob/gh-pages/CITATION">Cite</a>
+	/
+	<a href="mailto:lessons@software-carpentry.org">Contact</a>
+      </h4>
+    </div>
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

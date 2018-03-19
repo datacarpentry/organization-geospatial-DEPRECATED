@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-03-19 21:57:08 +0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon-dc.ico" />
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>Introduction to Spatio-Temporal Data: The Spatial Data Landscape</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="../conduct/">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="../setup.html">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../00-spatio-temporal-science-questions/">Answer a Spatio-temporal Research Question with Data - Where to Start?</a></li>
+            
+            <li><a href="../01-spatial-data-landscape/">The Spatial Data Landscape</a></li>
+            
+            <li><a href="../02-spatial-data-formats/">Spatial Data Formats -- Intro to Shapefiles (Vector Data) and GeoTIFFs (Raster Data)</a></li>
+            
+            <li><a href="../03-metadata-formats-and-files/">Data About Data -- Intro to Metadata File Formats and Structure</a></li>
+            
+            <li><a href="../04-intro-CRS-projection/">Intro to Coordinate Reference Systems & Spatial Projections</a></li>
+            
+            <li><a href="../05-geographic-vs-projected-CRS/">Introduction to the UTM Projected CRS and a Brief overview of datums</a></li>
+            
+            <li><a href="../06-CRS-formats-proj4-EPSG/">A Quick Overview of CRS Formats - Proj4 & EPSG - in R</a></li>
+            
+            <li><a href="../07-spatial-resolution-extent/">Intro to Spatial Metadata -- Spatial Resolution and Spatial Extent</a></li>
+            
+            <li><a href="../08-clean-data-bad-and-missing-values/">Cleaning Data -- Missing and Bad Data Values</a></li>
+            
+            <li><a href="../09-set-r-work-environment/">R Packages for Spatial-temporal Data -- Setting Up Your Working Environment</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../reference.html">Reference</a></li>
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="../LICENSE.md">License</a></li>
+	
+	
+	<li><a href="/edit/gh-pages/_episodes_rmd/01-spatial-data-landscape.Rmd">Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../00-spatio-temporal-science-questions/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">Introduction to Spatio-Temporal Data</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../02-spatial-data-formats/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">The Spatial Data Landscape</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br/>
+      <strong>Exercises:</strong> 30 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<p>This tutorial introduces the spatial data tool landscape. It
+covers the types of gui and non-gui tools that are available. The tutorial
+explores the benefits (and challenges) of using a non-gui (coding) approach to
+method development that supports clear documentation of methods.</p>
+
+<p><strong>R Skill Level:</strong> None. This tutorial is in a series with data skills
+intensive tutorials in the <code class="highlighter-rouge">R</code> programming language, however, the conceptual
+topics presented here relate to all programming languages!</p>
+
+<h1 id="goals--objectives">Goals / Objectives</h1>
+
+<p>After completing this activity, you will:</p>
+
+<ul>
+  <li>Be aware of the wide variety of tools available to work with spatial data.</li>
+</ul>
+
+<h3 id="additional-resources">Additional Resources</h3>
+
+<p>For a list of tools to work with spatial data, visit:</p>
+
+<ul>
+  <li>
+    <p><a href="http://en.wikipedia.org/wiki/List_of_geographic_information_systems_software">Wikipedia’s GIS software list</a></p>
+  </li>
+  <li>
+    <p><a href="http://en.wikipedia.org/wiki/List_of_spatial_analysis_software">Wikipedia’s spatial analysis software list</a></p>
+  </li>
+</ul>
+
+<p>&lt;/div&gt;</p>
+
+<h2 id="this-lesson-overviews-graphic-user-interface-gui-vs-non-gui-tools-interactive-vs-non-interactive">This lesson overviews graphic user interface (GUI) vs Non-GUI tools, interactive vs non-interactive</h2>
+<p>(nice graphic could go a long way here)</p>
+
+<h2 id="gui">GUI</h2>
+
+<p>Many GIS platforms were developed with end users working with graphical data (maps!).</p>
+
+<p>As spatial data analyses became more common, tools that were initially developed for use on the command line interface (CLI) were added to the GUI platforms.</p>
+
+<p>Working in code has several benefits over simple point and click tasks: (1) it is more reproducable, (2) batch processsing of mulitiple files from separate data sources can be scripted.</p>
+
+<h3 id="licensed-software">Licensed Software:</h3>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/Esri_logo.svg/1280px-Esri_logo.svg.png" height="100" /></p>
+
+<p><a href="https://www.esri.com/en-us/home">ESRI (Environmental Systems Research Institute)</a> is an international supplier of geographic information system (GIS) software, web GIS and geodatabase management applications.</p>
+
+<p>ESRI provides several licenced platforms for performing GIS, including <a href="https://www.arcgis.com/home/index.html">ArcGIS</a>, <a href="http://www.esri.com/software/arcgis/arcgisonline">ArcGIS Online</a>, and <a href="http://server.arcgis.com/en/portal/">Portal for ArcGIS</a> a stand alone version of ArGIS Online which you host.</p>
+
+<p>ESRI welcomes development on their platforms throug their <a href="https://developers.arcgis.com/">DevLabs</a>.</p>
+
+<p>ArcGIS software can be installed using <a href="https://github.com/Esri/arcgis-cookbook">Chef Cookbooks from Github</a>.</p>
+
+<p><img src="https://download.hexagongeospatial.com/-/media/Images/Hexagon/Hexagon%20Core/Geospatial/hexagon-geospatial/Hexagon_Geospatial_RGB_Standard.ashx?h=117&amp;la=en&amp;w=379&amp;hash=D3CFE8BCA386DA709B87386774847DE0862065DA" height="100" /></p>
+
+<p><a href="https://www.hexagongeospatial.com/products/power-portfolio">Hexagon Geospatial Power Portfolio</a> includes many geospatial tools including ERDAS Imagine, a powerful remotely sensed image processing platform.</p>
+
+<h3 id="free-and-open-source-software">Free and Open Source Software:</h3>
+
+<p><img src="http://www.osgeo.org/sites/osgeo.org/files/osgeo_logo.png" height="100" /></p>
+
+<p>The <a href="http://www.osgeo.org/">Open Source Geospatial Foundation (OSGEO)</a> supports several actively managed GIS platforms:</p>
+
+<p><img src="https://qgisblog.files.wordpress.com/2016/12/qgis-logo_anita02.png" height="100" /></p>
+
+<p><a href="https://www.qgis.org/en/site/">Quantum GIS</a> QGIS is a professional GIS application that is built on top of and proud to be itself Free and Open Source Software (FOSS). QGIS is written in Python, but has several interfaces written in R including <a href="https://cran.r-project.org/web/packages/RQGIS/index.html">RQGIS</a></p>
+
+<p><img src="https://grass.osgeo.org/uploads/images/logo_variant_nobg.png" height="100" /></p>
+
+<p><a href="https://grass.osgeo.org/">GRASS GIS</a>, commonly referred to as GRASS (Geographic Resources Analysis Support System), is a FOSS-GIS software suite used for geospatial data management and analysis, image processing, graphics and maps production, spatial modeling, and visualization. GRASS GIS is currently used in academic and commercial settings around the world, as well as by many governmental agencies and environmental consulting companies. It is a founding member of the Open Source Geospatial Foundation (OSGeo).</p>
+
+<p><img src="http://gisgeography.com/wp-content/uploads/2016/01/saga-gis-logo.png" height="100" /></p>
+
+<p><a href="http://www.saga-gis.org/en/index.html">SAGA-GIS</a>, or System for Automated Geoscientific Analyses,  is a FOSS developed by a small team of researchers from the Dept. of Physical Geography, Göttingen, and the Dept. of Physical Geography, Hamburg.</p>
+
+<p>SAGA has been designed for an easy and effective implementation of spatial algorithms, offers a comprehensive, growing set of geoscientific methods, provides an easily approachable user interface with many visualisation options, and runs under Windows and Linux operating systems.</p>
+
+<h2 id="online-gui">Online GUI</h2>
+
+<p><img src="https://earthengine.google.com/static/images/GoogleEarthEngine_Grey_108.png" height="100" /></p>
+
+<p>Google has created <a href="https://earthengine.google.com/">Google Earth Engine</a> which combines a multi-petabyte catalog of satellite imagery and geospatial datasets with planetary-scale analysis capabilities and makes it available for scientists, researchers, and developers to detect changes, map trends, and quantify differences on the Earth’s surface.</p>
+
+<p><a href="https://developers.google.com/earth-engine/">Earth Engine API</a> runs in both Python and JavaScript.</p>
+
+<p><img src="https://wp.stolaf.edu/it/files/2017/02/ArcGISOnlineLogoT.png" height="75" /></p>
+
+<p><a href="http://www.arcgis.com/features/features.html">ArcGIS Online</a> provides access to thousands of maps and base layers.</p>
+
+<h2 id="non-gui-tools">Non Gui Tools</h2>
+
+<p>Benefits: Reproducible workflows, more easily documented (inline comments, etc)</p>
+
+<h3 id="r">R</h3>
+
+<p><img src="https://www.r-project.org/logo/Rlogo.svg" height="100" /></p>
+
+<h3 id="python">Python</h3>
+
+<p><img src="http://www.thenewgeo.com/IMG/course-icons-2/arcpy.png" height="100" /></p>
+
+<p>ESRI supports their own Python package called <a href="http://pro.arcgis.com/en/pro-app/arcpy/get-started/what-is-arcpy-.htm">ArcPy</a> which requires a licences to ArcGIS or Portal be installed on the computer.</p>
+
+<p>QGIS has a packaged <a href="https://docs.qgis.org/2.18/en/docs/pyqgis_developer_cookbook/intro.html">PyQGIS</a> which can be used from the QGIS Console.</p>
+
+<p><a href="https://grasswiki.osgeo.org/wiki/GRASS_and_Python">GRASS and Python</a> can be used together in the GRASS GUI, as well as through the <a href="https://grasswiki.osgeo.org/wiki/GRASS_Python_Scripting_Library">GRASS API</a>.</p>
+
+<h3 id="matlab">Matlab</h3>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Matlab_Logo.png" height="100" /></p>
+
+<h3 id="idl">IDL</h3>
+
+<p><img src="https://jeodijital.com/wp-content/uploads/2017/03/ENVI_Icon_ColorLogo_web.png" height="100" /></p>
+
+<h3 id="gdal">GDAL</h3>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/GDALLogoColor.svg/1200px-GDALLogoColor.svg.png" height="100" /></p>
+
+<p><a href="http://www.gdal.org/">GDAL (Geospatial Data Abstraction Library)</a> a translator library for raster and vector geospatial data formats that is released under an X/MIT style Open Source license by the Open Source Geospatial Foundation. As a library, it presents a single raster abstract data model and single vector abstract data model to the calling application for all supported formats. It also comes with a variety of useful command line utilities for data translation and processing.</p>
+
+<h3 id="pdal">PDAL</h3>
+
+<p><img src="https://www.pdal.io/_images/pdal_logo.png" height="100" /></p>
+
+<p><a href="https://www.pdal.io/">PDAL (Point Cloud Data Abstraction Library)</a> is a C++ BSD library for translating and manipulating point cloud data. It is very much like the GDAL library which handles raster and vector data.</p>
+
+<h2 id="commonly-found-spatial-data-formats">Commonly found spatial data formats</h2>
+
+<p>essentially one line about this with a link to the spatial data formats page.</p>
+
+<h3 id="shapefiles-shp-dbf-etc---group-of-files-">Shapefiles (.shp, dbf, etc - group of files )</h3>
+
+<h3 id="geodatabases-gdb-">Geodatabases (.gdb, ??)</h3>
+
+<h3 id="csvs-csv">Csv’s (.csv)</h3>
+
+<h3 id="text-files-rasters-asc--essentially-one-line-about-this-with-a-link-to-the-spatial-data-formats-page">text files: rasters (.asc) – essentially one line about this with a link to the spatial data formats page.</h3>
+
+<h3 id="point-clouds-las-laz-xyz-bin-ply">Point Clouds (.las, .laz, .xyz, .bin, .ply)</h3>
+
+<h3 id="online-geojson">Online: geojson,</h3>
+
+<h2 id="packages-specific-to-r---with-link-to-the-setting-up-your-work-environment-page">Packages specific to R - with link to the setting up your work environment page</h2>
+
+<h3 id="raster">Raster</h3>
+
+<h3 id="rgdal">RGDAL</h3>
+
+<h3 id="rastervis">RasterVis</h3>
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>TBD</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../00-spatio-temporal-science-questions/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../02-spatial-data-formats/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-6" align="left">
+      <h4>
+	Copyright &copy; 2016–2018
+	
+	<a href="http://datacarpentry.org">Data Carpentry</a>
+	
+      </h4>
+    </div>
+    <div class="col-md-6" align="right">
+      <h4>
+	
+	
+	<a href="/edit/gh-pages/_episodes_rmd/01-spatial-data-landscape.Rmd">Edit on GitHub</a>
+	
+	
+	/
+	<a href="/blob/gh-pages/CONTRIBUTING.md">Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob/gh-pages/CITATION">Cite</a>
+	/
+	<a href="mailto:lessons@software-carpentry.org">Contact</a>
+      </h4>
+    </div>
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

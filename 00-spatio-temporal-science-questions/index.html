@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-03-19 21:57:08 +0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon-dc.ico" />
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>Introduction to Spatio-Temporal Data: Answer a Spatio-temporal Research Question with Data - Where to Start?</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="../conduct/">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="../setup.html">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../00-spatio-temporal-science-questions/">Answer a Spatio-temporal Research Question with Data - Where to Start?</a></li>
+            
+            <li><a href="../01-spatial-data-landscape/">The Spatial Data Landscape</a></li>
+            
+            <li><a href="../02-spatial-data-formats/">Spatial Data Formats -- Intro to Shapefiles (Vector Data) and GeoTIFFs (Raster Data)</a></li>
+            
+            <li><a href="../03-metadata-formats-and-files/">Data About Data -- Intro to Metadata File Formats and Structure</a></li>
+            
+            <li><a href="../04-intro-CRS-projection/">Intro to Coordinate Reference Systems & Spatial Projections</a></li>
+            
+            <li><a href="../05-geographic-vs-projected-CRS/">Introduction to the UTM Projected CRS and a Brief overview of datums</a></li>
+            
+            <li><a href="../06-CRS-formats-proj4-EPSG/">A Quick Overview of CRS Formats - Proj4 & EPSG - in R</a></li>
+            
+            <li><a href="../07-spatial-resolution-extent/">Intro to Spatial Metadata -- Spatial Resolution and Spatial Extent</a></li>
+            
+            <li><a href="../08-clean-data-bad-and-missing-values/">Cleaning Data -- Missing and Bad Data Values</a></li>
+            
+            <li><a href="../09-set-r-work-environment/">R Packages for Spatial-temporal Data -- Setting Up Your Working Environment</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../reference.html">Reference</a></li>
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="../LICENSE.md">License</a></li>
+	
+	
+	<li><a href="/edit/gh-pages/_episodes_rmd/00-spatio-temporal-science-questions.Rmd">Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span><span class="sr-only">lesson home</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">Introduction to Spatio-Temporal Data</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../01-spatial-data-landscape/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Answer a Spatio-temporal Research Question with Data - Where to Start?</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br/>
+      <strong>Exercises:</strong> 30 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<p>This tutorial provides an overview of finding spatial data to support your
+research question. It covers some of the key data sources, providers and
+places that you can look to find data for your study are / research question.</p>
+
+<p><strong>Skill Level:</strong> This tutorial provides conceptual background for the NEON / Data Carpentry
+spatio-temporal tutorial series. The concepts outlined in this tutorial, relate to many other
+programming languages and data types!</p>
+
+<h1 id="goals--objectives">Goals / Objectives</h1>
+
+<p>After completing this activity, you will:</p>
+
+<ul>
+  <li>Understand the general process of identifying types of data we might need to
+answer a spatio-temporal research question.</li>
+  <li>Understand the overall science concept and associated data of the NEON / DC
+<a href="http://neondataskills.org/tutorial-series/neon-dc-phenology-series/">Work with Spatio-temporal Data in R series</a>.</li>
+  <li>Understand that one can work with data from different sites to compare areas.</li>
+</ul>
+
+<figure>
+	<a href="https://xxxx">
+	<img src="https://xxxx" /></a>
+	<figcaption> OVERVIEW GRAPHIC UNDER CONSTRUCTION.
+	The process of answering a research question begins with deciding
+	what data are needed and finding/collecting the metadata needed to understand
+	and work with the data. Once this is decided we can then decide on what tools/
+	program we want to work with to manipulate, visualize, and analyze our data to
+	answer our questions. Source: National Ecological Observatory Network (NEON)  
+	</figcaption>
+</figure>
+
+<h2 id="answer-scientific-questions-using-data">Answer Scientific Questions Using Data</h2>
+
+<p>We often begin a research project with one or more questions that we would like
+to answer. Once we have a question, we identify the:</p>
+
+<ul>
+  <li>Type of data needed to address the question.</li>
+  <li>The spatial coverage required - location that the data should cover &amp; spatial
+extent.</li>
+  <li>The required temporal coverage - time period that the data should span to
+properly address the question.</li>
+</ul>
+
+<p>Once we have identified these things, we can determine what methods are
+needed to collect data needed to answer our question.</p>
+
+<h2 id="work-with-external-data">Work With External Data</h2>
+
+<p>When our question requires data that are small in temporal and/or spatial scale,
+we can often collect the data needed to answer the question ourselves. When we
+ask questions that cover larger spatial (e.g. regions to continents) and
+temporal scales, we often need to use data collected by other labs,
+organizations, and agencies. We refer to these data as <strong>external data</strong> - data
+that we have not collected ourselves.</p>
+
+<h2 id="metadata---data-that-describe-the-data">Metadata - Data That Describe the Data</h2>
+
+<p>When working with external data, we need to understand metadata - the
+documentation associated with a dataset that helps us understand collection and
+processing methods, format and other key information including:</p>
+
+<ol>
+  <li><strong>What methods were used to collect and process the data</strong>
+in order to trust that it will be sufficient to answer our question.</li>
+  <li><strong>In what format &amp; how the data are stored</strong> - what methods were used to
+indicate missing data values and bad data values in order to process the data
+effectively and get accurate analysis results.</li>
+  <li>If the data are explicedly spatial (e.g. GIS-type data), then we need to
+<strong>understand key spatial <em>metadata</em></strong> to properly process and visualize the
+data.</li>
+</ol>
+
+<h2 id="research-question---explore-regional-drivers-and-patterns-of-plant-phenology">Research Question - Explore (Regional) Drivers and Patterns of Plant Phenology</h2>
+
+<p>Our science topic for all of the tutorials in this series is plant phenology.
+Our goal is to:</p>
+
+<ol>
+  <li>Better understand (to quantify) both the timing
+of when plants turn green (green-up) and die back / turn brown (brown-down).</li>
+  <li>To quantify two key drivers of this timing - precipitation and temperature
+and visualize how / if trends observed in precipitation and temperature relate
+to trends observed in greening and browning of vegetation.</li>
+  <li>Additionally, we’d like to understand how / if “1” and “2” above vary at
+different sites.</li>
+</ol>
+
+<p>Our study area includes two National Ecological Observatory Network (NEON) field
+sites in the United States:</p>
+
+<ul>
+  <li><strong>Site One:</strong>
+<a href="http://www.neonscience.org/science-design/field-sites/harvard-forest" target="_blank">Harvard Forest </a>
+located in Massachusetts in the northeastern United States.</li>
+  <li><strong>Site Two:</strong>
+the <a href="http://www.neonscience.org/science-design/field-sites/san-joaquin-experimental-range" target="_blank">San Joaquin Experimental Range </a>
+located in the central region of the US state of California.</li>
+</ul>
+
+<p>Both sites are mapped below:</p>
+
+<p><img src="../fig/rmd-00-Field-Site-Map-1.png" title="plot of chunk Field-Site-Map" alt="plot of chunk Field-Site-Map" style="display: block; margin: auto;" /></p>
+
+<p>These two sites are about 4,900km (3,000 miles) apart! Do we expect to see
+differences in the timing of greening and browning of plants (phenophase timing)
+between the two sites? If there are differences, what is causing them? Do the
+two sites have the same drivers (causes) of phenologic change.</p>
+
+<h3 id="science-goals---spatio-temporal-data-in-r-series">Science Goals - Spatio-temporal Data in R Series</h3>
+
+<p>In the
+<a href="http://neondataskills.org/tutorial-series/neon-dc-phenology-series/">Work with Spatio-temporal Data in R series</a>,
+our goal is to create plots of temperature, precipitation and the patterns of
+phenology - specifically the greening and
+browning of plants - for one year (2011), over two NEON field sites. To
+achieve this goal we need data that:</p>
+
+<ol>
+  <li>Cover the same time periods - temporal data <em>(year=2011)</em>.</li>
+  <li>Are for the same spatial locations <em>(our two field sites)</em>.</li>
+  <li>Are collected using similar methods so they are comparable at our two field
+sites that are located 3,000+ miles apart!</li>
+</ol>
+
+<figure>
+	<a href="/fig/dc-spatio-temporal-intro/NDVI_Plot.png">
+	<img src="/fig/dc-spatio-temporal-intro/NDVI_Plot.png" /></a>
+	<figcaption>
+	An example plot of NDVI (Normalized Difference Vegetative Index). We see when the
+	vegetation is greener (a larger value) throughout a year or a growing season.
+	Source: National Ecological Observatory Network (NEON)  
+	</figcaption>
+</figure>
+
+<div id="challenge">
+  <h2 id="challenge-components-of-a-large-research-question">Challenge: Components of a Large Research Question</h2>
+
+  <p>Consider the following questions:</p>
+
+  <ol>
+    <li>What are some potential sources of data that might be useful to
+address our phenology question?</li>
+    <li>How would you go about finding these data?</li>
+  </ol>
+
+  <p>If you have a colleague nearby, discuss it with them!</p>
+</div>
+
+<h2 id="project-components">Project Components</h2>
+
+<p>One way to tackle our research project, is to break it down into smaller pieces.
+We can  first identify the types of data that we need. We’d like to do the
+following:</p>
+
+<ul>
+  <li><strong>Map / plot phenophase timing at both sites:</strong> We will need data that
+quantify degree of greenness at both sites. Where can we get that and how do we
+process it to plot greenness at both sites?</li>
+  <li><strong>Understand our field sites:</strong> To understand our sites we will need data that
+“map” vegetation cover and show road locations and boundaries. We also might want to create a map of our study
+sites for a future publication.
+    <ul>
+      <li>How large (spatial extent) are the sites?</li>
+      <li>How dense is the vegetation?</li>
+      <li>Where are the field sites located?</li>
+      <li>Are the sites accessible by roads or difficult to get to?</li>
+    </ul>
+  </li>
+  <li><strong>Plots of temperature and precipitation:</strong> Both are drivers of phenophase
+timing. We want to plot each at both sites for the same <em>temporal duration</em> as
+our greenness data.</li>
+</ul>
+
+<h2 id="a-spatio-temporal-approach">A Spatio-Temporal Approach</h2>
+
+<h3 id="find-phenology-data">Find Phenology Data</h3>
+
+<p>Where do we start to find data that quantifies the timing of plant greening and
+browning?</p>
+
+<p>We could go outside and monitor individual plants and write down in field
+notebooks when they turn green and brown. However, in this case, we can’t
+monitor enough plants over a large enough area by ourselves to quantify
+greening and browning of entire forests or grasslands at multiple sites. To
+answer our specific question at a regional scale, we need data that can measure
+these events over larger areas.</p>
+
+<h4 id="phenology-at-different-scales">Phenology at Different Scales</h4>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_4uHLXL1yZA" frameborder="0" allowfullscreen=""></iframe>
+
+<p>One way we can measure phenology over larger areas is to use
+<a href="http://phenology.cr.usgs.gov/index.php" target="_blank">Remote Sensing imagery</a></p>
+<ul>
+  <li>data collected using high fidelity cameras mounted on satelites and airplanes.
+Satellites continuously orbit the earth capturing images of the earth’s surface.</li>
+</ul>
+
+<p>The <a href="http://landsat.usgs.gov/" target="_blank">Landsat sensor</a>,
+captures images of the <em>same area every 16 days</em> which makes it a very powerful
+spatio-temporal data source. Because the data are collected from
+space, they cover a larger area. The data are standardized, collected using
+the same “camera”, so the data can be easily compared across sites and through
+time.</p>
+
+<h4 id="introduction-to-spectral-remote-sensing">Introduction to Spectral Remote Sensing</h4>
+
+<p>This video explains how remote sensing cameras (spectral sensors) work.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3iaFzafWJQE" frameborder="0" allowfullscreen=""></iframe>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Note:</strong> <a href="http://phenocam.sr.unh.edu/webcam/" target="_blank">Phenocam data </a>
+are another source of phenology data at the site scale. Phenocams are often
+mounted on towers and capture repeat photography of vegetation each day. Learn
+more about the
+<a href="http://budburst.org/what-is-phenocam">phenocam Citizen Science collaboration- Season Spotter</a>.</p>
+
+<h3 id="ndvi-measures-plant-greenness">NDVI Measures Plant Greenness</h3>
+
+<p>We can use remote sensing imagery to derive the Normalized Difference Vegetation
+Index (NDVI) - a quantitative index that measures how “green” or healthy
+vegetation is on the ground. NDVI greenness values ranging from 0-1 where 0
+represents minimal or no greenness and 1 represents maximum greenness. NDVI is
+an ideal data product used to estimate the timing of plant “green-up” and
+“brown-down” over large areas.</p>
+
+<figure>
+ <a href="http://earthobservatory.nasa.gov/Features/MeasuringVegetation/Images/ndvi_example.jpg">
+ <img src="http://earthobservatory.nasa.gov/Features/MeasuringVegetation/Images/ndvi_example.jpg" /></a>
+    <figcaption> NDVI is calculated from the visible and near-infrared light
+    reflected by vegetation. Healthy vegetation (left) absorbs most of the
+    visible light that hits it, and reflects a large portion of
+    near-infrared light. Unhealthy or sparse vegetation (right) reflects more
+    visible light and less near-infrared light. Source: NASA
+    </figcaption>
+</figure>
+
+<p>We can visualize NDVI remote sensing data and see the change in color
+(representing the change in the index) as the growing season progresses across
+the year. In this figure, each plot presents a snapshot of the NDVI values
+across an area of 120m x 150m.</p>
+
+<figure>
+	<a href="/fig/dc-spatio-temporal-intro/NDVI-Landsat-RS.png">
+	<img src="/fig/dc-spatio-temporal-intro/NDVI-Landsat-RS.png" /></a>
+	<figcaption> Remote sensing data can be used to measure the greening and
+	browning of plants over larger areas. Because these data are often collected
+	repeatedly using satellites orbiting the earth, it provides a nice time series
+	to use for many research questions.
+	Source: National Ecological Observatory Network (NEON) figure based on Landsat
+	Data.
+	</figcaption>
+</figure>
+
+<ul>
+  <li><a href="http://earthobservatory.nasa.gov/Features/MeasuringVegetation/measuring_vegetation_2.php" target="_blank"> More on NDVI from NASA</a></li>
+</ul>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Note:</strong> NDVI can be calculated using any image
+that contains a near-infrared band. Some phenocams capture near-infrared light.</p>
+
+<h2 id="find-remote-sensing-data">Find Remote Sensing Data</h2>
+
+<p>There are many sources that allow us to request and freely download remote
+sensing imagery and products like NDVI. In the United States, one popular data
+provider is the United States Geological Survey.</p>
+
+<ul>
+  <li><a href="http://phenology.cr.usgs.gov/get_data_main.php" target="_blank">Remote Sensing Phenology</a></li>
+  <li><a href="http://glovis.usgs.gov/" target="_blank">USGS GLOVIS</a></li>
+  <li><a href="http://landsatlook.usgs.gov/" target="_blank">Landsat Look Viewer</a></li>
+</ul>
+
+<p>Other, non-USGS sources of remote sensing data can be found in the
+<a href="/R/spatio-temporal-research-questions#resources-for-locating-spatial-and-ecological-data">Data Sources list at the end of this tutorial</a>.</p>
+
+<div id="challenge">
+  <h2 id="challenge-explore-landsat-look-website">Challenge: Explore <em>Landsat Look</em> Website</h2>
+
+  <p>Visit the
+<a href="http://landsatlook.usgs.gov/" target="_blank">Landsat Look Viewer website</a>.
+Search for any location of interest. One option could be a NEON Field site:
+Harvard Forest, Massachusetts, United States.</p>
+
+  <p>Then answer the following questions:</p>
+
+  <ol>
+    <li>Are data Landsat sensors are available for the area? If so, what Landsat sensors do the data
+come from?</li>
+    <li>Is there cloud cover in any of the images?</li>
+    <li>What time period are the data available for?</li>
+  </ol>
+
+  <p>Discuss with a colleague if you are working on this in a workshop!</p>
+</div>
+
+<h3 id="work-with-remote-sensing-imagery---raster-data-format">Work With Remote Sensing Imagery - Raster Data Format</h3>
+
+<p>Remote sensing images are in <strong>raster</strong> format. They are composed of pixels -
+just like the pixels in the images we take with our camera phones. Because we are studying
+phenophase timing, we need raster data collected
+repeatedly through time to identify when groups of plants green-up and brown down.
+We can use the <a href="https://cran.r-project.org/web/packages/rasterVis/index.html" target="_blank"> <code class="highlighter-rouge">rasterVis</code> package in <code class="highlighter-rouge">R</code> </a> efficiently plot raster time
+series.</p>
+
+<p>We will
+learn more about the raster format in
+<a href="http://neondataskills.org/R/spatial-data-formats">Spatial Data Formats – Intro to Shapefiles (Vector Data) and GeoTiffs (Raster Data)</a></p>
+
+<p>We will learn how to work with raster data in the NEON Data Skills
+<a href="http://neondataskills.org/tutorial-series/raster-data-series/"><em>Introduction to Working With Raster Data in R</em> tutorial series</a>,
+and, about raster time series data, in the
+<a href="http://neondataskills.org/tutorial-series/raster-time-series/"><em>Work With Raster Time Series Data in R</em> tutorial series</a>.</p>
+
+<h2 id="find-temperature-and-precipitation-data">Find Temperature and Precipitation Data</h2>
+
+<p>As a part of our research project, we also would like to plot three drivers of
+green-up and brown-down phenophase stages -
+temperature (both air &amp; soil temperature), photosynthetically active radiation,
+and precipitation.</p>
+
+<p>Precipitation, temperature and other <em>micrometeorological</em> measurements are recorded at
+weather stations across
+the globe. Many research and long term monitoring stations have towers with
+sensors mounted on them that collect high frequency (many measurements a second
+or minute) measurements of variables including temperature, precipitation, light
+intensity, wind speed and more.</p>
+
+<p>Some sources of climate data:</p>
+
+<ul>
+  <li><a href="http://www.neonscience.org/science-design/collection-methods/flux-tower-measurements" target="_blank"> <strong>National Ecological Observatory Network (NEON):</strong> </a>
+data from a network of flux towers, that measure temperature,
+precipitation, wind speed, light intensity and more. Field sites are located
+across the United States. Data can be downloaded from the
+<a href="http://data.neonscience.org/browse-data?showTheme=atmos" target="_blank">NEON data portal </a>.</li>
+  <li><a href="http://fluxnet.ornl.gov" target="_blank"><strong>FluxNet:</strong> </a>
+a network of towers located around the world.</li>
+  <li><a href="http://www.ncdc.noaa.gov/data-access/land-based-station-data" target="_blank"><strong>NOAA National Center for Environmental Information (formerly National Climatic Data Center):</strong></a>
+from a
+<a href="http://www.ncdc.noaa.gov/" target="_blank"> network of weather stations </a>
+maintained by NOAA.</li>
+  <li><a href="https://portal.lternet.edu/nis/home.jsp" target="_blank"><strong>Long Term Ecological Research sites (LTER):</strong></a>
+Many LTER sites have micrometerology towers that collect climatic data.</li>
+</ul>
+
+<figure>
+  <a href="https://farm6.staticflickr.com/5146/5666008904_85a10f5848_b.jpg">
+	<img src="https://farm6.staticflickr.com/5146/5666008904_85a10f5848_b.jpg" />
+	</a>
+	<figcaption>A flux tower located at the NEON Field Site in Sterling, Colorado (U.S.A.).
+	Flux towers have sensors mounted on different heights on the tower that collect
+	a suite of metrics including temperature, wind speed and often precipitation.
+	These sensors collect data at high frequencies - which sometimes means many
+	measurements per second.
+	Source: National Ecological Observatory Network (NEON)</figcaption>
+</figure>
+
+<h3 id="climate-data-at-our-field-sites">Climate Data At Our Field Sites</h3>
+
+<p>If we want climate data for our field sites, there are several places that
+we can start. In our case,
+<a href="http://harvardforest.fas.harvard.edu/research/LTER/" target="_blank">Harvard Forest is a LTER site </a>,
+so we can hope for a micrometerology tower that contains temperature and
+precipitation sensors.
+Visiting the
+<a href="http://harvardforest.fas.harvard.edu/research/stations" target="_blank"> Harvard Forest research stations home page</a>,
+we learn that it has a meteorological station / flux tower that has been
+collecting data since 2001. Better yet, the data are freely available for
+download from the <a href="http://harvardforest.fas.harvard.edu/harvard-forest-data-archive" target="_blank"> Harvard Forest data archives</a>.</p>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Note:</strong> Also take note that there are some other data
+resources on this page including “GIS” data. Many research stations (not all)
+have these types of data available.</p>
+
+<h4 id="micro-meteorological-data-from-the-fisher-tower">Micro-meteorological Data from the Fisher Tower</h4>
+<p>The
+<a href="http://harvardforest.fas.harvard.edu/meteorological-hydrological-stations" target="_blank"> Harvard Forest Fisher Meteorological Station </a>
+has been operational since 2001. It is located in an open field and records air
+temperature, relative humidity, precipitation, incoming and net radiation,
+barometric pressure, wind speed and direction, and soil temperature. Data is
+available at 15-minute and daily intervals.</p>
+
+<figure class="half">
+	<a href="http://harvardforest.fas.harvard.edu/sites/harvardforest.fas.harvard.edu/files/metsta-fall.jpg">
+	<img src="http://harvardforest.fas.harvard.edu/sites/harvardforest.fas.harvard.edu/files/metsta-fall.jpg" />
+	</a>
+	<a href="http://harvardforest.fas.harvard.edu/sites/harvardforest.fas.harvard.edu/files/metsta-winter.jpg">
+	<img src="http://harvardforest.fas.harvard.edu/sites/harvardforest.fas.harvard.edu/files/metsta-winter.jpg" />
+	</a>
+	<figcaption>The Fischer Meteorological Station in two seasons. Source:
+	<a href="http://harvardforest.fas.harvard.edu/" target="_blank"> Harvard Forest</a>
+	</figcaption>
+</figure>
+
+<h3 id="work-with-time-series-data-in-r">Work With Time Series Data in R</h3>
+
+<p>The climate data are available for download in a Comma
+Separated Value (<code class="highlighter-rouge">.csv</code>) format. To work with these data in <code class="highlighter-rouge">R</code>, we will need
+to understand how to work with date and time formats.</p>
+
+<p><a href="http://neondataskills.org/tutorial-series/tabular-time-series/">The <em>Introduction to Working With Time Series Data in Text Formats in R</em> tutorials</a>
+cover how to import time series data in <code class="highlighter-rouge">.csv</code> format into <code class="highlighter-rouge">R</code> and how to work with, subset and plot date &amp; date/time formats.</p>
+
+<div id="challenge">
+  <h2 id="challenge-explore-external-data-from-harvard-forest">Challenge: Explore External Data from Harvard Forest</h2>
+  <p>Revisiting the <a href="http://harvardforest.fas.harvard.edu/data-archives" target="_blank"> Harvard Forest research station data archives</a>:</p>
+
+  <ol>
+    <li>What other data are available for Harvard Forest?</li>
+    <li>Is there inforamtion that you’d consider metadata?</li>
+    <li>Which file formats do you recognize? Which are new to you?</li>
+  </ol>
+
+</div>
+
+<h2 id="data-to-characterize-our-study-site">Data to Characterize our Study Site</h2>
+
+<p>It is often useful to create maps that characterize our field sites. Maps are integral to
+planning site visits and plot locations prior to visiting. Maps
+are useful tools to get to know a site’s:</p>
+
+<ul>
+  <li>Layout including roads, and other infrastructure.</li>
+  <li>Topography (elevation)</li>
+  <li>Vegetation height and cover</li>
+</ul>
+
+<p>They are also essential for understanding sites that we may study using external
+data but never visit because they are far away or access is
+restricted. Maps are also useful for describing our field sites in publications.</p>
+
+<h3 id="map-site-infrastructure-buildings-roads-streams">Map Site Infrastructure: Buildings, Roads, Streams</h3>
+
+<p>The most basic map that we might draw of our site is one showing the
+infrastructure on a site, including roads, trails, streams, buildings and other
+landmarks. These points (e.g., field house), linear (e.g., trails &amp; streams),
+and boundary type data are often found in <strong>shapefile format</strong> ( <code class="highlighter-rouge">.shp</code>).
+This is a <strong>vector format</strong> that is read by most <strong>GIS programs</strong>.</p>
+
+<h4 id="work-with-vector-data">Work With Vector Data</h4>
+
+<p>We will learn more about the vector format in
+<a href="/R/spatial-data-formats"><em>Spatial Data Formats – Intro to Shapefiles (Vector Data) and GeoTiffs (Raster Data)</em> tutorial.</a></p>
+
+<p>Further, we explore working with vector data in more depth in the
+<a href="http://neondataskills.org/tutorial-series/vector-data-series/"><em>Introduction to Working With Vector Data in R</em> tutorial series</a>.</p>
+
+<h3 id="map-topography--vegetation-cover---lidar">Map Topography &amp; Vegetation Cover - LiDAR</h3>
+
+<p><strong>Light Detection and Ranging Data (LiDAR)</strong> data provide high resolution,
+accurate topography (elevation) and three-dimensional vegetation cover and
+structure (density and height) information. LiDAR can also be used to find the
+location of roads and streams (a way to initially create the shapefiles
+mentioned above).</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLLWiknuNGd50GI8OZf3EBo6PMx04xcoFa" frameborder="0" allowfullscreen=""></iframe>
+
+<ul>
+  <li>Learn more about LiDAR in the NEON Data Skills
+<a href="http://neondataskills.org/self-paced-tutorial/1_About-LiDAR-Data-Light-Detection-and-Ranging_Activity1/"> <em>The Basics of LiDAR - Light Detection and Ranging - Remote Sensing</em> tutorial</a></li>
+  <li>Learn more about LiDAR canopy height and digital elevation models in the NEON Data Skills
+<a href="http://neondataskills.org/self-paced-tutorial/2_LiDAR-Data-Concepts_Activity2/"><em>What is a CHM, DSM and DTM? About Gridded, Raster LiDAR Data</em> tutorial</a></li>
+</ul>
+
+<h3 id="sources-of-lidar-data">Sources of LiDAR Data</h3>
+
+<p>As LiDAR is most often captured from an airplane, the coverage of publically
+available LiDAR-derived data products is much less than that of satellite-based
+remote sensing. Research stations may have Digital Elevation Models (DEM) and
+Canopy Height Models (CHM), that map elevation and vegetation height
+respectively, or other LiDAR-derived data available for researchers.</p>
+
+<ul>
+  <li><a href="http://www.neonscience.org/data-resources/get-data/airborne-data" target="_blank"> <strong>NEON airborne observation platform</strong> data portal</a>: more
+information in the next section.</li>
+  <li><a href="http://www.opentopography.org/" target="_blank"><strong>Open Topography</strong>: </a>
+a great source of free LiDAR data in the US.</li>
+  <li><a href="http://earthexplorer.usgs.gov/" target="_blank"> <strong>USGS LiDAR data</strong></a></li>
+</ul>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Note:</strong> In the United States, state-wide data
+are often also available locally. State GIS offices are often a good source of
+information and sometimes have online repositories to access the data.</p>
+
+<h4 id="neon-airborne-observation-platform-aop">NEON Airborne Observation Platform (AOP)</h4>
+<p>The
+<a href="http://www.neonscience.org/science-design/collection-methods/airborne-remote-sensing" target="_blank"> NEON airborne observation platform </a>
+(AOP) collects annual remote sensing data over NEON field sites using sensors
+mounted on an airplane. The AOP consists of a hyperspectral imaging
+spectrometer, a full waveform and discrete return LiDAR, and a high-resolution
+Red Blue Green (RGB) camera. Data from the AOP build a robust time series of
+landscape-scale changes in numerous physical, biological and biochemical
+metrics, such as vegetation cover and density, canopy chemistry, and topography,
+including elevation, slope and aspect.</p>
+
+<h2 id="data-used-in-the-work-with-spatio-temporal-data-in-r-series">Data Used In The Work with Spatio-temporal Data in R Series</h2>
+<p>In the
+<a href="http://neondataskills.org/tutorial-series/neon-dc-phenology-series/">Work with Spatio-temporal Data in R series</a>,
+we will use the following data to explore the drivers of patterns of vegetation phenology (greening and browning ) across multiple sites.</p>
+
+<ul>
+  <li>Landsat-derived NDVI data</li>
+  <li>Light Detection and Ranging Data (LiDAR) data</li>
+  <li>Site layout vector data</li>
+  <li>Micro-meteorological data in tabular (.csv) format</li>
+</ul>
+
+<p>This
+<a href="http://neondataskills.org/tutorial-series/spatial-data-management-series/">Intro to Working With Spatio-Temporal Data and Data Management series</a>
+will provide you with the conceptual information to succeed in the following
+data skill intensive series.</p>
+
+<h2 id="resources-for-locating-spatial-and-ecological-data">Resources for Locating Spatial and Ecological Data</h2>
+
+<h4 id="general--broad-topics">General / Broad Topics</h4>
+<ul>
+  <li><a href="http://www.dataone.org/find-data" target="_blank"> <strong>DataOne</strong></a>:
+a wide variety of data shared by different users.</li>
+  <li><a href="http://www.data.gov/" target="_blank"> <strong>US federal data portal</strong> (data.gov)</a>:
+This is the clearing-house for all types of US federal data.</li>
+  <li><a href="http://www.geoplatform.gov/" target="_blank"> <strong>US federal spatial data portal</strong></a>:
+provide geospatial data, services, and applications for use by the public and by government agencies and partners.</li>
+  <li><a href="http://www.data.ny.gov/" target="_blank"> <strong>New York state government data</strong></a>:
+Many states have their own data portal. Simply search for the state name and “data portal” to find most of the repositories.</li>
+  <li><a href="http://www.ecologicaldata.org" target="_blank"> <strong>Ecological Data Wiki</strong> </a>:
+This wiki is designed to find &amp; compile ecological datasets.</li>
+</ul>
+
+<h4 id="additional-phenology-data-sources">Additional Phenology Data Sources</h4>
+<ul>
+  <li><a href="http://www.neonscience.org" target="_blank"> <strong>National Ecological
+Observatory Network (NEON)</strong> </a>:
+provide data from a continental-scale observation system with the purpose of
+examining ecological change over time. The data portal provides a wide diversity
+of standardized ecological data, including phenology, for all sites in the
+observatory network.</li>
+  <li><a href="https://www.usanpn.org/" target="_blank"> <strong>USA National Phenology Network</strong> </a>:
+a collaborative effort to collect phenology data</li>
+  <li><a href="http://phenocam.sr.unh.edu/webcam/" target="_blank"> <strong>Phenocam</strong></a>:
+provide automated, near-surface remote sensing of canopy phenology across the
+northeastern United States and adjacent areas of Canada.</li>
+</ul>
+
+<h4 id="additional-remote-sensing-data-sources">Additional Remote Sensing Data Sources</h4>
+<ul>
+  <li><a href="http://phenology.cr.usgs.gov/get_data_main.php" target="_blank"><strong>USGS/EROS Center</strong></a>:
+remote sensing phenology data</li>
+  <li><a href="http://landsat.gsfc.nasa.gov/" target="_blank"><strong>NASA Landsat</strong></a>:
+Landsat imagery data for the globe</li>
+</ul>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Note:</strong> Do you know of other good sources of
+ecological data, especially for other countries/regions? Please share them in
+the comments at the bottom of this page.</p>
+<hr />
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>TBD</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../"><span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span><span class="sr-only">lesson home</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../01-spatial-data-landscape/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-6" align="left">
+      <h4>
+	Copyright &copy; 2016–2018
+	
+	<a href="http://datacarpentry.org">Data Carpentry</a>
+	
+      </h4>
+    </div>
+    <div class="col-md-6" align="right">
+      <h4>
+	
+	
+	<a href="/edit/gh-pages/_episodes_rmd/00-spatio-temporal-science-questions.Rmd">Edit on GitHub</a>
+	
+	
+	/
+	<a href="/blob/gh-pages/CONTRIBUTING.md">Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob/gh-pages/CITATION">Cite</a>
+	/
+	<a href="mailto:lessons@software-carpentry.org">Contact</a>
+      </h4>
+    </div>
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>

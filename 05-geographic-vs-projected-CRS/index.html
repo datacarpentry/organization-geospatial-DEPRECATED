@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2018-03-19 21:57:08 +0000">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/css/syntax.css" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon-dc.ico" />
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <title>Introduction to Spatio-Temporal Data: Introduction to the UTM Projected CRS and a Brief overview of datums</title>
+  </head>
+  <body>
+    <div class="container">
+      
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+
+      
+      <a class="navbar-brand" href="../">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="../conduct/">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="../setup.html">Setup</a></li>
+
+        
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            <li><a href="../00-spatio-temporal-science-questions/">Answer a Spatio-temporal Research Question with Data - Where to Start?</a></li>
+            
+            <li><a href="../01-spatial-data-landscape/">The Spatial Data Landscape</a></li>
+            
+            <li><a href="../02-spatial-data-formats/">Spatial Data Formats -- Intro to Shapefiles (Vector Data) and GeoTIFFs (Raster Data)</a></li>
+            
+            <li><a href="../03-metadata-formats-and-files/">Data About Data -- Intro to Metadata File Formats and Structure</a></li>
+            
+            <li><a href="../04-intro-CRS-projection/">Intro to Coordinate Reference Systems & Spatial Projections</a></li>
+            
+            <li><a href="../05-geographic-vs-projected-CRS/">Introduction to the UTM Projected CRS and a Brief overview of datums</a></li>
+            
+            <li><a href="../06-CRS-formats-proj4-EPSG/">A Quick Overview of CRS Formats - Proj4 & EPSG - in R</a></li>
+            
+            <li><a href="../07-spatial-resolution-extent/">Intro to Spatial Metadata -- Spatial Resolution and Spatial Extent</a></li>
+            
+            <li><a href="../08-clean-data-bad-and-missing-values/">Cleaning Data -- Missing and Bad Data Values</a></li>
+            
+            <li><a href="../09-set-r-work-environment/">R Packages for Spatial-temporal Data -- Setting Up Your Working Environment</a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="../aio.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="../" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="../reference.html">Reference</a></li>
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="../LICENSE.md">License</a></li>
+	
+	
+	<li><a href="/edit/gh-pages/_episodes_rmd/05-geographic-vs-projected-CRS.Rmd">Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../04-intro-CRS-projection/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="../">Introduction to Spatio-Temporal Data</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../06-CRS-formats-proj4-EPSG/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Introduction to the UTM Projected CRS and a Brief overview of datums</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br/>
+      <strong>Exercises:</strong> 30 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>TBD</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="about">About</h2>
+
+<p>This tutorial focuses on the Universal Trans Mercator (UTM)
+projected Coordinate Reference which divides the globe into zones to optimize
+projection results in each zone. It also briefly introduces the concept of a
+datum.</p>
+
+<p><strong>R Skill Level:</strong> Beginner - you’ve got the basics of <code class="highlighter-rouge">R</code> down.</p>
+
+<h1 id="goals--objectives">Goals / Objectives</h1>
+
+<p>After completing this activity, you will:</p>
+
+<ul>
+  <li>The basic difference between a <code class="highlighter-rouge">Geographic</code> and a <code class="highlighter-rouge">Projected</code>  Coordinate
+Reference System.</li>
+  <li>Become familiar with the Universal Trans Mercator (UTM) and Geographic (WGS84)
+CRSs</li>
+</ul>
+
+<h2 id="things-youll-need-to-complete-this-lesson">Things You’ll Need To Complete This Lesson</h2>
+
+<p>To complete this lesson you will need the most current version of <code class="highlighter-rouge">R</code>, and
+preferably, <code class="highlighter-rouge">RStudio</code> loaded on your computer.</p>
+
+<h3 id="install-r-packages">Install R Packages</h3>
+
+<ul>
+  <li><strong>NAME:</strong> <code class="highlighter-rouge">install.packages("NAME")</code></li>
+</ul>
+
+<p><a href="R/Packages-In-R/">More on Packages in R - Adapted from Software Carpentry.</a></p>
+
+<h3 id="download-data">Download Data</h3>
+
+<p>If you want to follow along, please download</p>
+
+<p><a href="http://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/" class="btn btn-success">
+Download Natural Earth Global Boundary Layer</a></p>
+
+<p><strong>Spatial-Temporal Data &amp; Data Management Lesson Series:</strong> This lesson is part
+of a lesson series introducing
+<a href="tutorial/URL">spatial data and data management in <code class="highlighter-rouge">R</code> </a>.
+It is also part of a larger
+<a href="workshops/spatio-temporal-workshop">spatio-temporal Data Carpentry Workshop </a>
+that includes working with<br />
+<a href="tutorial/spatial-raster-series">raster data in <code class="highlighter-rouge">R</code> </a>,
+<a href="tutorial/spatial-vector-series">vector data in <code class="highlighter-rouge">R</code> </a>
+and<br />
+<a href="tutorial/tabular-time-series">tabular time series in <code class="highlighter-rouge">R</code> </a>.</p>
+
+<h3 id="additional-resources">Additional Resources</h3>
+
+<ul>
+  <li>Read more on coordinate systems in the
+<a href="http://docs.qgis.org/2.0/en/docs/gentle_gis_introduction/coordinate_reference_systems.html" target="_blank">
+QGIS documentation.</a></li>
+  <li>NEON Data Skills Lesson <a href="/GIS-Spatial-Data/Working-With-Rasters/" target="_blank">The Relationship Between Raster Resolution, Spatial extent &amp; Number of Pixels - in R</a></li>
+</ul>
+
+<h2 id="geographic-vs-projected-crs">Geographic vs Projected CRS</h2>
+
+<p>In the previous tutorial, we explored, two different types of Coordinate Reference
+Systems:</p>
+
+<ol>
+  <li><strong>Geographic coordinate systems:</strong> coordinate systems that span the entire
+globe (e.g. latitude / longitude).</li>
+  <li><strong>Projected coordinate Systems:</strong> coordinate systems that are localized to
+minimize visual distortion in a particular region (e.g. Robinson, UTM, State Plane)</li>
+</ol>
+
+<p>In this tutorial, we will discuss the differences between these CRSs in more
+detail.</p>
+
+<h2 id="geographic-coordinate-systems">Geographic Coordinate Systems</h2>
+
+<p>A geographic coordinate system uses a grid that wraps around the entire globe.
+This means that each point on the globe is defined using the SAME coordinate system. Geographic coordinate systems are best for global analysis however it
+is important to remember that distance is distorted using a geographic lat / long
+<code class="highlighter-rouge">CRS</code>.</p>
+
+<p>The <strong>geographic WGS84 lat/long</strong> <code class="highlighter-rouge">CRS</code> has an origin - (0,0) -
+located at the intersection of the
+Equator (0° latitude) and Prime Meridian (0° longitude) on the globe.</p>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OGR data source with driver: ESRI Shapefile 
+Source: "/home/travis/build/datacarpentry/r-spatial-data-management-intro/_episodes_rmd/data/Global/Boundaries/ne_110m_graticules_all", layer: "ne_110m_graticules_30"
+with 17 features
+It has 6 fields
+</code></pre></div></div>
+
+<div class="output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OGR data source with driver: ESRI Shapefile 
+Source: "/home/travis/build/datacarpentry/r-spatial-data-management-intro/_episodes_rmd/data/Global/Boundaries/ne_110m_graticules_all", layer: "ne_110m_wgs84_bounding_box"
+with 1 features
+It has 2 fields
+</code></pre></div></div>
+
+<div class="error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in fortify(data): object 'worldBound_df' not found
+</code></pre></div></div>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Note:</strong> The distance between the 2 degrees of
+longitude at the equator (0°) is ~ 69 miles. The distance between 2 degrees of
+longitude at 40°N (or S) is only 53 miles. However measures of distance when using
+lat/long project are not uniform.</p>
+
+<h2 id="projected-coordinate-reference-systems">Projected Coordinate Reference Systems</h2>
+
+<p>Spatial projection refers to the mathematical calculations
+performed to flatten the 3D data onto a 2D plane (our computer screen
+or a paper map). Projecting data from a round surface onto a flat surface, results
+in visual modifications to the data when plotted on a map. Some areas are stretched
+and some some are compressed. We can see this when we look at a MAP of the entire
+globe.</p>
+
+<p>The mathematical calculations used in spatial projections are designed to
+optimize the relative size and shape of a particular region on the globe.</p>
+
+<figure>
+    <a href="http://www.progonos.com/furuti/MapProj/Normal/CartDef/MapDef/Img/devSurfaces.png">
+    <img src="http://www.progonos.com/furuti/MapProj/Normal/CartDef/MapDef/Img/devSurfaces.png" />
+    </a>
+    <figcaption>The 3-dimensional globe must be transformed to create a flat
+    2-dimensional map. How that transformation or **projection** occurs changes
+    the appearance of the final map and the relative size of objects in
+    different parts of the map.  
+    Source: CA Furuti, progonos.com/furuti</figcaption>
+</figure>
+
+<h3 id="about-utm">About UTM</h3>
+
+<p>The <strong>Universal Transverse Mercator</strong> (UTM) system is a commonly used projected
+coordinate reference system. UTM subdivides the globe into zones,
+numbered 0-60 (equivalent to longitude) and regions (north and south)</p>
+
+<p class="notice"><i class="fa fa-star"></i> <strong>Data Note:</strong> UTM zones are also defined using bands,
+lettered C-X (equivalent to latitude) however, the band designation is often
+dropped as it isn’t esssential to specifying the location.</p>
+
+<p>While UTM zones span the entire globe, UTM uses a regional projection and
+associated coordinate system. The coordinate system grid for each
+zone is projected individually using the <strong>Mercator projection</strong>.</p>
+
+<p>The origin (0,0) for each UTM zone and associated region is located at the
+intersection of the equator and a location, 500,000 meters east of the central
+meridian of each zone. The origin location is placed outside of the boundary of
+the UTM zone, to avoid negative Easting numbers.</p>
+
+<figure>
+    <a href="https://www.e-education.psu.edu/natureofgeoinfo/sites/www.e-education.psu.edu.natureofgeoinfo/files/image/utm_zone_characteristics.png">
+    <img src="https://www.e-education.psu.edu/natureofgeoinfo/sites/www.e-education.psu.edu.natureofgeoinfo/files/image/utm_zone_characteristics.png" />
+    </a>
+    <figcaption>The 0,0 origin of each UTM zone is located in the **Bottom left** hand corner (south west) of the zone - exactly 500,000 m EAST from the central meridian of the zone.  
+    Source: Penn State E-education</figcaption>
+</figure>
+
+<hr />
+
+<h3 id="more-on-utm">More on UTM</h3>
+
+<ul>
+  <li><a href="https://www.e-education.psu.edu/geog482spring2/c2_p22.html" target="_blank">
+Penn State E-education overview of UTM</a></li>
+  <li><a href="https://www.e-education.psu.edu/geog482spring2/c2_p23.html " target="_blank">
+More about UTM Zones - Penn State E-education</a></li>
+</ul>
+
+<hr />
+
+<figure>
+    <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Utm-zones.jpg/800px-Utm-zones.jpg">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Utm-zones.jpg/800px-Utm-zones.jpg" />
+    </a>
+    <figcaption> The gridded UTM coordinate system across the globe.    
+    Source: Public domain from Earth Observatory, NASA</figcaption>
+</figure>
+
+<h1 id="edit-this-messy">edit this messy</h1>
+<p>The coordinates for the NEON Harvard Forest Field Site would be written as:</p>
+
+<p>UTM Zone 18N, 730782m, 4712631m</p>
+
+<p>where the N denotes that it is in the Northern, not Southern hemisphere. Occassionally, you may see:</p>
+
+<p>Zone 18T, 730782m Easting, 4712631m Northing.</p>
+
+<p class="notice"><i class="fa fa-star"></i><strong>Data Tip:</strong>  The UTM system doesn’t apply to polar
+regions (&gt;80°N or S). Universal Polar Stereographic (UPS) coordinate system is
+used in these area. This is where zones A, B and Y, Z are used if you were
+wondering why they weren’t in the UTM lettering system.</p>
+
+<div id="challenge">
+
+  <p>Practice understanding UTM coordinates:</p>
+
+  <p>https://www.e-education.psu.edu/natureofgeoinfo/sites/www.e-education.psu.edu.natureofgeoinfo/files/flash/coord_practice_utm_v06.swf</p>
+</div>
+
+<h3 id="datum">Datum</h3>
+
+<p>The datum describes the vertical and horizontal reference point of the coordinate
+system. The vertical datum describes the relationship between a specific ellipsoid
+(the top of the earth’s surface) and the center of the earth. The datum also describes
+the origin (0,0) of a coordinate system.</p>
+
+<p>Frequently encountered datums:</p>
+
+<ul>
+  <li><em>WGS84</em> – World Geodetic System (created in) 1984.  The origin is the center of
+the earth.</li>
+  <li><em>NAD27</em> &amp; <em>NAD83</em> – North American Datum 1927 and 1983,
+respectively.  The origin for NAD 27 is Meades Ranch in Kansas.</li>
+  <li><em>ED50</em> – European Datum 1950</li>
+</ul>
+
+<p>For more information, read</p>
+<ul>
+  <li><a href="http://help.arcgis.com/en/arcgisdesktop/10.0/help/index.html#/Datums/003r00000008000000/" target="_blank">ESRI’s ArcGIS discussion of Datums.</a></li>
+  <li><a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/OverviewCoordinateReferenceSystems.pdf" target="_blank">page 2 in M. Fraiser’s CRS Overview.</a></li>
+</ul>
+
+<blockquote>
+  <p>NOTE: All coordinate reference systems have a vertical and horizontal datum
+which defines a “0, 0” reference point. There are two models used to define
+the datum: <strong>ellipsoid</strong> (or spheroid): a mathematically representation of the shape of
+the earth. Visit
+<a href="https://en.wikipedia.org/wiki/Earth_ellipsoid" target="_blank">Wikipedia’s article on the earth ellipsoid </a>  for more information and <strong>geoid</strong>: a
+model of the earth’s gravitatinal field which approximates the mean sea level
+across the entire earth.  It is from this that elevation is measured. Visit
+<a href="https://en.wikipedia.org/wiki/Geoid" target="_blank">Wikipedia’s geoid
+article </a>for more information. We will not cover these concepts in this tutorial.</p>
+</blockquote>
+
+<h3 id="coordinate-reference-system-formats">Coordinate Reference System Formats</h3>
+
+<p>There are numerous formats that are used to document a <strong>CRS</strong>. In the next tutorial
+we will discuss three of the commonly encountered formats including: <strong>Proj4</strong>,
+<strong>WKT</strong> (Well Known Text) and <strong>EPSG</strong>.</p>
+
+<hr />
+
+<h2 id="additional-resources-1">Additional Resources</h2>
+
+<p>ESRI help on CRS
+QGIS help on CRS
+NCEAS cheatsheets</p>
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>TBD</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="../04-intro-CRS-projection/"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="../06-CRS-formats-proj4-EPSG/"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+      
+      
+<footer>
+  <div class="row">
+    <div class="col-md-6" align="left">
+      <h4>
+	Copyright &copy; 2016–2018
+	
+	<a href="http://datacarpentry.org">Data Carpentry</a>
+	
+      </h4>
+    </div>
+    <div class="col-md-6" align="right">
+      <h4>
+	
+	
+	<a href="/edit/gh-pages/_episodes_rmd/05-geographic-vs-projected-CRS.Rmd">Edit on GitHub</a>
+	
+	
+	/
+	<a href="/blob/gh-pages/CONTRIBUTING.md">Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob/gh-pages/CITATION">Cite</a>
+	/
+	<a href="mailto:lessons@software-carpentry.org">Contact</a>
+      </h4>
+    </div>
+  </div>
+</footer>
+
+      
+    </div>
+    
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/lesson.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37305346-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+  </body>
+</html>
